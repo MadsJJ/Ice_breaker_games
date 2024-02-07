@@ -1,6 +1,8 @@
 # bli-kjent-lek
 
-
+cd bli_kjent_lek_vite
+npm install
+npm run dev
 
 ## Getting started
 
