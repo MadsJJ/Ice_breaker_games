@@ -1,6 +1,8 @@
 # bli-kjent-lek
 
-
+cd bli_kjent_lek_vite<br>
+npm install<br>
+npm run dev
 
 ## Getting started
 
@@ -94,3 +96,6 @@ If you have run out of energy or time for your project, put a note at the top of
 
 
 test
+
+
+tfjghh heiiiiii
