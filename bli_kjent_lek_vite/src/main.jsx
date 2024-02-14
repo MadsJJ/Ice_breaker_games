@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Login from './Login.jsx'
-import './Login.css'
 import VisitGame from './VisitGame.jsx'
+import './style/VisitGame.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
