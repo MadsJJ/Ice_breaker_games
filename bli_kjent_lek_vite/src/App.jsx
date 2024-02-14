@@ -10,6 +10,9 @@ import {
   CardMedia,
 } from "@mui/material";
 import Container from "@mui/material/Container";
+import { useState } from 'react'
+import Navbar from './components/navbar'
+import './App.css'
 
 function App() {
   const handleClick = () => {
@@ -81,6 +84,7 @@ function App() {
       >
         New Game
       </Button>
+      <Navbar />
     </>
   );
 }
