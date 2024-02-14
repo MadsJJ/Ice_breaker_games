@@ -1,4 +1,4 @@
-import "./App.css";
+import "./style/App.css";
 import {
   Grid,
   Card,
@@ -10,9 +10,8 @@ import {
   CardMedia,
 } from "@mui/material";
 import Container from "@mui/material/Container";
-import { useState } from 'react'
-import Navbar from './components/navbar'
-import './style/App.css'
+import { useState } from "react";
+import Navbar from "./components/navbar";
 
 function App() {
   const handleClick = () => {
@@ -22,6 +21,7 @@ function App() {
   const data = ["Lek 1", "Lek 2", "Lek 3", "Lek 4", "Lek 5", "Lek 6"];
   return (
     <>
+      <Navbar />
       <Container maxWidth="lg">
         <Typography variant="h2" align="center">
           KaldPrat
@@ -84,7 +84,6 @@ function App() {
       >
         New Game
       </Button>
-      <Navbar />
     </>
   );
 }
