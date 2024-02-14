@@ -21,6 +21,7 @@ function App() {
   const data = ["Lek 1", "Lek 2", "Lek 3", "Lek 4", "Lek 5", "Lek 6"];
   return (
     <>
+      <Navbar />
       <Container maxWidth="lg">
         <Typography variant="h2" align="center">
           KaldPrat
@@ -83,7 +84,6 @@ function App() {
       >
         New Game
       </Button>
-      <Navbar />
     </>
   );
 }
