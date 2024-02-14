@@ -1,4 +1,4 @@
-import "./App.css";
+import "./style/App.css";
 import {
   Grid,
   Card,
@@ -10,9 +10,8 @@ import {
   CardMedia,
 } from "@mui/material";
 import Container from "@mui/material/Container";
-import { useState } from 'react'
-import Navbar from './components/navbar'
-import './style/App.css'
+import { useState } from "react";
+import Navbar from "./components/navbar";
 
 function App() {
   const handleClick = () => {
