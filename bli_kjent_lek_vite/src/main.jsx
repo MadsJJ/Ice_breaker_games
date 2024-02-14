@@ -8,6 +8,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import './style/App.css'
 
 export const theme = createTheme({
   palette: {

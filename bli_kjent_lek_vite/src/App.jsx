@@ -12,7 +12,7 @@ import {
 import Container from "@mui/material/Container";
 import { useState } from 'react'
 import Navbar from './components/navbar'
-import './App.css'
+import './style/App.css'
 
 function App() {
   const handleClick = () => {
