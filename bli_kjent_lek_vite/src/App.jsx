@@ -11,7 +11,8 @@ import {
 } from "@mui/material";
 import Container from "@mui/material/Container";
 import { useState } from "react";
-import Navbar from "./components/navbar";
+import Navbar from "./components/Navbar";
+import Searchbar from "./components/Searchbar";
 
 function App() {
   const handleClick = () => {
@@ -22,10 +23,9 @@ function App() {
   return (
     <>
       <Navbar />
+      <Searchbar />
       <Container maxWidth="lg">
-        <Typography variant="h2" align="center">
-          KaldPrat
-        </Typography>
+        
         <Grid
           container
           maxWidth="900px"
