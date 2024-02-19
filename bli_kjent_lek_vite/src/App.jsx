@@ -13,19 +13,36 @@ import Container from "@mui/material/Container";
 import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Searchbar from "./components/Searchbar";
+import { useEffect } from "react";
+import { db } from "./firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 function App() {
   const handleClick = () => {
     console.log("Clicked");
     location.href = "/src/";
   };
-  const data = ["Lek 1", "Lek 2", "Lek 3", "Lek 4", "Lek 5", "Lek 6"];
+  const [games, setGames] = useState([]);
+
+  useEffect(() => {
+    // A secret chamber for our fetching ritual
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(db, "games"));
+      const gamesList = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setGames(gamesList);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <Navbar />
       <Searchbar />
       <Container maxWidth="lg">
-        
         <Grid
           container
           maxWidth="900px"
@@ -35,7 +52,7 @@ function App() {
           spacing={4}
           style={{ marginTop: "50px" }}
         >
-          {data.map((item, index) => (
+          {games.map((item, index) => (
             <Grid item xs={3} sm={6} ms={3} key={index}>
               <Card
                 sx={{
@@ -48,18 +65,23 @@ function App() {
                   <CardMedia
                     sx={{ height: "140px" }}
                     image="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg"
-                    title="green iguana"
+                    title="hei"
                   />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      {item}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Lizards are a widespread group of squamate reptiles, with
-                      over 6,000 species, ranging across all continents except
-                      Antarctica
-                    </Typography>
-                  </CardContent>
+                  <div
+                    style={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
+                    <CardContent style={{ height: "160px" }}>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {item.Tittel}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {item.description}
+                      </Typography>
+                    </CardContent>
+                  </div>
                 </CardActionArea>
                 <CardActions>
                   <Button
