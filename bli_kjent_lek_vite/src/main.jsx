@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import NewGame from "./NewGame.jsx";
-import "./NewGame.css";
 import App from "./App.jsx";
 import "./style/index.css";
 import UserData from "./readUserdata.jsx";
@@ -32,7 +31,7 @@ export const theme = createTheme({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ThemeProvider theme={theme}>
     <React.StrictMode>
-      <App />
+      <NewGame />
       {/* <UserData /> */}
     </React.StrictMode>
   </ThemeProvider>
