@@ -1,0 +1,50 @@
+/* div {
+    background-color: #e4eaf5;
+
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+} */
+
+.newGameBox {
+    background-color: pink;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Heading styling */
+h2 {
+    color: #333;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Input styling */
+input,
+textarea,
+select {
+    margin-bottom: 10px;
+    padding: 8px;
+}
+
+/* Button styling */
+button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
