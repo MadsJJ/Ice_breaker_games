@@ -1,0 +1,40 @@
+
+.newGameBox {
+    background-color: white;
+    max-width: 600px;
+    margin: 0 auto;
+    
+}
+
+/* Heading styling */
+h2 {
+    font-size: 35px;
+    color: #064789;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Input styling */
+input,
+textarea,
+select {
+    margin-bottom: 50px;
+    padding: 8px;
+}
+
+/* Button styling */
+button {
+    background-color: #064789;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
