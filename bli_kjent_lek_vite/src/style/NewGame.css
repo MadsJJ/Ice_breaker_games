@@ -1,25 +1,15 @@
-/* div {
-    background-color: #e4eaf5;
-
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: inherit;
-
-    font-family: Arial, Helvetica, sans-serif;
-
-} */
 
 .newGameBox {
-    background-color: pink;
+    background-color: white;
     max-width: 600px;
     margin: 0 auto;
+    
 }
 
 /* Heading styling */
 h2 {
-    color: #333;
+    font-size: 35px;
+    color: #064789;
 }
 
 /* Form styling */
@@ -32,13 +22,13 @@ form {
 input,
 textarea,
 select {
-    margin-bottom: 10px;
+    margin-bottom: 50px;
     padding: 8px;
 }
 
 /* Button styling */
 button {
-    background-color: #4caf50;
+    background-color: #064789;
     color: white;
     padding: 10px 15px;
     border: none;

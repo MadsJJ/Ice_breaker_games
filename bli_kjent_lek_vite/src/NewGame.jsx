@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import Navbar from './components/Navbar';
+import "./style/newGame.css"
+
 
 function NewGame() {
 
         const [gameData, setGameData] = useState({ //bruker useState til å opprette en tilstand gameData som inneholder info om leken
-            title: '', //gameData er en objektstate med feltene til venstre
-            description: '',
-            rules: '',
-            category: '',
+            Tittel: '', //gameData er en objektstate med feltene til venstre
+            Beskrivelse: '',
+            Regler: '',
+            Kategori: '',
         });
 
 
@@ -41,49 +44,52 @@ function NewGame() {
         };
 
         return (
+        <>
+            <Navbar />
 
             <div className='newGameBox'>
-                <h2>Create a New Game</h2>
+                <h2>Opprett en ny lek</h2>
                 <form>
-                    <label>Title:</label>
+                    <label>Tittel:</label>
                     <input
                         type="text"
-                        name="title"
+                        name="Tittel:"
                         value={gameData.title}
                         onChange={handleInputChange}
                     />
 
-                    <label>Description:</label>
+                    <label>Beskrivelse:</label>
                     <textarea
-                        name="Description:"
+                        name="Beskrivelse:"
                         value={gameData.description}
                         onChange={handleInputChange}
                     ></textarea>
 
-                    <label>Rules:</label>
+                    <label>Regler:</label>
                     <textarea
-                        name="Rules:"
+                        name="Regler:"
                         value={gameData.rules}
                         onChange={handleInputChange}
                     ></textarea>
 
-                    <label>Category:</label>
+                    <label>Kategori:</label>
                     <select
-                        name="Category:"
+                        name="Kategori:"
                         value={gameData.category}
                         onChange={(e) => handleCategorySelect(e.target.value)}
                     >
-                        <option value="">Select a category</option>
-                        <option value="Category1">Category 1</option>
-                        <option value="Category2">Category 2</option>
+                        <option value="">Velg en kategori</option>
+                        <option value="Ute">Ute</option>
+                        <option value="Inne">Inne</option>
                         {/* Legg til de andre kategoriene her */}
                     </select>
 
                     <button type="button" onClick={handleConfirm}>
-                        Confirm Game
+                        Opprett lek
                     </button>
                 </form>
             </div>
+        </>
         );
     };
 
