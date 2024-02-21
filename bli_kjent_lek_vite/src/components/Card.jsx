@@ -1,13 +1,19 @@
+import React from "react";
+
 import "./style/Card.css";
 
-function Card() {
-    return (
-        <div className="card">
-            <img className="image" src="https://placekitten.com/150/200" alt="" />    
-            <h2 className="gameName">Test Text</h2>
-            <p className="desc">This is just some text, do not think about it too hard.</p>
-        </div>
-    );
-}
-
-export default Card;
+export const Card = ({ imgSrc, imgAlt, title, desc }) => {
+  const handleClick = (e) => alert("Test click");
+  // This handleClick needs to be changed to properly route to correct page
+  return (
+    <div className="card" onClick={(e) => handleClick(e)}>
+      {/* {imgSrc && imgAlt && (
+        <img className="cardImage" src={imgSrc} alt={imgAlt} />
+      )} */}
+      {/* Commented to have placeholder while not having proper images */}
+      <img className="cardImage" src="https://placekitten.com/350/140" alt="" />
+      {title && <h3 className="cardTitle">{title}</h3>}
+      {desc && <p className="cardDesc">{desc}</p>}
+    </div>
+  );
+};
