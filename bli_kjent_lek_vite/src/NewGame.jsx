@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 function NewGame() {
 
-
-    const createGamePage = ({ username }) => { //oppretter funksjonell komponent
         const [gameData, setGameData] = useState({ //bruker useState til å opprette en tilstand gameData som inneholder info om leken
             title: '', //gameData er en objektstate med feltene til venstre
             description: '',
@@ -89,5 +87,5 @@ function NewGame() {
         );
     };
 
-}
+
 export default NewGame;
