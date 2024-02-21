@@ -1,9 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import NewGame from './NewGame.jsx'
-import './NewGame.css'
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
+import NewGame from "./NewGame.jsx";
+import "./NewGame.css";
 import App from "./App.jsx";
 import "./style/index.css";
 import UserData from "./readUserdata.jsx";
