@@ -1,38 +1,33 @@
 import "./style/App.css";
-import {
-  Grid,
-  Card,
-  CardContent,
-  Typography,
-  CardActionArea,
-  CardActions,
-  Button,
-  CardMedia,
-} from "@mui/material";
-import Container from "@mui/material/Container";
-import { useState } from "react";
+import { Button } from "@mui/material";
+import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Searchbar from "./components/Searchbar";
-import { useEffect } from "react";
+import { Card } from "./components/Card";
 import { db } from "./firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 function App() {
   const handleClick = () => {
     console.log("Clicked");
     location.href = "/src/";
   };
+
   const [games, setGames] = useState([]);
 
   useEffect(() => {
-    // A secret chamber for our fetching ritual
+    // Help from ChatGPT
     const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(db, "games"));
-      const gamesList = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setGames(gamesList);
+      try {
+        const querySnapshot = await getDocs(collection(db, "games"));
+        const gamesData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setGames(gamesData);
+      } catch (error) {
+        console.error("Error fetching games:", error);
+      }
     };
 
     fetchData();
@@ -42,55 +37,39 @@ function App() {
     <>
       <Navbar />
       <Searchbar />
-      <Container maxWidth="lg">
-        <Grid
-          container
-          maxWidth="900px"
-          justifyContent="center"
-          alignItems="center"
-          columns={18}
-          spacing={4}
-          style={{ marginTop: "50px" }}
-        >
-          {games.map((item, index) => (
-            <Grid item xs={3} sm={6} ms={3} key={index}>
-              <Card
-                sx={{
-                  maxWidth: 345,
-                  minWidth: 250,
-                  borderRadius: "15px",
-                }}
-              >
-                <CardActionArea>
-                  <CardMedia
-                    sx={{ height: "140px" }}
-                    image="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg"
-                    title="green iguana"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      {item.Tittel}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {item.description}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-                <CardActions>
-                  <Button
-                    onClick={handleClick}
-                    color="secondary"
-                    variant="contained"
-                    size="small"
-                  >
-                    Button
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
+      <h2>Populære kategorier</h2>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          margin: "auto",
+          width: "90vw",
+        }}
+      >
+        <Card title={"Ute"} desc={" "} />
+        <Card title={"Barn"} desc={" "} />
+        <Card title={"Fest"} desc={" "} />
+      </div>
+      <h2>Populære leker</h2>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          margin: "auto",
+          width: "90vw",
+        }}
+      >
+        {/* Help from ChatGPT */}
+        {games.map((game) => (
+          <Card
+            key={game.id}
+            // imgSrc={game.imgSrc} // disse er ikke lagt til i db - må finne ut om vi vil ha bilder
+            // imgAlt={game.imgAlt}  / eller strings som linker til bilder i filstrukturen
+            title={game.Tittel} // burde endres til "title i firebase - holde det consistent med engelsk
+            desc={game.description} // burde kanskje ha en kortere beskrivelse til kortene?
+          />
+        ))}
+      </div>
       <Button
         id="newGameButton"
         color="primary"
