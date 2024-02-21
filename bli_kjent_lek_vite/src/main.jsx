@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import NewGame from "./NewGame.jsx";
 import App from "./App.jsx";
 import "./style/index.css";
@@ -10,6 +10,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./style/App.css";
+import Login from "./Login.jsx";
 
 export const theme = createTheme({
   palette: {
@@ -31,7 +32,7 @@ export const theme = createTheme({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ThemeProvider theme={theme}>
     <React.StrictMode>
-      <NewGame />
+      <Login />
       {/* <UserData /> */}
     </React.StrictMode>
   </ThemeProvider>
