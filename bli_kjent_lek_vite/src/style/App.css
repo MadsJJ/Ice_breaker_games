@@ -1,0 +1,24 @@
+/* * {
+  outline: 1px solid red;
+} */
+
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  height: 100vh;
+}
+
+button:focus {
+  outline: none !important;
+}
+
+#newGameButton {
+  position: fixed;
+  right: 3vw;
+  bottom: 6vh;
+  /* margin-top: 24px; */
+  min-width: 15vw;
+  min-height: 7vh;
+  margin-right: 24px;
+}

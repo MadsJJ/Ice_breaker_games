@@ -1,35 +1,91 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./style/App.css";
+import {
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  CardActionArea,
+  CardActions,
+  Button,
+  CardMedia,
+} from "@mui/material";
+import Container from "@mui/material/Container";
+import { useState } from "react";
+import Navbar from "./components/Navbar";
+import Searchbar from "./components/Searchbar";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const handleClick = () => {
+    console.log("Clicked");
+    location.href = "/src/";
+  };
+  const data = ["Lek 1", "Lek 2", "Lek 3", "Lek 4", "Lek 5", "Lek 6"];
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Navbar />
+      <Searchbar />
+      <Container maxWidth="lg">
+        
+        <Grid
+          container
+          maxWidth="900px"
+          justifyContent="center"
+          alignItems="center"
+          columns={18}
+          spacing={4}
+          style={{ marginTop: "50px" }}
+        >
+          {data.map((item, index) => (
+            <Grid item xs={3} sm={6} ms={3} key={index}>
+              <Card
+                sx={{
+                  maxWidth: 345,
+                  minWidth: 250,
+                  borderRadius: "15px",
+                }}
+              >
+                <CardActionArea>
+                  <CardMedia
+                    sx={{ height: "140px" }}
+                    image="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg"
+                    title="green iguana"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {item}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Lizards are a widespread group of squamate reptiles, with
+                      over 6,000 species, ranging across all continents except
+                      Antarctica
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                  <Button
+                    onClick={handleClick}
+                    color="secondary"
+                    variant="contained"
+                    size="small"
+                  >
+                    Button
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+      <Button
+        id="newGameButton"
+        color="primary"
+        variant="contained"
+        size="large"
+      >
+        New Game
+      </Button>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
