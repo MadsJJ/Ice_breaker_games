@@ -1,7 +1,17 @@
 import './style/Navbar.css'
 import kaldprat_logo from '../assets/kaldprat_logo.png'
+//routing
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Navbar(){
+    //routing
+  let navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate('/Login'); 
+  };
+
     return(
         <>
             <header className="navbar">
@@ -13,7 +23,7 @@ export default function Navbar(){
                     <a href="/">Mine spillelister</a>
                     <a href="/">Mine favoritter</a>
                     <a href="/">Mine leker</a>
-                    <button href="/">Logg ut</button>
+                    <button onClick={handleNavigate}>Logg In</button>
                 </nav>
             </header>
         </>

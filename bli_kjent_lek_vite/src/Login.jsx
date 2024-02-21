@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import kaldprat_logo from './assets/kaldprat_logo.png'
-import './style/Login.css'
+import styles from './style/Login.module.css'
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -23,21 +23,23 @@ function Login() {
     };
 
     return (
-        <body>
+        <body
+        className={styles.loginbody}>
             <div className='loginContainer'>
-                <div className='loginboks'>
+                <div className={styles.loginboks}>
 
-                    <div id="logoContainer">
-                        <img id="logo" src={kaldprat_logo} alt="error image" />
+                    <div id={styles.logoContainer}>
+                        <img id={styles.logo} src={kaldprat_logo} alt="error image" />
                     </div>
 
-                    <h2 className='overskrift'>Logg inn</h2>
+                    <h2 className={styles.overskrift}>Logg inn</h2>
                     <form onSubmit={handleSubmit}>
-                        <div className='input-boks'>
+                        <div className={styles.inputboks}>
                             <label htmlFor="username">Brukernavn:</label>
                             <br></br>
 
                             <input
+                                className={styles.loginInput}
                                 type="text"
                                 placeholder='Skriv ditt brukernavn her ...'
                                 id="username"
@@ -47,11 +49,12 @@ function Login() {
                         </div>
                         <br></br>
 
-                        <div className='input-boks'>
+                        <div className={styles.inputboks}>
                             <label htmlFor="password">Passord:</label>
                             <br></br>
 
                             <input
+                                className={styles.loginInput}
                                 type="password"
                                 placeholder='Skriv ditt brukernavn her ...'
                                 id="password"
@@ -59,7 +62,9 @@ function Login() {
                                 onChange={handlePasswordChange}
                             />
                         </div>
-                        <button type="submit">Logg inn</button>
+                        <button 
+                        className={styles.loginButton}
+                        type="submit">Logg inn</button>
                     </form>
                 </div>
             </div>

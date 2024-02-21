@@ -13,11 +13,24 @@ import Container from "@mui/material/Container";
 import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Searchbar from "./components/Searchbar";
+//routing
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 function App() {
+  //routing
+  // let navigate = useNavigate();
+
+  // const handleNavigate = () => {
+  //   navigate('/Login'); 
+  // };
+
+
+
   const handleClick = () => {
     console.log("Clicked");
-    location.href = "/src/";
+    location.href = "/src/Newgame.jsx";
   };
   const data = ["Lek 1", "Lek 2", "Lek 3", "Lek 4", "Lek 5", "Lek 6"];
   return (

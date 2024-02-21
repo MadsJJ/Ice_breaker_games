@@ -1,18 +1,46 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import NewGame from './NewGame.jsx'
-import './NewGame.css'
-import React from "react";
-import ReactDOM from "react-dom/client";
+import Login from './Login.jsx'
+// import UserData from "./readUserdata.jsx";
 import App from "./App.jsx";
-import "./style/index.css";
-import UserData from "./readUserdata.jsx";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import "./style/App.css";
+//error page
+import ErrorPage from "./components/error-page.jsx";
+//routing
+// import { BrowserRouter as 
+//   Router, 
+//   Route, 
+//   Routes } from 'react-router-dom';
+  import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+//tror man må kjøre "npm install react-router-dom"
+
+
+const router = createBrowserRouter([
+  //root route
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorPage />, 
+  },
+  //route NewGame
+  {
+    path: "/Login",
+    element: <Login />,
+  },
+
+  //-->
+  //legg til flere routes her
+]);
+
+
 
 export const theme = createTheme({
   palette: {
@@ -34,8 +62,7 @@ export const theme = createTheme({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ThemeProvider theme={theme}>
     <React.StrictMode>
-      <App />
-      {/* <UserData /> */}
+      <RouterProvider router={router} />
     </React.StrictMode>
   </ThemeProvider>
 );
