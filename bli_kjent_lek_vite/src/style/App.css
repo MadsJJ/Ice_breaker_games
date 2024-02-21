@@ -16,7 +16,7 @@ button:focus {
 #newGameButton {
   position: fixed;
   right: 3vw;
-  top: 6vh;
+  bottom: 6vh;
   /* margin-top: 24px; */
   min-width: 15vw;
   min-height: 7vh;

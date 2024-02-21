@@ -31,7 +31,7 @@ function Login() {
                         <img id="logo" src={kaldprat_logo} alt="error image" />
                     </div>
 
-                    <h2 class='overskrift'>Logg inn</h2>
+                    <h2 className='overskrift'>Logg inn</h2>
                     <form onSubmit={handleSubmit}>
                         <div className='input-boks'>
                             <label htmlFor="username">Brukernavn:</label>
