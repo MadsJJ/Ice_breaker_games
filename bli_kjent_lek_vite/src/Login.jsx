@@ -51,12 +51,11 @@ function Login() {
 
   return (
     <>
-      <Navbar />
       <div className="loginbody">
         <div className="loginContainer">
           <div className="loginboks">
             <div id="logoContainer">
-              <img id="logo" src={kaldprat_logo} alt="error image" />
+              <img id="logo" src={kaldprat_logo} alt="error image" onClick={handleNavigate} />
             </div>
 
             <h2 className="overskrift">Logg inn</h2>

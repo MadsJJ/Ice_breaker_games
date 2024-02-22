@@ -1,8 +1,18 @@
 import React, { useState } from "react";
 import Navbar from "./components/Navbar";
-import "./style/newGame.css";
+import "./style/NewGame.css";
+//routing
+import react from "react";
+import { useNavigate } from "react-router-dom";
 
 function NewGame() {
+ //routing
+ let navigate = useNavigate();
+
+ const handleNavigate = () => {
+   navigate("/");
+ };
+
   const [gameData, setGameData] = useState({
     //bruker useState til å opprette en tilstand gameData som inneholder info om leken
     Tittel: "", //gameData er en objektstate med feltene til venstre
@@ -82,7 +92,7 @@ function NewGame() {
             {/* Legg til de andre kategoriene her */}
           </select>
 
-          <button className="bnConfirm" type="button" onClick={handleConfirm}>
+          <button className="bnConfirm" type="button" onClick={handleNavigate}>
             Opprett lek
           </button>
         </form>
