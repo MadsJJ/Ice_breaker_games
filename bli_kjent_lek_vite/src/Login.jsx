@@ -74,6 +74,7 @@ function Login() {
                 />
               </div>
 
+              <br />
               <div className="inputboks">
                 <label htmlFor="password">Passord:</label>
 
@@ -86,6 +87,7 @@ function Login() {
                   onChange={handlePasswordChange}
                 />
               </div>
+              <br />
               <button
                 onClick={handleNavigate}
                 className="loginButton"
