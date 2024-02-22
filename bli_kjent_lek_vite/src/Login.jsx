@@ -3,8 +3,19 @@ import kaldprat_logo from "./assets/kaldprat_logo.png";
 import styles from "./style/Login.module.css";
 import { db } from "./firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
+//routing
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+    //routing
+    let navigate = useNavigate();
+
+    const handleNavigate = () => {
+      navigate('/'); 
+    };
+
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -79,6 +90,7 @@ function Login() {
                             />
                         </div>
                         <button 
+                        onClick={handleNavigate}
                         className={styles.loginButton}
                         type="submit">Logg inn</button>
                     </form>

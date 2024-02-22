@@ -13,11 +13,11 @@ import { useNavigate } from 'react-router-dom';
 
 function App() {
   //routing
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
 
-  // const handleNavigate = () => {
-  //   navigate('/Login'); 
-  // };
+  const handleNavigate = () => {
+    navigate('/NewGame'); 
+  };
 
 
 
@@ -84,6 +84,7 @@ function App() {
         ))}
       </div>
       <Button
+        onClick={handleNavigate}
         id="newGameButton"
         color="primary"
         variant="contained"

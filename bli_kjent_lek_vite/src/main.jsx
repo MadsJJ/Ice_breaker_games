@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import NewGame from './NewGame.jsx'
 import Login from './Login.jsx'
-// import UserData from "./readUserdata.jsx";
 import App from "./App.jsx";
 // import "./style/App.css";
 // import "./style/index.css";
@@ -22,7 +21,7 @@ import ErrorPage from "./components/error-page.jsx";
 
 
 const router = createBrowserRouter([
-  //root route
+  //root home
   {
     path: "/",
     element: <App />,
@@ -33,6 +32,12 @@ const router = createBrowserRouter([
     path: "/Login",
     element: <Login />,
   },
+  //route NewGame
+  {
+    path: "/NewGame",
+    element: <NewGame />,
+  },
+
 
   //-->
   //legg til flere routes her
