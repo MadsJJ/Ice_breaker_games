@@ -6,8 +6,21 @@ import Searchbar from "./components/Searchbar";
 import { Card } from "./components/Card";
 import { db } from "./firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
+//routing
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 function App() {
+  //routing
+  let navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate('/NewGame'); 
+  };
+
+
+
   const handleClick = () => {
     console.log("Clicked");
     location.href = "/src/";
@@ -71,6 +84,7 @@ function App() {
         ))}
       </div>
       <Button
+        onClick={handleNavigate}
         id="newGameButton"
         color="primary"
         variant="contained"
