@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import './style/Searchbar.css'
 
-const SearchBar = ({categories}) => {
+/*const SearchBar = () => {
     const [searchTerm, setSearchTerm]= useState('');
     const [filteredCategories, setFilteredCategories] = useState([]);
 
@@ -9,14 +10,37 @@ const SearchBar = ({categories}) => {
         const term = e.target.value;
         setSearchTerm(term);
 
-    if (term.trim()!== ''){
-        const filtered = categories.filter(category => category.name.toLowerCase().includes(term.toLowerCase())
-        );
-        setFilteredCategories(filtered);
-    }
-    else {setFilteredCategories([])
-    }
+        if (term.trim()!== ''){
+            const filtered = categories.filter(category => category.name.toLowerCase().includes(term.toLowerCase())
+            );
+            setFilteredCategories(filtered);
+        }
+        else {setFilteredCategories([])
+        }
  
+    };*/
+
+    export const SearchBar = ({setResults})=> {
+        const [Input, setInput] = useState("");
+
+        const fetchData = async () => {
+            const querySnapshot = await getDocs(collection(db, "games"));
+            const gamesList = querySnapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }));
+            setGames(gamesList);
+          };
+      
+          fetchData();
+        
+
+        
+
+        const handleChange = (value) => {
+            setInput(value);
+            fetchData(value);
+        
     };
     return (
         <>
@@ -27,8 +51,8 @@ const SearchBar = ({categories}) => {
                         type="text"
                         className="search-input"
                         placeholder="Finn lek..."
-                        value = {searchTerm}
-                        onChange={handleSearchChange}
+                        value = {input}
+                        onChange={(e) => handleChange(e.target.value)}
                     />
                     <button type="submit" className="search-button">
                         🔍
@@ -46,6 +70,15 @@ const SearchBar = ({categories}) => {
             </div>
         </>
     );
+
+
+SearchBar.propTypes = {
+    categories: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+    })).isRequired,
 };
 
 export default SearchBar;
+
+    }
