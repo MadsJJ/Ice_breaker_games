@@ -4,6 +4,8 @@ import NewGame from './NewGame.jsx'
 import Login from './Login.jsx'
 // import UserData from "./readUserdata.jsx";
 import App from "./App.jsx";
+// import "./style/App.css";
+// import "./style/index.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -12,10 +14,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 //error page
 import ErrorPage from "./components/error-page.jsx";
 //routing
-// import { BrowserRouter as 
-//   Router, 
-//   Route, 
-//   Routes } from 'react-router-dom';
   import {
   createBrowserRouter,
   RouterProvider,
@@ -30,7 +28,7 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />, 
   },
-  //route NewGame
+  //route Login
   {
     path: "/Login",
     element: <Login />,
