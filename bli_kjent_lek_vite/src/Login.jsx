@@ -1,20 +1,20 @@
 import { useState } from "react";
 import kaldprat_logo from "./assets/kaldprat_logo.png";
-import styles from "./style/Login.module.css";
+import Navbar from "./components/Navbar";
+import "./style/Login.css";
 import { db } from "./firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 //routing
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-    //routing
-    let navigate = useNavigate();
+  //routing
+  let navigate = useNavigate();
 
-    const handleNavigate = () => {
-      navigate('/'); 
-    };
-
+  const handleNavigate = () => {
+    navigate("/");
+  };
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -49,55 +49,58 @@ function Login() {
     // For eksempel kan du her kalle en funksjon for å validere og sende dataene til en server
   };
 
-    return (
-        <body
-        className={styles.loginbody}>
-            <div className='loginContainer'>
-                <div className={styles.loginboks}>
-
-                    <div id={styles.logoContainer}>
-                        <img id={styles.logo} src={kaldprat_logo} alt="error image" />
-                    </div>
-
-                    <h2 className={styles.overskrift}>Logg inn</h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className={styles.inputboks}>
-                            <label htmlFor="username">Brukernavn:</label>
-                            <br></br>
-
-                            <input
-                                className={styles.loginInput}
-                                type="text"
-                                placeholder='Skriv ditt brukernavn her ...'
-                                id="username"
-                                value={username}
-                                onChange={handleUsernameChange}
-                            />
-                        </div>
-                        <br></br>
-
-                        <div className={styles.inputboks}>
-                            <label htmlFor="password">Passord:</label>
-                            <br></br>
-
-                            <input
-                                className={styles.loginInput}
-                                type="password"
-                                placeholder='Skriv ditt brukernavn her ...'
-                                id="password"
-                                value={password}
-                                onChange={handlePasswordChange}
-                            />
-                        </div>
-                        <button 
-                        onClick={handleNavigate}
-                        className={styles.loginButton}
-                        type="submit">Logg inn</button>
-                    </form>
-                </div>
+  return (
+    <>
+      <Navbar />
+      <div className="loginbody">
+        <div className="loginContainer">
+          <div className="loginboks">
+            <div id="logoContainer">
+              <img id="logo" src={kaldprat_logo} alt="error image" />
             </div>
-        </body>
-    );
+
+            <h2 className="overskrift">Logg inn</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="inputboks">
+                <label htmlFor="username">Brukernavn:</label>
+
+                <input
+                  className="loginInput"
+                  type="text"
+                  placeholder="Skriv ditt brukernavn her ..."
+                  id="username"
+                  value={username}
+                  onChange={handleUsernameChange}
+                />
+              </div>
+
+              <br />
+              <div className="inputboks">
+                <label htmlFor="password">Passord:</label>
+
+                <input
+                  className="loginInput"
+                  type="password"
+                  placeholder="Skriv ditt brukernavn her ..."
+                  id="password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                />
+              </div>
+              <br />
+              <button
+                onClick={handleNavigate}
+                className="loginButton"
+                type="submit"
+              >
+                Logg inn
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default Login;

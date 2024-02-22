@@ -2,7 +2,7 @@ import React from "react";
 
 import "./style/Card.css";
 
-export const Card = ({ imgSrc, imgAlt, title, desc }) => {
+export const Card = ({ imgSrc, imgAlt, title, desc, category }) => {
   const handleClick = (e) => alert("Test click");
   // This handleClick needs to be changed to properly route to correct page
   return (
@@ -14,6 +14,7 @@ export const Card = ({ imgSrc, imgAlt, title, desc }) => {
       <img className="cardImage" src="https://placekitten.com/350/140" alt="" />
       {title && <h3 className="cardTitle">{title}</h3>}
       {desc && <p className="cardDesc">{desc}</p>}
+      {category && <p className="cardCats">{category}</p>}
     </div>
   );
 };
