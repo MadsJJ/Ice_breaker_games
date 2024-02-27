@@ -8,7 +8,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function RegisterUser() {
   //routing
   let navigate = useNavigate();
 
@@ -16,8 +16,8 @@ function Login() {
     navigate("/");
   };
 
-  const handleRegisterUser = () => {
-    navigate("/RegisterUser");
+  const handleLogin = () => {
+    navigate("/Login");
   };
 
   const [username, setUsername] = useState("");
@@ -62,10 +62,10 @@ function Login() {
               <img id="logo" src={kaldprat_logo} alt="error image" onClick={handleNavigate} />
             </div>
 
-            <h2 className="overskrift">Logg inn</h2>
+            <h2 className="overskrift">Registrer ny bruker</h2>
             <form onSubmit={handleSubmit}>
               <div className="inputboks">
-                <label htmlFor="username">Brukernavn:</label>
+                <label htmlFor="username">Lag et brukernavn:</label>
 
                 <input
                   className="loginInput"
@@ -79,7 +79,7 @@ function Login() {
 
               <br />
               <div className="inputboks">
-                <label htmlFor="password">Passord:</label>
+                <label htmlFor="password">Lag et passord:</label>
 
                 <input
                   className="loginInput"
@@ -98,20 +98,18 @@ function Login() {
               >
                 Logg inn
               </button>
+              <br></br>
+              <br></br>
 
-              <br></br>
-              <br></br>
-             
+
 
               <button
-                onClick={handleRegisterUser}
+                onClick={handleLogin}
                 className="optionButton"
                 type="submit"
               >
-                Registrer ny bruker?
+                Har allerede en bruker
               </button>
-
-
 
             </form>
           </div>
@@ -121,4 +119,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default RegisterUser;
