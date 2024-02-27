@@ -3,7 +3,14 @@ import kaldprat_logo from "./assets/kaldprat_logo.png";
 import Navbar from "./components/Navbar";
 import "./style/Login.css";
 import { db } from "./firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  doc,
+  setDoc,
+} from "firebase/firestore";
 //routing
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,10 +20,6 @@ function RegisterUser() {
   let navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate("/");
-  };
-
-  const handleLogin = () => {
     navigate("/Login");
   };
 
@@ -33,24 +36,32 @@ function RegisterUser() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Her kan du legge til logikken for å håndtere innsendingen av brukernavn og passord
-    // console.log("Brukernavn:", username);
-    // console.log("Passord:", password);
-    const q = query(
-      collection(db, "users"),
-      where("username", "==", username),
-      where("password", "==", password)
-    );
+    const q = query(collection(db, "users"), where("username", "==", username));
     const querySnapshot = await getDocs(q);
-    if (querySnapshot.empty) {
-      console.log("Oopsies, ingen brukere funnet");
+    console.log("knapp trykket");
+    if (username == "" || password == "") {
+      alert("Fyll ut alle feltene");
       return;
+    } else if (!querySnapshot.empty) {
+      alert("Brukernavn eksisterer allerede");
+    } else {
+      //add user to database
+      await createNewUser(username, password);
+      navigate("/Login");
+      alert(
+        "Created user with username: " +
+          username +
+          "\n and password: " +
+          password
+      );
     }
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
+  };
+
+  const createNewUser = async (username, password) => {
+    setDoc(doc(db, "users", username), {
+      username: username,
+      password: password,
     });
-    // For eksempel kan du her kalle en funksjon for å validere og sende dataene til en server
   };
 
   return (
@@ -59,7 +70,12 @@ function RegisterUser() {
         <div className="loginContainer">
           <div className="loginboks">
             <div id="logoContainer">
-              <img id="logo" src={kaldprat_logo} alt="error image" onClick={handleNavigate} />
+              <img
+                id="logo"
+                src={kaldprat_logo}
+                alt="error image"
+                onClick={handleNavigate}
+              />
             </div>
 
             <h2 className="overskrift">Registrer ny bruker</h2>
@@ -92,25 +108,22 @@ function RegisterUser() {
               </div>
               <br />
               <button
-                onClick={handleNavigate}
+                // onClick={handleSubmit}
                 className="loginButton"
                 type="submit"
               >
-                Logg inn
+                Registrer bruker
               </button>
               <br></br>
               <br></br>
 
-
-
               <button
-                onClick={handleLogin}
+                onClick={handleNavigate}
                 className="optionButton"
                 type="submit"
               >
                 Har allerede en bruker
               </button>
-
             </form>
           </div>
         </div>
