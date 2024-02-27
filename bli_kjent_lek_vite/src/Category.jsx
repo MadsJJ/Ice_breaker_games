@@ -17,6 +17,10 @@ function App() {
     navigate("/NewGame");
   };
 
+  const handleVisitGame = () => {
+    navigate("/VisitGame");
+  };
+
   const handleClick = () => {
     console.log("Clicked");
     location.href = "/src/";
@@ -67,6 +71,7 @@ function App() {
             // imgAlt={game.imgAlt}  / eller strings som linker til bilder i filstrukturen
             title={game.Tittel} // burde endres til "title i firebase - holde det consistent med engelsk
             desc={game.description} // burde kanskje ha en kortere beskrivelse til kortene?
+            onClick={handleVisitGame}
           />
         ))}
       </div>

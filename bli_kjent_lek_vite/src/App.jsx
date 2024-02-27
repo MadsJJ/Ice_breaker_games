@@ -18,6 +18,10 @@ function App() {
     navigate("/NewGame");
   };
 
+  const handleVisitGame = () => {
+    navigate("/VisitGame");
+  };
+
   const handleClick = () => {
     console.log("Clicked");
     location.href = "/src/";
@@ -56,6 +60,11 @@ function App() {
           width: "90vw",
         }}
       >
+        <button onClick={handleVisitGame}>visitgame</button>
+        <br></br>
+        <br></br>
+
+
         <Card title={"Ute"} desc={" "} />
         <Card title={"Barn"} desc={" "} />
         <Card title={"Fest"} desc={" "} />
@@ -78,6 +87,7 @@ function App() {
             title={game.Tittel} // burde endres til "title i firebase - holde det consistent med engelsk
             desc={game.description} // burde kanskje ha en kortere beskrivelse til kortene?
             category={game.category}
+           
           />
         ))}
       </div>

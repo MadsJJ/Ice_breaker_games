@@ -3,12 +3,12 @@ import kaldprat_logo from "./assets/kaldprat_logo.png";
 import Navbar from "./components/Navbar";
 import "./style/Login.css";
 import { db } from "./firebase";
-import { collection, doc, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 //routing
-// import React from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function RegisterUser() {
   //routing
   let navigate = useNavigate();
 
@@ -16,8 +16,8 @@ function Login() {
     navigate("/");
   };
 
-  const handleRegisterUser = () => {
-    navigate("/RegisterUser");
+  const handleLogin = () => {
+    navigate("/Login");
   };
 
   const [username, setUsername] = useState("");
@@ -33,6 +33,7 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // Her kan du legge til logikken for å håndtere innsendingen av brukernavn og passord
     // console.log("Brukernavn:", username);
     // console.log("Passord:", password);
     const q = query(
@@ -41,15 +42,15 @@ function Login() {
       where("password", "==", password)
     );
     const querySnapshot = await getDocs(q);
-    if (!querySnapshot.empty) {
-      console.log("User found");
-      console.log("ID:", querySnapshot.docs[0].id);
-      localStorage.setItem("userID", querySnapshot.docs[0].id);
-      localStorage.setItem("username", username);
-      navigate("/");
-    } else {
-      alert("Feil brukernavn eller passord");
+    if (querySnapshot.empty) {
+      console.log("Oopsies, ingen brukere funnet");
+      return;
     }
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+    });
+    // For eksempel kan du her kalle en funksjon for å validere og sende dataene til en server
   };
 
   return (
@@ -58,18 +59,13 @@ function Login() {
         <div className="loginContainer">
           <div className="loginboks">
             <div id="logoContainer">
-              <img
-                id="logo"
-                src={kaldprat_logo}
-                alt="error image"
-                onClick={handleNavigate}
-              />
+              <img id="logo" src={kaldprat_logo} alt="error image" onClick={handleNavigate} />
             </div>
 
-            <h2 className="overskrift">Logg inn</h2>
+            <h2 className="overskrift">Registrer ny bruker</h2>
             <form onSubmit={handleSubmit}>
               <div className="inputboks">
-                <label htmlFor="username">Brukernavn:</label>
+                <label htmlFor="username">Lag et brukernavn:</label>
 
                 <input
                   className="loginInput"
@@ -83,7 +79,7 @@ function Login() {
 
               <br />
               <div className="inputboks">
-                <label htmlFor="password">Passord:</label>
+                <label htmlFor="password">Lag et passord:</label>
 
                 <input
                   className="loginInput"
@@ -96,26 +92,24 @@ function Login() {
               </div>
               <br />
               <button
-                onClick={handleSubmit}
+                onClick={handleNavigate}
                 className="loginButton"
                 type="submit"
               >
                 Logg inn
               </button>
+              <br></br>
+              <br></br>
 
-              <br></br>
-              <br></br>
-             
+
 
               <button
-                onClick={handleRegisterUser}
+                onClick={handleLogin}
                 className="optionButton"
                 type="submit"
               >
-                Registrer ny bruker?
+                Har allerede en bruker
               </button>
-
-
 
             </form>
           </div>
@@ -125,4 +119,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default RegisterUser;

@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import NewGame from "./NewGame.jsx";
 import Login from "./Login.jsx";
 import App from "./App.jsx";
+import RegisterUser from "./RegisterUser.jsx";
+import VisitGame from "./VisitGame.jsx";
 import "./style/App.css";
 import "./style/index.css";
 import "@fontsource/roboto/300.css";
@@ -32,6 +34,17 @@ const router = createBrowserRouter([
   {
     path: "/NewGame",
     element: <NewGame />,
+  },
+  //route RegisterUser
+  {
+    path: "/RegisterUser",
+    element: <RegisterUser />,
+  },
+
+  //route VisitGame
+  {
+    path: "/VisitGame",
+    element: <VisitGame />,
   },
 
   //-->
