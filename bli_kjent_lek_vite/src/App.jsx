@@ -51,25 +51,7 @@ function App() {
     <>
       <Navbar />
       <Searchbar />
-      <h2>Populære kategorier</h2>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          margin: "auto",
-          width: "90vw",
-        }}
-      >
-        <button onClick={handleVisitGame}>visitgame</button>
-        <br></br>
-        <br></br>
-
-
-        <Card title={"Ute"} desc={" "} />
-        <Card title={"Barn"} desc={" "} />
-        <Card title={"Fest"} desc={" "} />
-      </div>
-      <h2>Populære leker</h2>
+      <br />
       <div
         style={{
           display: "flex",
@@ -82,12 +64,12 @@ function App() {
         {games.map((game) => (
           <Card
             key={game.id}
+            gameId={game.id}
             // imgSrc={game.imgSrc} // disse er ikke lagt til i db - må finne ut om vi vil ha bilder
             // imgAlt={game.imgAlt}  / eller strings som linker til bilder i filstrukturen
-            title={game.Tittel} // burde endres til "title i firebase - holde det consistent med engelsk
-            desc={game.description} // burde kanskje ha en kortere beskrivelse til kortene?
+            title={game.title} // burde endres til "title i firebase - holde det consistent med engelsk
+            // desc={game.description} // bare ha beskrivelse på lek-side
             category={game.category}
-           
           />
         ))}
       </div>
