@@ -5,6 +5,8 @@ import Login from "./Login.jsx";
 import App from "./App.jsx";
 import RegisterUser from "./RegisterUser.jsx";
 import VisitGame from "./VisitGame.jsx";
+import CategoryFilter from "./CategoryFilter.jsx";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./style/App.css";
 import "./style/index.css";
 import "@fontsource/roboto/300.css";
@@ -45,6 +47,12 @@ const router = createBrowserRouter([
   {
     path: "/VisitGame",
     element: <VisitGame />,
+  },
+
+  //route categoryFilter
+  {
+    path: "/CategoryFilter",
+    element: <CategoryFilter />,
   },
 
   //-->

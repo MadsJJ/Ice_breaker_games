@@ -3,6 +3,7 @@ import { Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Searchbar from "./components/Searchbar";
+import GameCarousel from "./components/GameCarousel";
 import { Card } from "./components/Card";
 import { db } from "./firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
@@ -51,25 +52,9 @@ function App() {
     <>
       <Navbar />
       <Searchbar />
-      <h2>Populære kategorier</h2>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          margin: "auto",
-          width: "90vw",
-        }}
-      >
-        <button onClick={handleVisitGame}>visitgame</button>
-        <br></br>
-        <br></br>
-
-
-        <Card title={"Ute"} desc={" "} />
-        <Card title={"Barn"} desc={" "} />
-        <Card title={"Fest"} desc={" "} />
-      </div>
+      <GameCarousel />
       <h2>Populære leker</h2>
+
       <div
         style={{
           display: "flex",
@@ -87,7 +72,7 @@ function App() {
             title={game.Tittel} // burde endres til "title i firebase - holde det consistent med engelsk
             desc={game.description} // burde kanskje ha en kortere beskrivelse til kortene?
             category={game.category}
-           
+
           />
         ))}
       </div>
