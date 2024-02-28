@@ -94,6 +94,7 @@ function NewGame() {
         <form className="newGameForm">
           <label className="gameTitle">Title:</label>
           <input
+            className="inputfeltGame"
             type="text"
             name="title"
             value={gameData.title}
@@ -105,6 +106,7 @@ function NewGame() {
 
           <label className="gameTitle">Description:</label>
           <textarea
+            className="inputfeltGame"
             name="description"
             value={gameData.description}
             onChange={(e) => setGameData(prevGameData => ({
@@ -115,6 +117,7 @@ function NewGame() {
 
           <label className="gameTitle">Minimum number of people:</label>
           <input
+            className="inputfeltGame"
             type="number"
             inputMode="numeric"
             name="minNumberOfPeople"
@@ -128,6 +131,7 @@ function NewGame() {
 
           <label className="gameTitle">Maximum number of people:</label>
           <input
+            className="inputfeltGame"
             type="number"
             inputMode="numeric"
             name="maxNumberOfPeople"
@@ -143,6 +147,7 @@ function NewGame() {
           <div>
             <label>
               <input
+                className="inputfeltGame"
                 type="checkbox"
                 name="Outdoor"
                 checked={gameData.categories.includes("Outdoor")}
@@ -161,6 +166,7 @@ function NewGame() {
             </label>
             <label>
               <input
+                className="inputfeltGame"
                 type="checkbox"
                 name="Moro"
                 checked={gameData.categories.includes("Moro")}
