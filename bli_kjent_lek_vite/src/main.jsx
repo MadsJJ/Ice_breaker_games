@@ -43,7 +43,7 @@ const router = createBrowserRouter([
 
   //route VisitGame
   {
-    path: "/VisitGame",
+    path: "/VisitGame/:gameId",
     element: <VisitGame />,
   },
 
