@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import "./style/Card.css";
 
-export const Card = ({ gameId, imgSrc, imgAlt, title, desc, category }) => {
+export const Card = ({ gameId, imgSrc, imgAlt, title, desc, categories }) => {
   let navigate = useNavigate();
 
   const handleClick = () => {
@@ -12,10 +12,10 @@ export const Card = ({ gameId, imgSrc, imgAlt, title, desc, category }) => {
   };
 
   const categoriesString = () => {
-    if (typeof category === "string") {
-      return category;
+    if (typeof categories === "string") {
+      return categories;
     }
-    return category.join(", "); // Join array elements with commas
+    return categories.join(", "); // Join array elements with commas
   };
 
   // This handleClick needs to be changed to properly route to correct page
@@ -28,7 +28,9 @@ export const Card = ({ gameId, imgSrc, imgAlt, title, desc, category }) => {
       <img className="cardImage" src="https://placekitten.com/350/140" alt="" />
       {title && <h3 className="cardTitle">{title}</h3>}
       {desc && <p className="cardDesc">{desc}</p>}
-      {category && <p className="cardCats">Kategorier: {categoriesString()}</p>}
+      {categories && (
+        <p className="cardCats">Kategorier: {categoriesString()}</p>
+      )}
     </div>
   );
 };

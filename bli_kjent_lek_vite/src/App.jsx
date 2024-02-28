@@ -69,7 +69,7 @@ function App() {
             // imgAlt={game.imgAlt}  / eller strings som linker til bilder i filstrukturen
             title={game.title} // burde endres til "title i firebase - holde det consistent med engelsk
             // desc={game.description} // bare ha beskrivelse på lek-side
-            category={game.category}
+            categories={game.categories}
           />
         ))}
       </div>

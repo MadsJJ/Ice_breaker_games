@@ -50,16 +50,16 @@ function VisitGame() {
     fetchData();
   }, []);
 
-  const [categories, setCategories] = useState("");
+  const [categoryList, setCategories] = useState("");
 
   useEffect(() => {
-    console.log(games.category);
-    if (typeof games.category === "object") {
-      setCategories(games.category.join(", "));
+    console.log(games.categories);
+    if (typeof games.categories === "object") {
+      setCategories(games.categories.join(", "));
     } else {
-      setCategories(games.category ? games.category : "");
+      setCategories(games.categories ? games.categories : "");
     }
-  }, [games.category]);
+  }, [games.categories]);
 
   const handleHoverRating = (value) => {
     // Set hoverRating to the value when mouse enters a star
@@ -122,7 +122,7 @@ function VisitGame() {
                 </button>
               </div>
               <div className="categoryDiv">
-                <p>Category: {categories}</p>
+                <p>Category: {categoryList}</p>
               </div>
 
               <button className="reportButton">Rapporter Lek</button>
