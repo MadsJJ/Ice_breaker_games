@@ -3,7 +3,16 @@ import { useNavigate } from "react-router-dom";
 
 import "./style/Card.css";
 
-export const Card = ({ gameId, imgSrc, imgAlt, title, desc, categories }) => {
+export const Card = ({
+  gameId,
+  imgSrc,
+  imgAlt,
+  title,
+  desc,
+  categories,
+  minP,
+  maxP,
+}) => {
   let navigate = useNavigate();
 
   const handleClick = () => {
@@ -30,6 +39,11 @@ export const Card = ({ gameId, imgSrc, imgAlt, title, desc, categories }) => {
       {desc && <p className="cardDesc">{desc}</p>}
       {categories && (
         <p className="cardCats">Kategorier: {categoriesString()}</p>
+      )}
+      {minP && maxP && (
+        <p classname="numPlayers">
+          Spillere: {minP}-{maxP}
+        </p>
       )}
     </div>
   );

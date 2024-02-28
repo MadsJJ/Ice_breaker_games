@@ -94,6 +94,8 @@ function VisitGame() {
               </div>
               <div className="textRight">
                 <p>{games.description}</p>
+                <p>{games.minNumberOfPeople}</p>
+                <p>{games.maxNumberOfPeople}</p>
               </div>
             </div>
             <div className="additionalInfo">
