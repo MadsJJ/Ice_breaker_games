@@ -9,6 +9,7 @@
 
 .card:hover {
   background-color: aliceblue;
+  cursor: pointer;
 }
 
 .cardImage {
@@ -21,7 +22,7 @@
 .cardTitle {
   padding-left: 20px;
   padding-right: 20px;
-  margin-bottom: -20px;
+  margin-bottom: -10px;
 }
 
 .cardDesc {
