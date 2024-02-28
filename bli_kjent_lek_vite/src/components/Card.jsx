@@ -41,7 +41,7 @@ export const Card = ({
         <p className="cardCats">Kategorier: {categoriesString()}</p>
       )}
       {minP && maxP && (
-        <p classname="numPlayers">
+        <p className="numPlayers">
           Spillere: {minP}-{maxP}
         </p>
       )}
