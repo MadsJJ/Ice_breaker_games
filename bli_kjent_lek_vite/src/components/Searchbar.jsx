@@ -1,116 +1,97 @@
-import { useState, useEffect } from 'react'; //useeffect sørger for at man kan utføre søket når søkeordet endres 
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import './style/Searchbar.css'
-import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from "../firebase";
+import { collection, doc, getDocs, query, where } from "firebase/firestore";
 
 
-/*const SearchBar = () => {
-    const [searchTerm, setSearchTerm]= useState('');
-    const [filteredCategories, setFilteredCategories] = useState([]);
+function SearchBar(props){
 
-    const handleSearchChange = (e) => {
-        const term = e.target.value;
-        setSearchTerm(term);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    //const [searchResults, setSearchResults] = useState([]); // Lagre søkeresultater
 
-        if (term.trim()!== ''){
-            const filtered = categories.filter(category => category.name.toLowerCase().includes(term.toLowerCase())
-            );
-            setFilteredCategories(filtered);
+    const handleSearch = async (event) => {
+        event.preventDefault();
+        const querySnapshot = await getDocs(collection(db, "games"));
+        const results = [];
+
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+
+            if (data && data.Tittel){
+                const titleFromDatabase = data.Tittel.toLowerCase();
+            
+                if (titleFromDatabase.includes(searchTerm.toLowerCase())) {
+                    results.push(doc.data());
+            
+            
+            }
         }
-        else {setFilteredCategories([])
-        }
+
+
+        
+            //console.log(doc.Tittel);
+
+            // if (doc.Tittel.includes(searchTerm)){
+            //     {games.map((game) => (
+          
+
+            // }
+        // doc.data() is never undefined for query doc snapshots
+        //console.log(doc.id, " => ", doc.data());
+    });
+    setSearchResults(results);
+
  
-    };*/
+    };
 
-    useEffect(() => {
-        const fetchSearchResults = async () => {
-          const db = getFirestore();
-          const gamesRef = collection(db, 'games');
-    
-          if (searchTerm.trim() !== '') {
-            const q = query(gamesRef, where('name', '==', searchTerm));
-            const querySnapshot = await getDocs(q);
-    
-            const results = querySnapshot.docs.map((doc) => ({
-              id: doc.id,
-              ...doc.data(),
-            }));
-    
-            setSearchResults(results);
-          } else {
-            setSearchResults([]);
-          }
-        };
-    
-        fetchSearchResults();
-      }, [searchTerm]);
-    
-      const handleSearchChange = (e) => {
-        setSearchTerm(e.target.value);
-      };
 
-    // export const SearchBar = ({setResults})=> {
-    //     const [Input, setInput] = useState("");
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
 
-    //     const fetchData = async () => {
-    //         const querySnapshot = await getDocs(collection(db, "games"));
-    //         const gamesList = querySnapshot.docs.map((doc) => ({
-    //           id: doc.id,
-    //           ...doc.data(),
-    //         }));
-    //         setGames(gamesList);
-    //       };
-      
-    //       fetchData();
-        
+    };
 
-        
-
-    //     const handleChange = (value) => {
-    //         setInput(value);
-    //         fetchData(value);
-        
-    // };
 
     return (
-        <>
             <div className="search-bar-container">
                 <h1 className="alle-leker">Alle leker</h1>
-                <form className="search-form">
+
+
+
+                <form className="search-form" >
+
                     <input
                         type="text"
                         className="search-input"
                         placeholder="Finn lek..."
-                        value = {searchTerm}
-                        onChange={handleSearchChange}
+                        value={searchTerm}
+                        onChange= {handleSearchChange}
+                        
                     />
-                    <button type="submit" className="search-button">
+                    <button onClick={handleSearch} type="submit" className="search-button">
                         🔍
                     </button>
                     <button type="button" className="sort-aå">A-Å</button>
                     <button type="button" className="filter-button">Filter</button>
+                
                 </form>
 
+                {/* Display search results */}
+            <div className="search-results">
+                {searchResults.map((game, index) => (
+                    <div key={index}>{game.Tittel}</div>
+                ))}
+            </div>
 
-                <ul>
-                {searchResults.map((result) => (
-                <li key={result.id}>
-                    <a href={`/games/${result.id}`}>{result.name}</a>
-                </li>
-            ))}
-        </ul>
-    </div>
-    </>
+
+            
+
+
+            </div>
+        
     );
-
-
-SearchBar.propTypes = {
-    categories: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-    })).isRequired,
 };
 
-export default SearchBar;
 
-    
+
+export default SearchBar;
