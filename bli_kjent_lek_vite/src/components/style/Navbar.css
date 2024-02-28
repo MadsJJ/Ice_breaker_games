@@ -14,21 +14,32 @@
   margin: 10px;
 }
 
-.navigation button {
+.notLogo {
+  display: flex;
+  align-items: center;
+}
+
+.user {
+  display: flex;
+  margin-left: 15px;
+  font-weight: bold;
+  color: #064789;
+}
+
+.user button {
   color: white;
   background-color: #064789;
-  margin-left: 5px;
+  margin-left: 15px;
   border: none;
   border-radius: 20px;
-  padding: 15px 32px;
+  padding: 5px 12px;
   font-size: 16px;
   font-weight: bold;
   text-align: center;
-  display: inline-block;
   transition: background-color 0.3s, box-shadow 0.3s;
   cursor: pointer;
 }
 
-.navigation button:hover {
+.user button:hover {
   background-color: cornflowerblue;
 }
