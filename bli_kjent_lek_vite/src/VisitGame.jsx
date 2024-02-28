@@ -98,7 +98,7 @@ function VisitGame() {
             </div>
             <div className="additionalInfo">
               <div className="ratingDiv">
-                <p>Rating: {rating}</p>
+                <p>Vurdering: {rating}</p>
                 <div>
                   {[1, 2, 3, 4, 5].map((value) => (
                     <span
@@ -122,7 +122,7 @@ function VisitGame() {
                 </button>
               </div>
               <div className="categoryDiv">
-                <p>Category: {categoryList}</p>
+                <p>Kategorier: {categoryList}</p>
               </div>
 
               <button className="reportButton">Rapporter Lek</button>
