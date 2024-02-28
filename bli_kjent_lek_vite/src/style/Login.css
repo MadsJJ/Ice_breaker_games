@@ -76,3 +76,23 @@
 #logo {
   width: 100px;
 }
+
+
+.optionButton{
+  font-size: medium;
+  font-weight: 7 px;
+  letter-spacing: 1px;
+  width: 300px;
+  height: 50px;
+  background-color: rgba(28, 28, 116, 0.257);
+  color: white;
+  padding: 10px;
+  border: solid rgba(28, 28, 116, 0.504);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.optionButton:hover {
+  border: solid rgb(82, 82, 150);
+  background-color: rgb(82, 82, 150);
+}

@@ -3,21 +3,24 @@ import kaldprat_logo from "./assets/kaldprat_logo.png";
 import Navbar from "./components/Navbar";
 import "./style/Login.css";
 import { db } from "./firebase";
-import { collection, doc, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  doc,
+  setDoc,
+} from "firebase/firestore";
 //routing
-// import React from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function RegisterUser() {
   //routing
   let navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate("/");
-  };
-
-  const handleRegisterUser = () => {
-    navigate("/RegisterUser");
+    navigate("/Login");
   };
 
   const [username, setUsername] = useState("");
@@ -33,23 +36,32 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // console.log("Brukernavn:", username);
-    // console.log("Passord:", password);
-    const q = query(
-      collection(db, "users"),
-      where("username", "==", username),
-      where("password", "==", password)
-    );
+    const q = query(collection(db, "users"), where("username", "==", username));
     const querySnapshot = await getDocs(q);
-    if (!querySnapshot.empty) {
-      console.log("User found");
-      console.log("ID:", querySnapshot.docs[0].id);
-      localStorage.setItem("userID", querySnapshot.docs[0].id);
-      localStorage.setItem("username", username);
-      navigate("/");
+    console.log("knapp trykket");
+    if (username == "" || password == "") {
+      alert("Fyll ut alle feltene");
+      return;
+    } else if (!querySnapshot.empty) {
+      alert("Brukernavn eksisterer allerede");
     } else {
-      alert("Feil brukernavn eller passord");
+      //add user to database
+      await createNewUser(username, password);
+      navigate("/Login");
+      alert(
+        "Created user with username: " +
+          username +
+          "\n and password: " +
+          password
+      );
     }
+  };
+
+  const createNewUser = async (username, password) => {
+    setDoc(doc(db, "users", username), {
+      username: username,
+      password: password,
+    });
   };
 
   return (
@@ -66,10 +78,10 @@ function Login() {
               />
             </div>
 
-            <h2 className="overskrift">Logg inn</h2>
+            <h2 className="overskrift">Registrer ny bruker</h2>
             <form onSubmit={handleSubmit}>
               <div className="inputboks">
-                <label htmlFor="username">Brukernavn:</label>
+                <label htmlFor="username">Lag et brukernavn:</label>
 
                 <input
                   className="loginInput"
@@ -83,7 +95,7 @@ function Login() {
 
               <br />
               <div className="inputboks">
-                <label htmlFor="password">Passord:</label>
+                <label htmlFor="password">Lag et passord:</label>
 
                 <input
                   className="loginInput"
@@ -96,27 +108,22 @@ function Login() {
               </div>
               <br />
               <button
-                onClick={handleSubmit}
+                // onClick={handleSubmit}
                 className="loginButton"
                 type="submit"
               >
-                Logg inn
+                Registrer bruker
               </button>
-
               <br></br>
               <br></br>
-             
 
               <button
-                onClick={handleRegisterUser}
+                onClick={handleNavigate}
                 className="optionButton"
                 type="submit"
               >
-                Registrer ny bruker?
+                Har allerede en bruker
               </button>
-
-
-
             </form>
           </div>
         </div>
@@ -125,4 +132,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default RegisterUser;
