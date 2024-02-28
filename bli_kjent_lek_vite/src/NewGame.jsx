@@ -1,99 +1,180 @@
 import React, { useState } from "react";
 import Navbar from "./components/Navbar";
-import "./style/NewGame.css";
-//routing
-import react from "react";
 import { useNavigate } from "react-router-dom";
+import { db } from "./firebase";
+import "./style/NewGame.css";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  where,
+  doc,
+  setDoc
+} from "firebase/firestore";
 
 function NewGame() {
- //routing
- let navigate = useNavigate();
-
- const handleNavigate = () => {
-   navigate("/");
- };
-
   const [gameData, setGameData] = useState({
-    //bruker useState til å opprette en tilstand gameData som inneholder info om leken
-    Tittel: "", //gameData er en objektstate med feltene til venstre
-    Beskrivelse: "",
-    Regler: "",
-    Kategori: "",
+    title: "",
+    description: "",
+    minNumberOfPeople: "",
+    maxNumberOfPeople: "",
+    categories: [] // Change categories to an array
   });
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setGameData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate("/");
   };
 
-  // Håndterer kategorivalg
-  const handleCategorySelect = (selectedCategory) => {
-    setGameData((prevData) => ({
-      ...prevData,
-      category: selectedCategory,
-    }));
+  const handleChange = (event) => {
+    const { name, checked } = event.target;
+    if (checked) {
+      // If checkbox is checked, add category to the array
+      setGameData(prevGameData => ({
+        ...prevGameData,
+        categories: [...prevGameData.categories, name]
+      }));
+    } else {
+      // If checkbox is unchecked, remove category from the array
+      setGameData(prevGameData => ({
+        ...prevGameData,
+        categories: prevGameData.categories.filter(cat => cat !== name)
+      }));
+    }
   };
 
-  // Håndterer bekreftelsesknappen
-  const handleConfirm = () => {
-    // Implementer logikk for å bekrefte leken (for eksempel, send data til backend)
-    // Her kan du også legge til brukernavnet
-    const confirmedGameData = {
-      ...gameData,
-      createdBy: username,
-    };
+  const handleCreateGame = async (event) => {
+    event.preventDefault();
+    try {
+      if (
+        !gameData.title ||
+        !gameData.description ||
+        !gameData.minNumberOfPeople ||
+        !gameData.maxNumberOfPeople ||
+        gameData.categories.length === 0 // Ensure at least one category is selected
+      ) {
+        alert("Fill out all fields!");
+        return;
+      }
 
-    // Implementer videre logikk etter behov (f.eks. lagring i database)
-    console.log("Bekreft leken:", confirmedGameData);
+      // Add the game to "games" collection
+      await createNewGame(gameData);
+
+      // Reset the form after the game is added to the database
+      setGameData({
+        title: "",
+        description: "",
+        minNumberOfPeople: "",
+        maxNumberOfPeople: "",
+        categories: []
+      });
+
+      // Alert that the game was created
+      alert("Game created!");
+
+      // Navigate back to the homepage
+      navigate("/");
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      alert("An error occurred while creating the game.");
+    }
+  };
+
+  const createNewGame = async (gameData) => {
+    await addDoc(collection(db, "games"), gameData);
   };
 
   return (
     <>
       <Navbar />
-
       <div className="newGameBox">
-        <h2 className="NGH2">Opprett en ny lek</h2>
+        <h2 className="NGH2">Create a new game</h2>
         <form className="newGameForm">
-          <label>Tittel:</label>
+          <label className="gameTitle">Title:</label>
           <input
-            className="gameTitle"
             type="text"
-            name="Tittel:"
+            name="title"
             value={gameData.title}
-            onChange={handleInputChange}
+            onChange={(e) => setGameData(prevGameData => ({
+              ...prevGameData,
+              title: e.target.value
+            }))}
           />
 
-          <label>Beskrivelse:</label>
+          <label className="gameTitle">Description:</label>
           <textarea
-            name="Beskrivelse:"
+            name="description"
             value={gameData.description}
-            onChange={handleInputChange}
+            onChange={(e) => setGameData(prevGameData => ({
+              ...prevGameData,
+              description: e.target.value
+            }))}
           ></textarea>
 
-          <label>Regler:</label>
-          <textarea
-            name="Regler:"
-            value={gameData.rules}
-            onChange={handleInputChange}
-          ></textarea>
+          <label className="gameTitle">Minimum number of people:</label>
+          <input
+            type="number"
+            inputMode="numeric"
+            name="minNumberOfPeople"
+            value={gameData.minNumberOfPeople}
+            onChange={(e) => setGameData(prevGameData => ({
+              ...prevGameData,
+              minNumberOfPeople: e.target.value
+            }))}
+          />
 
-          <label>Kategori:</label>
-          <select
-            name="Kategori:"
-            value={gameData.category}
-            onChange={(e) => handleCategorySelect(e.target.value)}
-          >
-            <option value="">Velg en kategori</option>
-            <option value="Ute">Ute</option>
-            <option value="Inne">Inne</option>
-            {/* Legg til de andre kategoriene her */}
-          </select>
 
-          <button className="bnConfirm" type="button" onClick={handleNavigate}>
-            Opprett lek
+          <label className="gameTitle">Maximum number of people:</label>
+          <input
+            type="number"
+            inputMode="numeric"
+            name="maxNumberOfPeople"
+            value={gameData.maxNumberOfPeople}
+            onChange={(e) => setGameData(prevGameData => ({
+              ...prevGameData,
+              maxNumberOfPeople: e.target.value
+            }))}
+          />
+
+
+          <label className="gameTitle">Categories:</label>
+          <div>
+            <label>
+              <input
+                type="checkbox"
+                name="Outdoor"
+                checked={gameData.categories.includes("Outdoor")}
+                onChange={handleChange}
+              />{" "}
+              Outdoor
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="Indoor"
+                checked={gameData.categories.includes("Indoor")}
+                onChange={handleChange}
+              />{" "}
+              Indoor
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="Moro"
+                checked={gameData.categories.includes("Moro")}
+                onChange={handleChange}
+              />{" "}
+              Moro
+            </label >
+            <label className="gameTitle"></label>
+            {/* Add other categories here */}
+          </div>
+          <br></br>
+
+          <button className="bnConfirm" type="button" onClick={handleCreateGame}>
+            Create Game
           </button>
         </form>
       </div>

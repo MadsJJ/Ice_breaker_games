@@ -24,7 +24,7 @@ select {
 }
 
 .gameTitle {
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   padding: 8px;
 }
 
@@ -35,6 +35,7 @@ select {
   padding: 10px 15px;
   border: none;
   cursor: pointer;
+  
 }
 
 .bnConfirm:hover {
