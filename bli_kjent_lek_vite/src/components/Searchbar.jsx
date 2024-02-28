@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; //useeffect sørger for at man kan utføre søket når søkeordet endres 
 import PropTypes from 'prop-types';
 import './style/Searchbar.css'
+import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
+
 
 /*const SearchBar = () => {
     const [searchTerm, setSearchTerm]= useState('');
@@ -20,28 +22,56 @@ import './style/Searchbar.css'
  
     };*/
 
-    export const SearchBar = ({setResults})=> {
-        const [Input, setInput] = useState("");
-
-        const fetchData = async () => {
-            const querySnapshot = await getDocs(collection(db, "games"));
-            const gamesList = querySnapshot.docs.map((doc) => ({
+    useEffect(() => {
+        const fetchSearchResults = async () => {
+          const db = getFirestore();
+          const gamesRef = collection(db, 'games');
+    
+          if (searchTerm.trim() !== '') {
+            const q = query(gamesRef, where('name', '==', searchTerm));
+            const querySnapshot = await getDocs(q);
+    
+            const results = querySnapshot.docs.map((doc) => ({
               id: doc.id,
               ...doc.data(),
             }));
-            setGames(gamesList);
-          };
+    
+            setSearchResults(results);
+          } else {
+            setSearchResults([]);
+          }
+        };
+    
+        fetchSearchResults();
+      }, [searchTerm]);
+    
+      const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
+      };
+
+    // export const SearchBar = ({setResults})=> {
+    //     const [Input, setInput] = useState("");
+
+    //     const fetchData = async () => {
+    //         const querySnapshot = await getDocs(collection(db, "games"));
+    //         const gamesList = querySnapshot.docs.map((doc) => ({
+    //           id: doc.id,
+    //           ...doc.data(),
+    //         }));
+    //         setGames(gamesList);
+    //       };
       
-          fetchData();
+    //       fetchData();
         
 
         
 
-        const handleChange = (value) => {
-            setInput(value);
-            fetchData(value);
+    //     const handleChange = (value) => {
+    //         setInput(value);
+    //         fetchData(value);
         
-    };
+    // };
+
     return (
         <>
             <div className="search-bar-container">
@@ -51,8 +81,8 @@ import './style/Searchbar.css'
                         type="text"
                         className="search-input"
                         placeholder="Finn lek..."
-                        value = {input}
-                        onChange={(e) => handleChange(e.target.value)}
+                        value = {searchTerm}
+                        onChange={handleSearchChange}
                     />
                     <button type="submit" className="search-button">
                         🔍
@@ -60,15 +90,17 @@ import './style/Searchbar.css'
                     <button type="button" className="sort-aå">A-Å</button>
                     <button type="button" className="filter-button">Filter</button>
                 </form>
-                <div className= "search-result">
-                    {filteredCategories.map((category)=> (
-                        <div key={category.id} className="category-card"> 
-                        <span>{category.name}</span>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </>
+
+
+                <ul>
+                {searchResults.map((result) => (
+                <li key={result.id}>
+                    <a href={`/games/${result.id}`}>{result.name}</a>
+                </li>
+            ))}
+        </ul>
+    </div>
+    </>
     );
 
 
@@ -81,4 +113,4 @@ SearchBar.propTypes = {
 
 export default SearchBar;
 
-    }
+    

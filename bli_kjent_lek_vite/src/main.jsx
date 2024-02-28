@@ -1,19 +1,55 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import NewGame from "./NewGame.jsx";
-import "./NewGame.css";
+import Login from "./Login.jsx";
 import App from "./App.jsx";
+import RegisterUser from "./RegisterUser.jsx";
+import VisitGame from "./VisitGame.jsx";
+import "./style/App.css";
 import "./style/index.css";
-import UserData from "./readUserdata.jsx";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import "./style/App.css";
-import Login from "./Login.jsx";
-import SearchBar from "./components/Searchbar.jsx";
-import Navbar from "./components/Navbar.jsx";
+//error page
+import ErrorPage from "./components/error-page.jsx";
+//routing
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+//tror man må kjøre "npm install react-router-dom"
+
+const router = createBrowserRouter([
+  //root home
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorPage />,
+  },
+  //route Login
+  {
+    path: "/Login",
+    element: <Login />,
+  },
+  //route NewGame
+  {
+    path: "/NewGame",
+    element: <NewGame />,
+  },
+  //route RegisterUser
+  {
+    path: "/RegisterUser",
+    element: <RegisterUser />,
+  },
+
+  //route VisitGame
+  {
+    path: "/VisitGame",
+    element: <VisitGame />,
+  },
+
+  //-->
+  //legg til flere routes her
+]);
 
 export const theme = createTheme({
   palette: {
@@ -35,9 +71,7 @@ export const theme = createTheme({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ThemeProvider theme={theme}>
     <React.StrictMode>
-      <Navbar/>
-      <SearchBar/>
-      {/* <UserData /> */}
+      <RouterProvider router={router} />
     </React.StrictMode>
   </ThemeProvider>
 );

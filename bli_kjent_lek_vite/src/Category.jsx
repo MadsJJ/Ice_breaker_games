@@ -1,5 +1,4 @@
 import "./style/App.css";
-import { Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Searchbar from "./components/Searchbar";
@@ -33,7 +32,11 @@ function App() {
     // Help from ChatGPT
     const fetchData = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "games"));
+        const q = query(
+          collection(db, "games"),
+          where("Category", "==", "ute")
+        );
+        const querySnapshot = await getDocs(q);
         const gamesData = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
@@ -51,25 +54,7 @@ function App() {
     <>
       <Navbar />
       <Searchbar />
-      <h2>Populære kategorier</h2>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          margin: "auto",
-          width: "90vw",
-        }}
-      >
-        <button onClick={handleVisitGame}>visitgame</button>
-        <br></br>
-        <br></br>
-
-
-        <Card title={"Ute"} desc={" "} />
-        <Card title={"Barn"} desc={" "} />
-        <Card title={"Fest"} desc={" "} />
-      </div>
-      <h2>Populære leker</h2>
+      <h2>{Category}</h2>
       <div
         style={{
           display: "flex",
@@ -86,8 +71,7 @@ function App() {
             // imgAlt={game.imgAlt}  / eller strings som linker til bilder i filstrukturen
             title={game.Tittel} // burde endres til "title i firebase - holde det consistent med engelsk
             desc={game.description} // burde kanskje ha en kortere beskrivelse til kortene?
-            category={game.category}
-           
+            onClick={handleVisitGame}
           />
         ))}
       </div>

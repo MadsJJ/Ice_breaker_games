@@ -1,91 +1,104 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import Navbar from "./components/Navbar";
+import "./style/NewGame.css";
+//routing
+import react from "react";
+import { useNavigate } from "react-router-dom";
 
 function NewGame() {
+ //routing
+ let navigate = useNavigate();
 
-        const [gameData, setGameData] = useState({ //bruker useState til å opprette en tilstand gameData som inneholder info om leken
-            title: '', //gameData er en objektstate med feltene til venstre
-            description: '',
-            rules: '',
-            category: '',
-        });
+ const handleNavigate = () => {
+   navigate("/");
+ };
 
+  const [gameData, setGameData] = useState({
+    //bruker useState til å opprette en tilstand gameData som inneholder info om leken
+    Tittel: "", //gameData er en objektstate med feltene til venstre
+    Beskrivelse: "",
+    Regler: "",
+    Kategori: "",
+  });
 
-        const handleInputChange = (event) => {
-            const { name, value } = event.target;
-            setGameData((prevData) => ({
-                ...prevData,
-                [name]: value,
-            }));
-        };
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setGameData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
+  // Håndterer kategorivalg
+  const handleCategorySelect = (selectedCategory) => {
+    setGameData((prevData) => ({
+      ...prevData,
+      category: selectedCategory,
+    }));
+  };
 
-        // Håndterer kategorivalg
-        const handleCategorySelect = (selectedCategory) => {
-            setGameData((prevData) => ({
-                ...prevData,
-                category: selectedCategory,
-            }));
-        };
-
-        // Håndterer bekreftelsesknappen
-        const handleConfirm = () => {
-            // Implementer logikk for å bekrefte leken (for eksempel, send data til backend)
-            // Her kan du også legge til brukernavnet
-            const confirmedGameData = {
-                ...gameData,
-                createdBy: username,
-            };
-
-            // Implementer videre logikk etter behov (f.eks. lagring i database)
-            console.log('Bekreft leken:', confirmedGameData);
-        };
-
-        return (
-
-            <div className='newGameBox'>
-                <h2>Create a New Game</h2>
-                <form>
-                    <label>Title:</label>
-                    <input
-                        type="text"
-                        name="title"
-                        value={gameData.title}
-                        onChange={handleInputChange}
-                    />
-
-                    <label>Description:</label>
-                    <textarea
-                        name="Description:"
-                        value={gameData.description}
-                        onChange={handleInputChange}
-                    ></textarea>
-
-                    <label>Rules:</label>
-                    <textarea
-                        name="Rules:"
-                        value={gameData.rules}
-                        onChange={handleInputChange}
-                    ></textarea>
-
-                    <label>Category:</label>
-                    <select
-                        name="Category:"
-                        value={gameData.category}
-                        onChange={(e) => handleCategorySelect(e.target.value)}
-                    >
-                        <option value="">Select a category</option>
-                        <option value="Category1">Category 1</option>
-                        <option value="Category2">Category 2</option>
-                        {/* Legg til de andre kategoriene her */}
-                    </select>
-
-                    <button type="button" onClick={handleConfirm}>
-                        Confirm Game
-                    </button>
-                </form>
-            </div>
-        );
+  // Håndterer bekreftelsesknappen
+  const handleConfirm = () => {
+    // Implementer logikk for å bekrefte leken (for eksempel, send data til backend)
+    // Her kan du også legge til brukernavnet
+    const confirmedGameData = {
+      ...gameData,
+      createdBy: username,
     };
 
+    // Implementer videre logikk etter behov (f.eks. lagring i database)
+    console.log("Bekreft leken:", confirmedGameData);
+  };
+
+  return (
+    <>
+      <Navbar />
+
+      <div className="newGameBox">
+        <h2 className="NGH2">Opprett en ny lek</h2>
+        <form className="newGameForm">
+          <label>Tittel:</label>
+          <input
+            className="gameTitle"
+            type="text"
+            name="Tittel:"
+            value={gameData.title}
+            onChange={handleInputChange}
+          />
+
+          <label>Beskrivelse:</label>
+          <textarea
+            name="Beskrivelse:"
+            value={gameData.description}
+            onChange={handleInputChange}
+          ></textarea>
+
+          <label>Regler:</label>
+          <textarea
+            name="Regler:"
+            value={gameData.rules}
+            onChange={handleInputChange}
+          ></textarea>
+
+          <label>Kategori:</label>
+          <select
+            name="Kategori:"
+            value={gameData.category}
+            onChange={(e) => handleCategorySelect(e.target.value)}
+          >
+            <option value="">Velg en kategori</option>
+            <option value="Ute">Ute</option>
+            <option value="Inne">Inne</option>
+            {/* Legg til de andre kategoriene her */}
+          </select>
+
+          <button className="bnConfirm" type="button" onClick={handleNavigate}>
+            Opprett lek
+          </button>
+        </form>
+      </div>
+    </>
+  );
+}
 
 export default NewGame;
