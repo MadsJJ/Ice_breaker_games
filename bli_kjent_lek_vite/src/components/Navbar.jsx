@@ -32,23 +32,26 @@ export default function Navbar() {
     <>
       <header className="navbar">
         <a href="/">
-          {" "}
           {/* Empty link for now - will return you to homepage once routing logic is completed */}
-          <img src={kaldprat_logo} alt="KaldPrat logo" width="80px" />{" "}
+          <img src={kaldprat_logo} alt="KaldPrat logo" width="80px" />
           {/* Image tag for logo */}
         </a>
-        <nav className="navigation">
-          <a href="/">Mine ratings</a>
-          <a href="/">Mine spillelister</a>
-          <a href="/">Mine favoritter</a>
-          <a href="/">Mine leker</a>
-          <button>Hei {username || "Gjest"}, godt å se deg!</button>
-          {username ? (
-            <button onClick={handleLogout}>Logg ut</button>
-          ) : (
-            <button onClick={handleNavigate}>Logg inn</button>
-          )}
-        </nav>
+        <div className="notLogo">
+          <nav className="navigation">
+            <a href="/">Mine ratings</a>
+            <a href="/">Mine spillelister</a>
+            <a href="/">Mine favoritter</a>
+            <a href="/">Mine leker</a>
+          </nav>
+          <div className="user">
+            <p>Hei {username || "Gjest"}, godt å se deg!</p>
+            {username ? (
+              <button onClick={handleLogout}>Logg ut</button>
+            ) : (
+              <button onClick={handleNavigate}>Logg inn</button>
+            )}
+          </div>
+        </div>
       </header>
     </>
   );
