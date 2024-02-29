@@ -54,6 +54,12 @@ const router = createBrowserRouter([
     element: <CategoryFilter />,
   },
 
+  //route categoryFilter
+  {
+    path: "/CategoryFilter",
+    element: <CategoryFilter />,
+  },
+
   //-->
   //legg til flere routes her
 ]);

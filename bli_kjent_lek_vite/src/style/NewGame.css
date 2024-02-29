@@ -2,12 +2,14 @@
   background-color: white;
   max-width: 600px;
   margin: 0 auto;
+  padding:10px;
 }
 
 /* Heading styling */
 .NGH2 {
-  font-size: 35px;
+  font-size: 30px;
   color: #064789;
+  margin:5px;
 }
 
 /* Form styling */
@@ -19,13 +21,19 @@
 /* Input styling */
 textarea,
 select {
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   padding: 8px;
 }
 
 .gameTitle {
-  margin-bottom: 50px;
+  margin-bottom: 5px;
   padding: 8px;
+}
+
+.inputfeltGame{
+  padding:20px;
+  border-radius:5px;
+  border:solid #064789; 
 }
 
 /* Button styling */
@@ -35,6 +43,7 @@ select {
   padding: 10px 15px;
   border: none;
   cursor: pointer;
+  
 }
 
 .bnConfirm:hover {
