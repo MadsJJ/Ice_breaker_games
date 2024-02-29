@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Searchbar from "./components/Searchbar";
 import GameCarousel from "./components/GameCarousel";
-import GameCarousel from "./components/GameCarousel";
 import { Card } from "./components/Card";
 import { db } from "./firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
