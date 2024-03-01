@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import RegisterUser from "./RegisterUser.jsx";
 import VisitGame from "./VisitGame.jsx";
 import CategoryFilter from "./CategoryFilter.jsx";
+import WheelOfFortune from "./WheelOfFortune.jsx";
 import "./style/App.css";
 import "./style/index.css";
 import "@fontsource/roboto/300.css";
@@ -59,6 +60,14 @@ const router = createBrowserRouter([
     path: "/CategoryFilter",
     element: <CategoryFilter />,
   },
+
+   //route WheelOfFortune
+   {
+    path: "/WheelOfFortune",
+    element: <WheelOfFortune />,
+  },
+
+  
 
   //-->
   //legg til flere routes her

@@ -38,8 +38,10 @@ export default function Navbar() {
         </a>
         <div className="notLogo">
           <nav className="navigation">
+            
             <a href="/">Mine ratings</a>
             <a href="/">Mine spillelister</a>
+            <a href="/WheelOfFortune">Lykkehjulet</a>
             <a href="/">Mine favoritter</a>
             <a href="/">Mine leker</a>
           </nav>
