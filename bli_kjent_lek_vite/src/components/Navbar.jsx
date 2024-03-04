@@ -8,6 +8,16 @@ import { useState, useEffect } from "react";
 export default function Navbar() {
   const [username, setUsername] = useState("");
 
+
+
+  const handleMyGames = () => {
+    if (localStorage.getItem("username")) {
+      navigate("/MyGames");
+    } else {
+      alert("Du må være logget inn for å besøke dine leker!");
+    }
+  };
+
   useEffect(() => {
     //ChatGPT
     // Check if username exists in local storage
@@ -43,7 +53,7 @@ export default function Navbar() {
             <a href="/">Mine spillelister</a>
             <a href="/WheelOfFortune">Lykkehjulet</a>
             <a href="/">Mine favoritter</a>
-            <a href="/">Mine leker</a>
+            <a onClick={handleMyGames} style={{cursor: 'pointer'}}>Mine leker</a>
           </nav>
           <div className="user">
             <p>Hei {username || "Gjest"}, godt å se deg!</p>

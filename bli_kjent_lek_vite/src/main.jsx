@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import NewGame from "./NewGame.jsx";
+import MyGames from "./MyGames.jsx";
 import Login from "./Login.jsx";
 import App from "./App.jsx";
 import RegisterUser from "./RegisterUser.jsx";
@@ -66,6 +67,16 @@ const router = createBrowserRouter([
     path: "/WheelOfFortune",
     element: <WheelOfFortune />,
   },
+
+  //route Mygames
+
+  {
+
+    path: "/MyGames",
+    element: <MyGames />,
+  },
+
+
 
   
 
