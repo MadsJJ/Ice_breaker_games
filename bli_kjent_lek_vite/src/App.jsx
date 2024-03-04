@@ -15,8 +15,12 @@ function App() {
   //routing
   let navigate = useNavigate();
 
-  const handleNavigate = () => {
-    navigate("/NewGame");
+  const handleNewGame = () => {
+    if (localStorage.getItem("username")) {
+      navigate("/NewGame");
+    } else {
+      alert("Du må være logget inn for å legge til en ny lek!");
+    }
   };
 
   const handleVisitGame = () => {
@@ -78,7 +82,7 @@ function App() {
         ))}
       </div>
       <Button
-        onClick={handleNavigate}
+        onClick={handleNewGame}
         id="newGameButton"
         color="primary"
         variant="contained"
