@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./style/WheelOfFortune.css";
 import Navbar from "./components/Navbar";
+import Timer from "./components/Timer";
 
 const sectors = [
     { color: '#f82', label: '1000'},
@@ -110,6 +111,9 @@ const WheelOfFortune = () => {
           width: "90vw",
         }}
       >
+        <Timer></Timer>
+
+        
         <div id="wheelOfFortune">
           <canvas id="wheel" width="400" height="400"></canvas>
           <div id="spin" className={spinning ? 'spin spinning' : 'spin'} onClick={handleSpin}>SPIN</div>
