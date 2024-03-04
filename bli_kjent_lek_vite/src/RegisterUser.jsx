@@ -124,6 +124,18 @@ function RegisterUser() {
               >
                 Har allerede en bruker
               </button>
+
+              <br></br>
+              <br></br>
+
+
+              <button
+                onClick={handleNavigate}
+                className="optionButton"
+                type="submit"
+              >
+                Besøk siden som gjest
+              </button>
             </form>
           </div>
         </div>
