@@ -55,7 +55,7 @@ function NewGame() {
         !gameData.maxNumberOfPeople ||
         gameData.categories.length === 0 // Ensure at least one category is selected
       ) {
-        alert("Fill out all fields!");
+        alert("Fyll inn alle felter!");
         return;
       }
 
@@ -72,13 +72,13 @@ function NewGame() {
       });
 
       // Alert that the game was created
-      alert("Game created!");
+      alert("Leken er opprettet!");
 
       // Navigate back to the homepage
       navigate("/");
     } catch (error) {
       console.error("Error adding document: ", error);
-      alert("An error occurred while creating the game.");
+      alert("Et problem oppstod når vi forsøkte å opprette leken.");
     }
   };
 
@@ -90,9 +90,9 @@ function NewGame() {
     <>
       <Navbar />
       <div className="newGameBox">
-        <h2 className="NGH2">Create a new game</h2>
+        <h2 className="NGH2">Lag en ny lek</h2>
         <form className="newGameForm">
-          <label className="gameTitle">Title:</label>
+          <label className="gameTitle">Tittel:</label>
           <input
             className="inputfeltGame"
             type="text"
@@ -104,7 +104,7 @@ function NewGame() {
             }))}
           />
 
-          <label className="gameTitle">Description:</label>
+          <label className="gameTitle">Beskrivelse:</label>
           <textarea
             className="inputfeltGame"
             name="description"
@@ -115,7 +115,7 @@ function NewGame() {
             }))}
           ></textarea>
 
-          <label className="gameTitle">Minimum number of people:</label>
+          <label className="gameTitle">Minimum antall deltakere:</label>
           <input
             className="inputfeltGame"
             type="number"
@@ -129,7 +129,7 @@ function NewGame() {
           />
 
 
-          <label className="gameTitle">Maximum number of people:</label>
+          <label className="gameTitle">Maks antall deltakere:</label>
           <input
             className="inputfeltGame"
             type="number"
@@ -143,7 +143,7 @@ function NewGame() {
           />
 
 
-          <label className="gameTitle">Categories:</label>
+          <label className="gameTitle">Kategorier:</label>
           <div>
             <label>
               <input
@@ -180,7 +180,7 @@ function NewGame() {
           <br></br>
 
           <button className="bnConfirm" type="button" onClick={handleCreateGame}>
-            Create Game
+            Opprett lek
           </button>
         </form>
       </div>

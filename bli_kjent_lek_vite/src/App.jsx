@@ -84,7 +84,7 @@ function App() {
         variant="contained"
         size="large"
       >
-        New Game
+        Ny lek!
       </Button>
     </>
   );
