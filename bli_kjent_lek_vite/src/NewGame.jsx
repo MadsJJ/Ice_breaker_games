@@ -10,7 +10,7 @@ import {
   query,
   where,
   doc,
-  setDoc
+  setDoc,
 } from "firebase/firestore";
 
 function NewGame() {
@@ -19,7 +19,8 @@ function NewGame() {
     description: "",
     minNumberOfPeople: "",
     maxNumberOfPeople: "",
-    categories: [] // Change categories to an array
+    creatorID: localStorage.getItem("userID"),
+    categories: [], // Change categories to an array
   });
 
   const navigate = useNavigate();
@@ -32,15 +33,15 @@ function NewGame() {
     const { name, checked } = event.target;
     if (checked) {
       // If checkbox is checked, add category to the array
-      setGameData(prevGameData => ({
+      setGameData((prevGameData) => ({
         ...prevGameData,
-        categories: [...prevGameData.categories, name]
+        categories: [...prevGameData.categories, name],
       }));
     } else {
       // If checkbox is unchecked, remove category from the array
-      setGameData(prevGameData => ({
+      setGameData((prevGameData) => ({
         ...prevGameData,
-        categories: prevGameData.categories.filter(cat => cat !== name)
+        categories: prevGameData.categories.filter((cat) => cat !== name),
       }));
     }
   };
@@ -68,7 +69,7 @@ function NewGame() {
         description: "",
         minNumberOfPeople: "",
         maxNumberOfPeople: "",
-        categories: []
+        categories: [],
       });
 
       // Alert that the game was created
@@ -98,10 +99,12 @@ function NewGame() {
             type="text"
             name="title"
             value={gameData.title}
-            onChange={(e) => setGameData(prevGameData => ({
-              ...prevGameData,
-              title: e.target.value
-            }))}
+            onChange={(e) =>
+              setGameData((prevGameData) => ({
+                ...prevGameData,
+                title: e.target.value,
+              }))
+            }
           />
 
           <label className="gameTitle">Beskrivelse:</label>
@@ -109,10 +112,12 @@ function NewGame() {
             className="inputfeltGame"
             name="description"
             value={gameData.description}
-            onChange={(e) => setGameData(prevGameData => ({
-              ...prevGameData,
-              description: e.target.value
-            }))}
+            onChange={(e) =>
+              setGameData((prevGameData) => ({
+                ...prevGameData,
+                description: e.target.value,
+              }))
+            }
           ></textarea>
 
           <label className="gameTitle">Minimum antall deltakere:</label>
@@ -122,12 +127,13 @@ function NewGame() {
             inputMode="numeric"
             name="minNumberOfPeople"
             value={gameData.minNumberOfPeople}
-            onChange={(e) => setGameData(prevGameData => ({
-              ...prevGameData,
-              minNumberOfPeople: e.target.value
-            }))}
+            onChange={(e) =>
+              setGameData((prevGameData) => ({
+                ...prevGameData,
+                minNumberOfPeople: e.target.value,
+              }))
+            }
           />
-
 
           <label className="gameTitle">Maks antall deltakere:</label>
           <input
@@ -136,12 +142,13 @@ function NewGame() {
             inputMode="numeric"
             name="maxNumberOfPeople"
             value={gameData.maxNumberOfPeople}
-            onChange={(e) => setGameData(prevGameData => ({
-              ...prevGameData,
-              maxNumberOfPeople: e.target.value
-            }))}
+            onChange={(e) =>
+              setGameData((prevGameData) => ({
+                ...prevGameData,
+                maxNumberOfPeople: e.target.value,
+              }))
+            }
           />
-
 
           <label className="gameTitle">Kategorier:</label>
           <div>
@@ -173,13 +180,17 @@ function NewGame() {
                 onChange={handleChange}
               />{" "}
               Moro
-            </label >
+            </label>
             <label className="gameTitle"></label>
             {/* Add other categories here */}
           </div>
           <br></br>
 
-          <button className="bnConfirm" type="button" onClick={handleCreateGame}>
+          <button
+            className="bnConfirm"
+            type="button"
+            onClick={handleCreateGame}
+          >
             Opprett lek
           </button>
         </form>
