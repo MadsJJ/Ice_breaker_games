@@ -39,7 +39,7 @@ function MyGames() {
     // Help from ChatGPT
     const fetchData = async () => {
       try {
-        const q = query(collection(db, "games"), where("userID", "==", localStorage.getItem("username")))
+        const q = query(collection(db, "games"), where("creatorID", "==", localStorage.getItem("username")))
         const querySnapshot = await getDocs(q);
         const myGamesData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -78,6 +78,7 @@ function MyGames() {
             // imgAlt={game.imgAlt}  / eller strings som linker til bilde r i filstrukturen
             title={game.title} // burde endres til "title i firebase - holde det consistent med engelsk
             // desc={game.description} // bare ha beskrivelse på lek-side
+            creatorID={game.creatorID}
             categories={game.categories}
             minP={game.minNumberOfPeople}
             maxP={game.maxNumberOfPeople}

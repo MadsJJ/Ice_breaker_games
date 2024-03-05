@@ -29,6 +29,18 @@
   /* margin-bottom: -10px; */
 }
 
+#creator {
+  color:grey !important;
+  font-size: small;
+  line-height: 15px;
+  margin-right:20px;
+  margin-top:10px;
+  float:right;
+  font-weight: 500;
+
+  
+}
+
 /* .cardDesc {
   padding: 20px;
 } */

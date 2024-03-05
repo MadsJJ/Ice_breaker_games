@@ -75,6 +75,7 @@ function App() {
             // imgAlt={game.imgAlt}  / eller strings som linker til bilde r i filstrukturen
             title={game.title} // burde endres til "title i firebase - holde det consistent med engelsk
             // desc={game.description} // bare ha beskrivelse på lek-side
+            creatorID={game.creatorID}
             categories={game.categories}
             minP={game.minNumberOfPeople}
             maxP={game.maxNumberOfPeople}

@@ -12,6 +12,7 @@ export const Card = ({
   categories,
   minP,
   maxP,
+  creatorID,
 }) => {
   let navigate = useNavigate();
 
@@ -37,14 +38,23 @@ export const Card = ({
       <img className="cardImage" src="https://placekitten.com/350/140" alt="" />
       {title && <h3 className="cardTitle">{title}</h3>}
       {desc && <p className="cardDesc">{desc}</p>}
+      
       {categories && (
         <p className="cardCats">Kategorier: {categoriesString()}</p>
       )}
+     
       {minP && maxP && (
         <p className="numPlayers">
           Spillere: {minP}-{maxP}
         </p>
       )}
+
+      {creatorID && (
+        <p id="creator">
+          Laget av: {creatorID}
+        </p>
+      )}
+      
     </div>
   );
 };
