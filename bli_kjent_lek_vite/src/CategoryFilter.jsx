@@ -1,11 +1,11 @@
-import "./style/App.css";
+import { collection, getDocs } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { Card } from "./components/Card";
 import Navbar from "./components/Navbar";
 import Searchbar from "./components/Searchbar";
-import { Card } from "./components/Card";
 import { db } from "./firebase";
-import { collection, getDocs } from "firebase/firestore";
-import { useLocation } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import "./style/App.css";
 
 function CategoryFilter() {
   const [games, setGames] = useState([]);
