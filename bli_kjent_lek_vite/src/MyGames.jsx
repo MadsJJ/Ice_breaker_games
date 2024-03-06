@@ -32,7 +32,7 @@ function MyGames() {
     location.href = "/src/";
   };
 
-  const [myGames, setMyGames] = useState({});
+  const [myGames, setMyGames] = useState([]);
 
   useEffect(() => {
     // Help from ChatGPT
