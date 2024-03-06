@@ -16,6 +16,7 @@ import {
 function NewPlaylist() {
   const [playlistData, setPlaylistData] = useState({
     title: "",
+    games: "",
     
     creatorID: localStorage.getItem("userID"),
 

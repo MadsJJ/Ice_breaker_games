@@ -1,3 +1,4 @@
+import VisitPlaylist from "./VisitPlaylist.jsx";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import NewGame from "./NewGame.jsx";
@@ -89,6 +90,12 @@ const router = createBrowserRouter([
 
     path: "/NewPlaylist",
     element: <NewPlaylist/>,
+  },
+
+  {
+
+    path: "/VisitPlaylist",
+    element: <VisitPlaylist/>,
   },
 
 

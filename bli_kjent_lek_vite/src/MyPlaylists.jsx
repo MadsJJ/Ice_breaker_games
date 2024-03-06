@@ -76,12 +76,10 @@ function MyPlaylists() {
             playlistId={playlist.id}
             // imgSrc={game.imgSrc} // disse er ikke lagt til i db - må finne ut om vi vil ha bilder
             // imgAlt={game.imgAlt}  / eller strings som linker til bilde r i filstrukturen
-            playlistTitle={playlistTitle.title} // burde endres til "title i firebase - holde det consistent med engelsk
-            // desc={game.description} // bare ha beskrivelse på lek-side
+            playlistTitle={playlist.playlistTitle} // burde endres til "title i firebase - holde det consistent med engelsk
+            
             creatorID={playlist.creatorID}
-            // categories={playlist.categories}
-            // minP={game.minNumberOfPeople}
-            // maxP={game.maxNumberOfPeople}
+           
           />
         ))}
       </div>

@@ -23,9 +23,9 @@ function MyGames() {
     }
   };
 
-  const handleVisitGame = () => {
-    navigate("/VisitGame");
-  };
+  // const handleVisitGame = () => {
+  //   navigate("/VisitGame");
+  // };
 
   const handleClick = () => {
     console.log("Clicked");
