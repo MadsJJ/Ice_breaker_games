@@ -1,26 +1,69 @@
 import "./style/App.css";
-import { Button } from "@mui/material";
-import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Searchbar from "./components/Searchbar";
-import GameCarousel from "./components/GameCarousel";
 import { Card } from "./components/Card";
 import { db } from "./firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import { doc, getDoc } from "firebase/firestore";
 //routing
-import React from "react";
-import { useNavigate } from "react-router-dom";
 
 function MyFavorites() {
-  //routing
-  let navigate = useNavigate();
+  const [MyFavorites, setMyFavorites] = useState([]);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const q = query(collection(db, "games", "user"), where());
+  //       const querySnapshot = await getDocs(q);
+  //       const myFavoritesData = querySnapshot.docs.map((doc) => ({
+  //         id: doc.id,
+  //         ...doc.data(),
+  //       }));
+  //       setMyFavorites(myFavoritesData);
+  //     } catch (error) {
+  //       console.error("Error fetching games:", error);
+  //     }
+  //   };
 
+  //   fetchData();
+  // }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const userId = localStorage.getItem("username");
+      const userDocRef = doc(db, "users", userId);
+
+      try {
+        const userDocSnap = await getDoc(userDocRef);
+
+        if (userDocSnap.exists()) {
+          const userLikedGamesIds = userDocSnap.data().likedGames; // Dette er arrayen av spill-IDer brukeren liker
+          const gamesPromises = userLikedGamesIds.map((title) =>
+            getDoc(doc(db, "games", title))
+          );
+
+          const gamesSnapshots = await Promise.all(gamesPromises);
+          const myFavoritesData = gamesSnapshots.map((snapshot) => ({
+            id: snapshot.id,
+            ...snapshot.data(),
+          }));
+
+          setMyFavorites(myFavoritesData);
+        } else {
+          console.log("No user found with the given ID");
+        }
+      } catch (error) {
+        console.error("Error fetching user's favorite games:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
       <Navbar />
-      <Searchbar heading = "Mine Favoritter"/>
+      <Searchbar heading="Mine Favoritter" />
       {/* <GameCarousel /> */}
       <br />
 
@@ -33,7 +76,7 @@ function MyFavorites() {
         }}
       >
         {/* Help from ChatGPT */}
-        {myGames.map((game) => (
+        {MyFavorites.map((game) => (
           <Card
             key={game.id}
             gameId={game.id}
@@ -48,15 +91,6 @@ function MyFavorites() {
           />
         ))}
       </div>
-      <Button
-        onClick={handleNewGame}
-        id="newGameButton"
-        color="primary"
-        variant="contained"
-        size="large"
-      >
-        Ny lek!
-      </Button>
     </>
   );
 }
