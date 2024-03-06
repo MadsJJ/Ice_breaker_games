@@ -1,43 +1,51 @@
-import Dropdown from "react-bootstrap/Dropdown";
-//routing
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { db } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import "./style/DropDownCategory.css";
 
 function DropDownCategory() {
-  //routing
   let navigate = useNavigate();
 
-  const handleNavigate = (categories) => {
-    navigate("/CategoryFilter", { state: { categories } });
+  const handleSelectChange = (event) => {
+    const selectedCategory = event.target.value;
+    console.log(selectedCategory);
+    // Navigate to CategoryFilter with selected category
+    navigate("/CategoryFilter", { state: { category: selectedCategory } });
   };
 
-  return (
-    <Dropdown>
-      <Dropdown.Toggle
-        variant="success"
-        id="dropdown-basic"
-        style={{
-          backgroundColor: "#064789",
-          borderColor: "#064789",
-          padding: "10px",
-        }}
-      >
-        Kategorier
-      </Dropdown.Toggle>
+  const [categories, setCategories] = useState([]);
 
-      <Dropdown.Menu>
-        <Dropdown.Item onClick={() => handleNavigate("Ute")}>Ute</Dropdown.Item>
-        <Dropdown.Item onClick={() => handleNavigate("Inne")}>
-          Inne
-        </Dropdown.Item>
-        <Dropdown.Item onClick={() => handleNavigate("Barn")}>
-          Barn
-        </Dropdown.Item>
-        <Dropdown.Item onClick={() => handleNavigate("Fest")}>
-          Fest
-        </Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const categoriesData = new Set(); // Using Set to ensure unique categories
+      const q = collection(db, "games");
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        const gameCategories = doc.data().categories;
+        gameCategories.forEach((category) => {
+          categoriesData.add(category);
+        });
+      });
+      setCategories(Array.from(categoriesData));
+    };
+
+    fetchCategories();
+  }, []);
+
+  return (
+    <div className="ddDiv">
+      <select className="dropDown" onChange={handleSelectChange}>
+        <option className="dropOptions" value="">
+          Kategorier
+        </option>
+        {categories.map((category, index) => (
+          <option className="dropOptions" key={index} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 }
 
