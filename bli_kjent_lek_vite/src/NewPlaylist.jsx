@@ -17,9 +17,8 @@ function NewPlaylist() {
   const [playlistData, setPlaylistData] = useState({
     title: "",
     games: "",
-    
-    creatorID: localStorage.getItem("userID"),
 
+    creatorID: localStorage.getItem("userID"),
   });
 
   const navigate = useNavigate();
@@ -48,28 +47,30 @@ function NewPlaylist() {
   const addPlaylistToDB = async (playlistData) => {
     await addDoc(collection(db, "playlists"), playlistData);
   };
-  
 
   const handleCreatePlaylist = async (event) => {
-    if (localStorage.getItem('username')) {
-        try {
-          // Du kan tilpasse disse feltene basert på hva som er nødvendig for spillelisten din
-          const newPlaylistData = {
-            title: playlistData.title,
-            creatorID: localStorage.getItem('username'),
-            // Legg til andre felt etter behov
-          };
-    
-          await addPlaylistToDB(newPlaylistData);
-          alert('Ny spilleliste ble opprettet!');
-        } catch (error) {
-          console.error('Feil ved oppretting av spilleliste:', error);
-          alert('Noe gikk galt ved oppretting av spilleliste. Vennligst prøv igjen.');
-        }
-      } else {
-        alert('Du må være logget inn for å legge til en ny spilleliste!');
+    if (localStorage.getItem("username")) {
+      try {
+        // Du kan tilpasse disse feltene basert på hva som er nødvendig for spillelisten din
+        const newPlaylistData = {
+          title: playlistData.title,
+          creatorID: localStorage.getItem("username"),
+          // Legg til andre felt etter behov
+        };
+
+        await addPlaylistToDB(newPlaylistData);
+        alert("Ny spilleliste ble opprettet!");
+        navigate("/Myplaylists");
+      } catch (error) {
+        console.error("Feil ved oppretting av spilleliste:", error);
+        alert(
+          "Noe gikk galt ved oppretting av spilleliste. Vennligst prøv igjen."
+        );
       }
-    };
+    } else {
+      alert("Du må være logget inn for å legge til en ny spilleliste!");
+    }
+  };
 
   const createNewPlaylist = async (playlistData) => {
     await addDoc(collection(db, "playlists"), playlistData);
@@ -95,8 +96,6 @@ function NewPlaylist() {
             }
           />
 
-          
-        
           <button
             className="bnConfirm"
             type="button"
