@@ -11,7 +11,7 @@
 .search-form {
   display: flex;
   align-items: center;
-  gap: 10px;
+  /* gap: 10px; */
 }
 
 .search-input {
@@ -28,16 +28,7 @@
   border: 2px solid #ccc;
   border-radius: 5px;
   cursor: pointer;
-}
-
-.sort-aå,
-.filter-button {
-  padding: 10px;
-  border: 1px solid #064789;
-  background-color: #064789;
-  cursor: pointer;
-  border-radius: 5px;
-  color: white;
+  margin-right: 15px;
 }
 
 .alle-leker {
