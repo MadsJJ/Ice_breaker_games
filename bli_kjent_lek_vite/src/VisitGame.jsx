@@ -127,7 +127,7 @@ function VisitGame() {
                 <p>Kategorier: {categoryList}</p>
               </div>
 
-              <button className="reportButton">Rapporter Lek</button>
+              <button className="playlistButton">Legg til i spilleliste</button>
             </div>
           </div>
         </div>

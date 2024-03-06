@@ -76,7 +76,7 @@ function MyPlaylists() {
             playlistId={playlist.id}
             // imgSrc={game.imgSrc} // disse er ikke lagt til i db - må finne ut om vi vil ha bilder
             // imgAlt={game.imgAlt}  / eller strings som linker til bilde r i filstrukturen
-            playlistTitle={playlist.playlistTitle} // burde endres til "title i firebase - holde det consistent med engelsk
+            playlistTitle={playlist.title} // burde endres til "title i firebase - holde det consistent med engelsk
             
             creatorID={playlist.creatorID}
            

@@ -45,12 +45,17 @@ function NewPlaylist() {
     }
   };
 
+  const addPlaylistToDB = async (playlistData) => {
+    await addDoc(collection(db, "playlists"), playlistData);
+  };
+  
+
   const handleCreatePlaylist = async (event) => {
     if (localStorage.getItem('username')) {
         try {
           // Du kan tilpasse disse feltene basert på hva som er nødvendig for spillelisten din
           const newPlaylistData = {
-            title: 'Min nye spilleliste',
+            title: playlistData.title,
             creatorID: localStorage.getItem('username'),
             // Legg til andre felt etter behov
           };
