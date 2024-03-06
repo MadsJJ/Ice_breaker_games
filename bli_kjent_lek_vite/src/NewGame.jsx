@@ -154,26 +154,27 @@ function NewGame() {
           <div>
             <label>
               <input
-                className="inputfeltGame"
+                className="inputfeltGame2"
                 type="checkbox"
-                name="Outdoor"
-                checked={gameData.categories.includes("Outdoor")}
+                name="Ute"
+                checked={gameData.categories.includes("Ute")}
                 onChange={handleChange}
               />{" "}
-              Outdoor
+              Ute
             </label>
             <label>
               <input
+                className="inputfeltGame2"
                 type="checkbox"
-                name="Indoor"
-                checked={gameData.categories.includes("Indoor")}
+                name="Inne"
+                checked={gameData.categories.includes("Inne")}
                 onChange={handleChange}
               />{" "}
-              Indoor
+              Inne
             </label>
             <label>
               <input
-                className="inputfeltGame"
+                className="inputfeltGame2"
                 type="checkbox"
                 name="Moro"
                 checked={gameData.categories.includes("Moro")}
@@ -183,16 +184,28 @@ function NewGame() {
             </label>
             <label className="gameTitle"></label>
             {/* Add other categories here */}
-          </div>
-          <br></br>
 
-          <button
-            className="bnConfirm"
-            type="button"
-            onClick={handleCreateGame}
-          >
-            Opprett lek
-          </button>
+
+            <br></br>
+            <br></br>
+
+            
+
+
+
+          
+            <button
+              className="bnConfirm"
+             type="button"
+              onClick={handleCreateGame}>Opprett lek
+            </button>
+          </div>
+         
+
+         
+          <br></br>
+          <br></br>
+          <br></br>
         </form>
       </div>
     </>

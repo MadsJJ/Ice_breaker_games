@@ -34,6 +34,13 @@ select {
   padding:20px;
   border-radius:5px;
   border:solid #064789; 
+  width:100%;
+}
+
+.inputfeltGame2{
+  padding:20px;
+  border-radius:5px;
+  border:solid #064789; 
 }
 
 /* Button styling */
@@ -43,6 +50,8 @@ select {
   padding: 10px 15px;
   border: none;
   cursor: pointer;
+  width:100%;
+  margin-left:20px;
   
 }
 
