@@ -50,7 +50,7 @@ export default function Navbar() {
           <nav className="navigation">
             
             <a href="/">Mine ratings</a>
-            <a href="/">Mine spillelister</a>
+            <a href="/MyPlaylists">Mine spillelister</a>
             <a href="/WheelOfFortune">Lykkehjulet</a>
             <a href="/">Mine favoritter</a>
             <a onClick={handleMyGames} style={{cursor: 'pointer'}}>Mine leker</a>

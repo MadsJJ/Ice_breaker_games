@@ -2,12 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import NewGame from "./NewGame.jsx";
 import MyGames from "./MyGames.jsx";
+import MyPlaylists from "./MyPlaylists.jsx";
+import NewPlaylist from "./NewPlaylist.jsx";
 import Login from "./Login.jsx";
 import App from "./App.jsx";
 import RegisterUser from "./RegisterUser.jsx";
 import VisitGame from "./VisitGame.jsx";
 import CategoryFilter from "./CategoryFilter.jsx";
 import WheelOfFortune from "./WheelOfFortune.jsx";
+
 import "./style/App.css";
 import "./style/index.css";
 import "@fontsource/roboto/300.css";
@@ -74,6 +77,18 @@ const router = createBrowserRouter([
 
     path: "/MyGames",
     element: <MyGames />,
+  },
+
+  {
+
+    path: "/MyPlaylists",
+    element: <MyPlaylists/>,
+  },
+
+  {
+
+    path: "/NewPlaylist",
+    element: <NewPlaylist/>,
   },
 
 
