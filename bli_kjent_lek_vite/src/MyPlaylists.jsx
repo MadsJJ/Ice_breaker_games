@@ -8,7 +8,6 @@ import { CardPlaylist } from "./components/CardPlaylist";
 import { db } from "./firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 //routing
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function MyPlaylists() {
@@ -32,17 +31,19 @@ function MyPlaylists() {
     location.href = "/src/";
   };
 
-  const[myPlaylists, setMyPlaylists] = useState([]);
-
+  const [myPlaylists, setMyPlaylists] = useState([]);
 
   useEffect(() => {
     // Help from ChatGPT
     const fetchData = async () => {
       try {
-        const q = query(collection(db, "playlists"), where("creatorID", "==", localStorage.getItem("username")))
+        const q = query(
+          collection(db, "playlists"),
+          where("creatorID", "==", localStorage.getItem("username"))
+        );
         const querySnapshot = await getDocs(q);
         const myPlaylistsData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
+          id: doc.id,
           ...doc.data(),
         }));
         setMyPlaylists(myPlaylistsData);
@@ -77,14 +78,12 @@ function MyPlaylists() {
             // imgSrc={game.imgSrc} // disse er ikke lagt til i db - må finne ut om vi vil ha bilder
             // imgAlt={game.imgAlt}  / eller strings som linker til bilde r i filstrukturen
             playlistTitle={playlist.title} // burde endres til "title i firebase - holde det consistent med engelsk
-            
             creatorID={playlist.creatorID}
-           
           />
         ))}
       </div>
       <Button
-        onClick={handleNewPlaylist} 
+        onClick={handleNewPlaylist}
         id="newPlaylistButton"
         color="primary"
         variant="contained"

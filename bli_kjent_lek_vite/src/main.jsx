@@ -66,8 +66,8 @@ const router = createBrowserRouter([
     element: <CategoryFilter />,
   },
 
-   //route WheelOfFortune
-   {
+  //route WheelOfFortune
+  {
     path: "/WheelOfFortune",
     element: <WheelOfFortune />,
   },
@@ -75,32 +75,24 @@ const router = createBrowserRouter([
   //route Mygames
 
   {
-
     path: "/MyGames",
     element: <MyGames />,
   },
 
   {
-
     path: "/MyPlaylists",
-    element: <MyPlaylists/>,
+    element: <MyPlaylists />,
   },
 
   {
-
     path: "/NewPlaylist",
-    element: <NewPlaylist/>,
+    element: <NewPlaylist />,
   },
 
   {
-
-    path: "/VisitPlaylist",
-    element: <VisitPlaylist/>,
+    path: "/VisitPlaylist/:playlistId",
+    element: <VisitPlaylist />,
   },
-
-
-
-  
 
   //-->
   //legg til flere routes her

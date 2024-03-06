@@ -10,27 +10,30 @@ export const CardPlaylist = ({
   creatorID,
 }) => {
   const navigate = useNavigate();
-  const [localPlaylistTitle, setLocalPlaylistTitle] = useState("");
 
   const handleClick = () => {
+    console.log("Clicked playlist id:", propPlaylistTitle);
     console.log("Clicked playlist id:", playlistId);
-    navigate("/VisitPlaylist/", { state: { playlistTitle: localPlaylistTitle } });
+    navigate("/VisitPlaylist/{playlistTitle}", {
+      state: { playlistTitle: propPlaylistTitle, playlistId: playlistId },
+    });
   };
 
   return (
     <div className="cardPlaylist" onClick={handleClick}>
-      <img className="cardPlaylistImage" src="https://placekitten.com/350/140" alt="" />
-      {propPlaylistTitle && <h3 className="cardPlaylistTitle">{propPlaylistTitle}</h3>}
-
-      {creatorID && (
-        <p id="creator">
-          Laget av: {creatorID}
-        </p>
+      <img
+        className="cardPlaylistImage"
+        src="https://placekitten.com/350/140"
+        alt=""
+      />
+      {propPlaylistTitle && (
+        <h3 className="cardPlaylistTitle">{propPlaylistTitle}</h3>
       )}
+
+      {creatorID && <p id="creator">Laget av: {creatorID}</p>}
     </div>
   );
 };
-
 
 // import React from "react";
 // import { useNavigate } from "react-router-dom";
@@ -43,7 +46,7 @@ export const CardPlaylist = ({
 //   imgAlt,
 //   playlistTitle,
 //   creatorID,
-  
+
 // }) => {
 //   let navigate = useNavigate();
 
@@ -71,16 +74,13 @@ export const CardPlaylist = ({
 //       {/* Commented to have placeholder while not having proper images */}
 //       <img className="cardPlaylistImage" src="https://placekitten.com/350/140" alt="" />
 //       {playlistTitle && <h3 className="cardPlaylistTitle">{playlistTitle}</h3>}
-      
-
 
 //       {creatorID && (
 //         <p id="creator">
 //           Laget av: {creatorID}
 //         </p>
 //       )}
-      
-      
+
 //     </div>
 //   );
 // };

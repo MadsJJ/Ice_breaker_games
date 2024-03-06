@@ -8,7 +8,7 @@ import { Card } from "./components/Card";
 import { db } from "./firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 //routing
-import React from "react"; 
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function MyGames() {
@@ -32,17 +32,19 @@ function MyGames() {
     location.href = "/src/";
   };
 
-  const[myGames, setMyGames] = useState([]);
-
+  const [myGames, setMyGames] = useState({});
 
   useEffect(() => {
     // Help from ChatGPT
     const fetchData = async () => {
       try {
-        const q = query(collection(db, "games"), where("creatorID", "==", localStorage.getItem("username")))
+        const q = query(
+          collection(db, "games"),
+          where("creatorID", "==", localStorage.getItem("username"))
+        );
         const querySnapshot = await getDocs(q);
         const myGamesData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
+          id: doc.id,
           ...doc.data(),
         }));
         setMyGames(myGamesData);
@@ -57,7 +59,7 @@ function MyGames() {
   return (
     <>
       <Navbar />
-      <Searchbar heading = "Mine Leker"/>
+      <Searchbar heading="Mine Leker" />
       {/* <GameCarousel /> */}
       <br />
 
