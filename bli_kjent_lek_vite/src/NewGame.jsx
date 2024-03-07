@@ -21,13 +21,10 @@ function NewGame() {
     maxNumberOfPeople: "",
     creatorID: localStorage.getItem("userID"),
     categories: [], // Change categories to an array
+    likes: 0,
   });
 
   const navigate = useNavigate();
-
-  const handleNavigate = () => {
-    navigate("/");
-  };
 
   const handleChange = (event) => {
     const { name, checked } = event.target;
