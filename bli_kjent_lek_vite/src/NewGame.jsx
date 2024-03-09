@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { db } from "./firebase";
@@ -28,6 +28,25 @@ function NewGame() {
   const handleNavigate = () => {
     navigate("/");
   };
+
+  const [categories, setCategories] = useState([]);
+  // fetch categories from db - reused from DropDownCategory
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const categoriesData = new Set(); // Using Set to ensure unique categories
+      const q = collection(db, "games");
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        const gameCategories = doc.data().categories;
+        gameCategories.forEach((category) => {
+          categoriesData.add(category);
+        });
+      });
+      setCategories(Array.from(categoriesData));
+    };
+
+    fetchCategories();
+  }, []);
 
   const handleChange = (event) => {
     const { name, checked } = event.target;
@@ -96,6 +115,8 @@ function NewGame() {
           <label className="gameTitle">Tittel:</label>
           <input
             className="inputfeltGame"
+            maxLength={50}
+            id="titleInput"
             type="text"
             name="title"
             value={gameData.title}
@@ -110,6 +131,7 @@ function NewGame() {
           <label className="gameTitle">Beskrivelse:</label>
           <textarea
             className="inputfeltGame"
+            id="descInput"
             name="description"
             value={gameData.description}
             onChange={(e) =>
@@ -120,69 +142,57 @@ function NewGame() {
             }
           ></textarea>
 
-          <label className="gameTitle">Minimum antall deltakere:</label>
-          <input
-            className="inputfeltGame"
-            type="number"
-            inputMode="numeric"
-            name="minNumberOfPeople"
-            value={gameData.minNumberOfPeople}
-            onChange={(e) =>
-              setGameData((prevGameData) => ({
-                ...prevGameData,
-                minNumberOfPeople: e.target.value,
-              }))
-            }
-          />
+          <div>
+            <label className="gameTitle">Minimum antall deltakere:</label>
+            <input
+              className="inputfeltGame"
+              id="minPlayer"
+              type="number"
+              inputMode="numeric"
+              name="minNumberOfPeople"
+              value={gameData.minNumberOfPeople}
+              onChange={(e) =>
+                setGameData((prevGameData) => ({
+                  ...prevGameData,
+                  minNumberOfPeople: e.target.value,
+                }))
+              }
+            />
+          </div>
 
-          <label className="gameTitle">Maks antall deltakere:</label>
-          <input
-            className="inputfeltGame"
-            type="number"
-            inputMode="numeric"
-            name="maxNumberOfPeople"
-            value={gameData.maxNumberOfPeople}
-            onChange={(e) =>
-              setGameData((prevGameData) => ({
-                ...prevGameData,
-                maxNumberOfPeople: e.target.value,
-              }))
-            }
-          />
+          <div>
+            <label className="gameTitle">Maks antall deltakere:</label>
+            <input
+              className="inputfeltGame"
+              id="maxPlayer"
+              maxLength={3}
+              type="number"
+              inputMode="numeric"
+              name="maxNumberOfPeople"
+              value={gameData.maxNumberOfPeople}
+              onChange={(e) =>
+                setGameData((prevGameData) => ({
+                  ...prevGameData,
+                  maxNumberOfPeople: e.target.value,
+                }))
+              }
+            />
+          </div>
 
           <label className="gameTitle">Kategorier:</label>
           <div>
-            <label>
-              <input
-                className="inputfeltGame"
-                type="checkbox"
-                name="Outdoor"
-                checked={gameData.categories.includes("Outdoor")}
-                onChange={handleChange}
-              />{" "}
-              Outdoor
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="Indoor"
-                checked={gameData.categories.includes("Indoor")}
-                onChange={handleChange}
-              />{" "}
-              Indoor
-            </label>
-            <label>
-              <input
-                className="inputfeltGame"
-                type="checkbox"
-                name="Moro"
-                checked={gameData.categories.includes("Moro")}
-                onChange={handleChange}
-              />{" "}
-              Moro
-            </label>
-            <label className="gameTitle"></label>
-            {/* Add other categories here */}
+            {categories.map((category, index) => (
+              <label key={index} className="categoryTitle">
+                <input
+                  className="inputfeltGame"
+                  type="checkbox"
+                  name={category}
+                  checked={gameData.categories.includes(category)}
+                  onChange={handleChange}
+                />
+                {category}
+              </label>
+            ))}
           </div>
           <br></br>
 
