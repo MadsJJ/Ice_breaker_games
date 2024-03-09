@@ -1,20 +1,21 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import NewGame from "./NewGame.jsx";
-import MyGames from "./MyGames.jsx";
-import Login from "./Login.jsx";
-import App from "./App.jsx";
-import RegisterUser from "./RegisterUser.jsx";
-import VisitGame from "./VisitGame.jsx";
-import CategoryFilter from "./CategoryFilter.jsx";
-import WheelOfFortune from "./WheelOfFortune.jsx";
-import "./style/App.css";
-import "./style/index.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import CategoryFilter from "./CategoryFilter.jsx";
+import Login from "./Login.jsx";
+import MyGames from "./MyGames.jsx";
+import NewGame from "./NewGame.jsx";
+import RegisterUser from "./RegisterUser.jsx";
+import MyFavorites from "./MyFavorites.jsx";
+import "./style/App.css";
+import "./style/index.css";
+import VisitGame from "./VisitGame.jsx";
+import WheelOfFortune from "./WheelOfFortune.jsx";
 //error page
 import ErrorPage from "./components/error-page.jsx";
 //routing
@@ -62,8 +63,8 @@ const router = createBrowserRouter([
     element: <CategoryFilter />,
   },
 
-   //route WheelOfFortune
-   {
+  //route WheelOfFortune
+  {
     path: "/WheelOfFortune",
     element: <WheelOfFortune />,
   },
@@ -71,14 +72,15 @@ const router = createBrowserRouter([
   //route Mygames
 
   {
-
     path: "/MyGames",
     element: <MyGames />,
   },
 
-
-
-  
+  //route MyFavorites
+  {
+    path: "/MyFavorites",
+    element: <MyFavorites />,
+  },
 
   //-->
   //legg til flere routes her
