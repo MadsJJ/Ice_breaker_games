@@ -62,42 +62,73 @@ const Timer = () => {
       </div>
 
       <div className="buttons">
-        <button id="startknapp" onClick={handleStartPause}>{isRunning ? "Pause" : "Start"}</button>
-        <button id="startknapp" onClick={handleReset}>Reset</button>
+        <button
+          className="timerButton"
+          id="startknapp"
+          onClick={handleStartPause}
+        >
+          {isRunning ? "Pause" : "Start"}
+        </button>
+        <button className="timerButton" id="startknapp" onClick={handleReset}>
+          Reset
+        </button>
       </div>
       <br></br>
       <div className="input-container">
-
         <span>Minutter</span>
         <br></br>
         <div className="input-group">
-          <button onClick={() => setInputMinutes(Math.max(inputMinutes - 1, 0))}>-</button>
-          
+          <button
+            className="timerButton"
+            onClick={() => setInputMinutes(Math.max(inputMinutes - 1, 0))}
+          >
+            -
+          </button>
+
           <input
+            className="timeInput"
             type="number"
             value={inputMinutes}
             onChange={(e) => setInputMinutes(parseInt(e.target.value))}
             placeholder="Minutter"
           />
-          
-          <button onClick={() => setInputMinutes(inputMinutes + 1)}>+</button>
+
+          <button
+            className="timerButton"
+            onClick={() => setInputMinutes(inputMinutes + 1)}
+          >
+            +
+          </button>
         </div>
         <div className="input-group">
-        <span>Sekunder</span>
-        <br></br>
-          <button onClick={() => setInputSeconds(Math.max(inputSeconds - 1, 0))}>-</button>
+          <span>Sekunder</span>
+          <br></br>
+          <button
+            className="timerButton"
+            onClick={() => setInputSeconds(Math.max(inputSeconds - 1, 0))}
+          >
+            -
+          </button>
           <input
+            className="timeInput"
             type="number"
             value={inputSeconds}
             onChange={(e) => setInputSeconds(parseInt(e.target.value))}
             placeholder="Sekunder"
           />
-         
-          <button onClick={() => setInputSeconds(inputSeconds + 1)}>+</button>
+
+          <button
+            className="timerButton"
+            onClick={() => setInputSeconds(inputSeconds + 1)}
+          >
+            +
+          </button>
         </div>
-        <button onClick={handleSetTime}>Sett tid</button>
+        <button className="timerButton" onClick={handleSetTime}>
+          Sett tid
+        </button>
       </div>
-      
+
       {timeUp && <p className="time-up-message">Tiden er ute!</p>}
     </div>
   );
