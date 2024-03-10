@@ -12,6 +12,7 @@ import MyGames from "./MyGames.jsx";
 import NewGame from "./NewGame.jsx";
 import RegisterUser from "./RegisterUser.jsx";
 import MyFavorites from "./MyFavorites.jsx";
+import MyRatings from "./MyRatings.jsx";
 import "./style/App.css";
 import "./style/index.css";
 import VisitGame from "./VisitGame.jsx";
@@ -80,6 +81,12 @@ const router = createBrowserRouter([
   {
     path: "/MyFavorites",
     element: <MyFavorites />,
+  },
+
+  //route MyRatings
+  {
+    path: "/MyRatings",
+    element: <MyRatings />,
   },
 
   //-->
