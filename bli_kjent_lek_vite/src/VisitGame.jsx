@@ -16,6 +16,7 @@ function VisitGame() {
   const navigate = useNavigate();
 
   const title = location.state.key;
+  const gameId = location.state ? location.state.gameId : null;
 
   const handleRatingClick = (value) => {
     // Set the rating to the clicked value
@@ -128,8 +129,7 @@ function VisitGame() {
                 <p>Kategorier: {categoryList}</p>
               </div>
 
-              {/* <button className="playlistButton">Legg til i spilleliste</button> */}
-              <DropDownPlaylist/>
+              <DropDownPlaylist gameId={gameId}/>
             </div>
           </div>
         </div>
