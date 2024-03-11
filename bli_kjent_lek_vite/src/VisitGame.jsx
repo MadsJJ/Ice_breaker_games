@@ -1,3 +1,4 @@
+import DropDownPlaylist from "./components/DropDownPlaylist";
 import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import "./style/VisitGame.css";
@@ -127,7 +128,8 @@ function VisitGame() {
                 <p>Kategorier: {categoryList}</p>
               </div>
 
-              <button className="playlistButton">Legg til i spilleliste</button>
+              {/* <button className="playlistButton">Legg til i spilleliste</button> */}
+              <DropDownPlaylist/>
             </div>
           </div>
         </div>

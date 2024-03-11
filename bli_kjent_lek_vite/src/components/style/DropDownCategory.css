@@ -1,0 +1,12 @@
+.dropDown {
+  padding: 10px;
+  background-color: #064789;
+  font-weight: bold;
+  color: aliceblue;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.dropDown option {
+  gap: 2px;
+}

@@ -1,47 +1,48 @@
-import "./style/App.css";
+import React, { useEffect, useState } from "react";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "./firebase";
 import Navbar from "./components/Navbar";
 import Searchbar from "./components/Searchbar";
 import { Card } from "./components/Card";
-import { db } from "./firebase";
-import { collection, getDocs } from "firebase/firestore";
-import { useLocation } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function CategoryFilter() {
   const [games, setGames] = useState([]);
-  const [noMatches, setNoMatches] = useState(false); //if no games matches the search
+  const [noMatches, setNoMatches] = useState(false);
   const location = useLocation();
-  const { categories, searchTerm } = location.state || {};
+  const { category, searchTerm } = location.state || {};
+  let navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // gets all the games form the db
-        const gamesQuery = collection(db, "games");
-        const querySnapshot = await getDocs(gamesQuery);
-        let gamesData = querySnapshot.docs.map(doc => ({
+        let querySnapshot;
+        if (category) {
+          const q = query(
+            collection(db, "games"),
+            where("categories", "array-contains", category)
+          );
+          querySnapshot = await getDocs(q);
+        } else {
+          // If no category is selected, fetch all games
+          querySnapshot = await getDocs(collection(db, "games"));
+        }
+
+        let gamesData = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-        
-        // Filter based on the serachTerm
+
+        // Filter based on the searchTerm if it exists
         if (searchTerm) {
           const searchTermLower = searchTerm.toLowerCase();
-          gamesData = gamesData.filter(game =>
+          gamesData = gamesData.filter((game) =>
             game.title.toLowerCase().includes(searchTermLower)
-          );
-        }
-        
-        // Filter based on categories
-        if (categories) {
-          gamesData = gamesData.filter(game =>
-            game.categories && game.categories.includes(categories)
           );
         }
 
         setGames(gamesData);
         setNoMatches(gamesData.length === 0);
-
       } catch (error) {
         console.error("Error fetching games:", error);
         setNoMatches(true);
@@ -49,12 +50,12 @@ function CategoryFilter() {
     };
 
     fetchData();
-  }, [searchTerm, categories]);
+  }, [category, searchTerm]); // Fetch data whenever category or searchTerm changes
 
   return (
     <>
       <Navbar />
-      <Searchbar heading={categories} />
+      <Searchbar heading={category} />
       <div
         style={{
           display: "flex",
@@ -67,6 +68,9 @@ function CategoryFilter() {
           <Card
             key={game.id}
             title={game.title}
+            creatorID={game.creatorID}
+            minP={game.minNumberOfPeople}
+            maxP={game.maxNumberOfPeople}
           />
         ))}
         {noMatches && <p>Ingen leker matcher ditt søk:(</p>}
