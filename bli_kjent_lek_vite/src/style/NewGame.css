@@ -50,3 +50,30 @@ select {
 .bnConfirm:hover {
   background-color: #45a049;
 }
+
+.fileInputContainer {
+  position: relative;
+  display: inline-block;
+  
+
+}
+
+#fileInput {
+  display: none; /* Hide the actual file input */
+}
+
+
+
+.uploadButton {
+  padding: 12px 24px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.uploadButton:hover {
+  background-color: #45a049;
+}
