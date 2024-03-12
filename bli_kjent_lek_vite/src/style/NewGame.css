@@ -1,13 +1,12 @@
 .newGameBox {
-  background-color: white;
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 800px;
+  margin: auto;
   padding: 10px;
 }
 
 /* Heading styling */
 .NGH2 {
-  font-size: 30px;
+  font-size: 32px;
   color: #064789;
   margin: 5px;
 }
@@ -18,37 +17,74 @@
   flex-direction: column;
 }
 
-/* Input styling */
-/* textarea,
-select {
-  margin-bottom: 20px;
-  padding: 8px;
-} */
-
 .gameTitle {
-  margin-bottom: 5px;
-  padding: 8px;
+  font-size: 18px;
+  padding: 5px;
 }
 
 .inputfeltGame {
-  padding: 20px;
-  border-radius: 5px;
+  padding: 10px;
   border: solid #064789;
+  border-radius: 5px;
+  margin-bottom: 25px;
+}
+
+.categoryTitle {
+  margin: 10px;
+  font-size: 16px;
+}
+
+#titleInput {
+  padding: 0;
+  padding-left: 30px;
+  padding-right: 30px;
+  text-align: center;
+  font-size: 16px;
+  border: none;
+  border-bottom: solid#064789;
+  border-radius: 0;
+  width: auto;
+}
+
+#titleInput:focus {
+  outline: none;
+}
+
+#descInput {
+  resize: none;
+  height: 200px;
+}
+
+#minPlayer {
+  width: 23px;
+  height: 10px;
+  align-self: center;
+}
+
+#maxPlayer {
+  width: 23px;
+  height: 10px;
+  align-self: center;
 }
 
 /* Button styling */
 .bnConfirm {
+  width: 225px;
+  margin: auto;
+  margin-top: -10px;
   background-color: #064789;
+  border-radius: 5px;
   color: white;
   font-weight: bold;
   font-size: 16px;
   padding: 10px 15px;
   border: none;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .bnConfirm:hover {
-  background-color: #45a049;
+  background-color: mediumseagreen;
 }
 
 .fileInputContainer {
