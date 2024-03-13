@@ -1,17 +1,13 @@
-import VisitPlaylist from "./VisitPlaylist.jsx";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import NewGame from "./NewGame.jsx";
 import MyGames from "./MyGames.jsx";
-import MyPlaylists from "./MyPlaylists.jsx";
-import NewPlaylist from "./NewPlaylist.jsx";
 import Login from "./Login.jsx";
 import App from "./App.jsx";
 import RegisterUser from "./RegisterUser.jsx";
 import VisitGame from "./VisitGame.jsx";
 import CategoryFilter from "./CategoryFilter.jsx";
 import WheelOfFortune from "./WheelOfFortune.jsx";
-
 import "./style/App.css";
 import "./style/index.css";
 import "@fontsource/roboto/300.css";
@@ -19,6 +15,19 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import CategoryFilter from "./CategoryFilter.jsx";
+import Login from "./Login.jsx";
+import MyGames from "./MyGames.jsx";
+import NewGame from "./NewGame.jsx";
+import RegisterUser from "./RegisterUser.jsx";
+import MyFavorites from "./MyFavorites.jsx";
+import "./style/App.css";
+import "./style/index.css";
+import VisitGame from "./VisitGame.jsx";
+import WheelOfFortune from "./WheelOfFortune.jsx";
 //error page
 import ErrorPage from "./components/error-page.jsx";
 //routing
@@ -83,12 +92,17 @@ const router = createBrowserRouter([
     path: "/MyPlaylists",
     element: <MyPlaylists />,
   },
-
+  //route MyFavorites
   {
+    path: "/MyFavorites",
+    element: <MyFavorites />,  
+    
+  },
+    {
     path: "/NewPlaylist",
     element: <NewPlaylist />,
   },
-
+  
   {
     path: "/VisitPlaylist/:playlistId",
     element: <VisitPlaylist />,

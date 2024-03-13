@@ -3,9 +3,18 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import "./style/VisitGame.css";
 //routing
-import { useNavigate, useLocation } from "react-router-dom";
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  setDoc,
+  updateDoc,
+  where,
+} from "firebase/firestore";
+
+import { useLocation } from "react-router-dom";
 import { db } from "./firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
 
 function VisitGame() {
   const [rating, setRating] = useState(0); // Initial rating is 0
@@ -27,7 +36,8 @@ function VisitGame() {
     setRating(value);
   };
 
-  const [games, setGame] = useState([]);
+  const [game, setGame] = useState([]);
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,26 +56,54 @@ function VisitGame() {
           };
           setGame(gameData);
         } else {
-          console.log("No game found with the given title:", gameId);
+          console.log("No game found with the given title:", title);
         }
       } catch (error) {
         console.error("Error fetching game:", error);
       }
+      try {
+        const q = query(
+          collection(db, "users"),
+          where("username", "==", localStorage.getItem("username"))
+        );
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+          // Assuming there's only one user with the given username
+          const userData = {
+            id: querySnapshot.docs[0].id,
+            ...querySnapshot.docs[0].data(),
+          };
+          setUser(userData);
+        } else {
+          console.log("No user found");
+        }
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
     };
 
     fetchData();
-  }, []);
+  }, [title]);
+
+  // Lag en funksjon som legger til spillet i liked array for bruker
 
   const [categoryList, setCategories] = useState("");
 
   useEffect(() => {
-    console.log(games.categories);
-    if (typeof games.categories === "object") {
-      setCategories(games.categories.join(", "));
+    console.log(game.categories);
+    if (typeof game.categories === "object") {
+      setCategories(game.categories.join(", "));
     } else {
-      setCategories(games.categories ? games.categories : "");
+      setCategories(game.categories ? game.categories : "");
     }
-  }, [games.categories]);
+  }, [game.categories]);
+
+  useEffect(() => {
+    // Sjekk om spillet er liket av brukeren basert på spilltittelen
+    const isLiked = user.likedGames?.includes(game.title);
+    setLiked(isLiked);
+  }, [game.title, user.likedGames]); // Avhengigheter for å kjøre effekten
 
   const handleHoverRating = (value) => {
     // Set hoverRating to the value when mouse enters a star
@@ -77,7 +115,30 @@ function VisitGame() {
     setHoverRating(0);
   };
 
-  const handleLikeClick = () => {
+  const handleLikeClick = async () => {
+    let updatedUser = { ...user };
+    if (!user.likedGames) {
+      updatedUser.likedGames = [];
+    }
+    if (!liked) {
+      updatedUser.likedGames = [...updatedUser.likedGames, game.title];
+    } else {
+      updatedUser.likedGames = updatedUser.likedGames.filter(
+        (title) => title.trim() !== game.title.trim()
+      );
+    }
+    console.log("Mine favoritter:", updatedUser.likedGames);
+    setUser(updatedUser);
+
+    // await db.collection('users').doc(user.username).update({likedGames: updatedUser.likedGames});
+    setDoc(
+      doc(db, "users", user.username),
+      {
+        likedGames: updatedUser.likedGames,
+      },
+      { merge: true }
+    );
+
     // Toggle liked status
     setLiked(!liked);
   };
@@ -88,9 +149,9 @@ function VisitGame() {
       <div className="content">
         <div className="newGameContainer">
           <div className="gameHeader">
-            <h2>{games.title}</h2>
+            <h2>{game.title}</h2>
           </div>
-          <p>Laget av: {games.creatorID ? games.creatorID : "Ukjent"}</p>
+          <p>Laget av: {game.creatorID ? game.creatorID : "Ukjent"}</p>
           <br></br>
 
           <div className="container">
@@ -99,9 +160,9 @@ function VisitGame() {
                 <p>Bilde</p>
               </div>
               <div className="textRight">
-                <p>{games.description}</p>
-                <p>{games.minNumberOfPeople}</p>
-                <p>{games.maxNumberOfPeople}</p>
+                <p>{game.description}</p>
+                <p>{game.minNumberOfPeople}</p>
+                <p>{game.maxNumberOfPeople}</p>
               </div>
             </div>
             <div className="additionalInfo">

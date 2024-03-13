@@ -18,6 +18,15 @@ export default function Navbar() {
     }
   };
 
+
+  const handleMyFavorites = () => {
+    if (localStorage.getItem("username")) {
+      navigate("/MyFavorites");
+    } else {
+      alert("Du må være logget inn for å se dine favoritter!");
+    }
+  };
+
   useEffect(() => {
     //ChatGPT
     // Check if username exists in local storage
@@ -52,7 +61,7 @@ export default function Navbar() {
             <a href="/">Mine ratings</a>
             <a href="/MyPlaylists">Mine spillelister</a>
             <a href="/WheelOfFortune">Lykkehjulet</a>
-            <a href="/">Mine favoritter</a>
+            <a onClick={handleMyFavorites} style={{cursor: 'pointer'}}>Mine favoritter</a>
             <a onClick={handleMyGames} style={{cursor: 'pointer'}}>Mine leker</a>
           </nav>
           <div className="user">

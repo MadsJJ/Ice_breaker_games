@@ -92,6 +92,7 @@
 
 /* likeButton */
 .likeButton {
+  font-size: 25px;
   background-color: #f2f2f2;
   color: #000;
   border: none;
