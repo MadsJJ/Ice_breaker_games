@@ -18,7 +18,7 @@ export const Card = ({
 
   const handleClick = () => {
     console.log("Clicked game id:", gameId); // Log gameId
-    navigate("/VisitGame/${gameId}", { state: { key: title } });
+    navigate(`/VisitGame/${gameId}`, { state: { title: title, gameId: gameId } });
   };
 
   const categoriesString = () => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../firebase";
-import { collection, getDocs, query, where, updateDoc, arrayUnion } from "firebase/firestore";
+import { collection, getDocs, doc, query, where, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { useLocation } from "react-router-dom";
 import "./style/DropDownCategory.css";
 
@@ -32,12 +32,34 @@ function DropDownPlaylist() {
 
   const handleSelectChange = async (event) => {
     const selectedPlaylistId = event.target.value;
-    const currentGameId = location.state.gameId; // Assuming you pass the gameId via location.state
+    const currentGameId = location.state.gameId; 
+
+    // Logging selected playlist ID and current game ID
+    console.log("Selected Playlist ID:", selectedPlaylistId);
+    console.log("Current Game ID:", currentGameId);
 
     try {
+
       // Update the selected playlist to add the current game
-      const playlistRef = collection(db, "playlists").doc(selectedPlaylistId);
-      await updateDoc(playlistRef, {
+      // const playlistRef = collection(db, "playlists").doc(selectedPlaylistId);¨
+
+      const docRef = doc(db, "playlists", selectedPlaylistId);
+      const docSnapshot = await getDoc(docRef);
+      
+      if (docSnapshot.exists()) {
+        const playlistData = {
+          id: docSnapshot.id,
+          ...docSnapshot.data()
+        };
+        console.log("Playlistref", docSnapshot);
+        // Now you can use playlistData for your further processing
+      } else {
+        console.log("No such document!");
+        // console.log("Playlistref", docSnapshot);
+      }
+      
+
+      await updateDoc(docSnapshot, {
         games: arrayUnion(db.doc(`games/${currentGameId}`)),
       });
       console.log("Game added to playlist successfully!");

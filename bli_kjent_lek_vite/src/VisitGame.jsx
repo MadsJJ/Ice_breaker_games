@@ -15,8 +15,12 @@ function VisitGame() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const title = location.state.key;
-  const gameId = location.state ? location.state.gameId : null;
+  const title = location.state.title;
+  const gameId = location.state.gameId;
+  // const gameId = location.state ? location.state.gameId : null;
+
+  console.log("title", title);
+  console.log("gameid", gameId);
 
   const handleRatingClick = (value) => {
     // Set the rating to the clicked value
