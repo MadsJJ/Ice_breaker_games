@@ -68,6 +68,7 @@ function CategoryFilter() {
           <Card
             key={game.id}
             title={game.title}
+            image={game.image}
             creatorID={game.creatorID}
             minP={game.minNumberOfPeople}
             maxP={game.maxNumberOfPeople}
