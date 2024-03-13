@@ -55,6 +55,7 @@ function NewPlaylist() {
         const newPlaylistData = {
           title: playlistData.title,
           creatorID: localStorage.getItem("username"),
+          games: [],
           // Legg til andre felt etter behov
         };
 

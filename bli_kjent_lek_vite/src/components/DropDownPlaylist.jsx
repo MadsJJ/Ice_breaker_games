@@ -4,8 +4,8 @@ import { collection, getDocs, doc, query, where, getDoc, updateDoc, arrayUnion }
 import { useLocation } from "react-router-dom";
 import "./style/DropDownCategory.css";
 
-function DropDownPlaylist() {
-  const location = useLocation();
+function DropDownPlaylist({ gameId }) {
+  // const location = useLocation();
 
   const [myPlaylists, setMyPlaylists] = useState([]);
 
@@ -32,11 +32,10 @@ function DropDownPlaylist() {
 
   const handleSelectChange = async (event) => {
     const selectedPlaylistId = event.target.value;
-    const currentGameId = location.state.gameId; 
 
     // Logging selected playlist ID and current game ID
     console.log("Selected Playlist ID:", selectedPlaylistId);
-    console.log("Current Game ID:", currentGameId);
+    console.log("Current Game ID:", gameId);
 
     try {
 
@@ -57,10 +56,12 @@ function DropDownPlaylist() {
         console.log("No such document!");
         // console.log("Playlistref", docSnapshot);
       }
+
+      const gameRef = doc(db, "games", gameId);
       
 
-      await updateDoc(docSnapshot, {
-        games: arrayUnion(db.doc(`games/${currentGameId}`)),
+      await updateDoc(docRef, {
+        games: arrayUnion(gameRef),
       });
       console.log("Game added to playlist successfully!");
     } catch (error) {

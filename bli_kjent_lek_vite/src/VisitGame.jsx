@@ -26,7 +26,6 @@ function VisitGame() {
 
   const title = location.state.title;
   const gameId = location.state.gameId;
-  // const gameId = location.state ? location.state.gameId : null;
 
   console.log("title", title);
   console.log("gameid", gameId);
