@@ -64,6 +64,9 @@ function DropDownPlaylist({ gameId }) {
         games: arrayUnion(gameRef),
       });
       console.log("Game added to playlist successfully!");
+      alert(
+        "Spillet ble lagt til i spilleliste!"
+      );
     } catch (error) {
       console.error("Error adding game to playlist:", error);
     }
