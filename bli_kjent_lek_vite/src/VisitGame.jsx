@@ -24,9 +24,34 @@ function VisitGame() {
 
   const title = location.state.key;
 
-  const handleRatingClick = (value) => {
-    // Set the rating to the clicked value
-    setRating(value);
+  const handleRatingClick = async (value) => {
+    let updatedUser = { ...user };
+    if (!updatedUser.myRatings) {
+      updatedUser.myRatings = {};
+    }
+
+    const currentRating = updatedUser.myRatings[game.title.trim()];
+
+    // Sjekk om den nye ratingen er lik den eksisterende ratingen for spillet
+    if (value === currentRating) {
+      // Fjern ratingen ved å sette den til 0 eller fjerne nøkkelen
+      delete updatedUser.myRatings[game.title.trim()];
+      setRating(0);
+    } else {
+      // Oppdater med den nye ratingen
+      updatedUser.myRatings[game.title.trim()] = value;
+      setRating(value);
+    }
+
+    console.log("Mine Ratings:", updatedUser.myRatings);
+    setUser(updatedUser);
+
+    // Oppdater brukerens ratinger i databasen
+    await setDoc(
+      doc(db, "users", user.username),
+      { myRatings: updatedUser.myRatings },
+      { merge: true }
+    );
   };
 
   const [game, setGame] = useState([]);
@@ -79,8 +104,6 @@ function VisitGame() {
     fetchData();
   }, [title]);
 
-  // Lag en funksjon som legger til spillet i liked array for bruker
-
   const [categoryList, setCategories] = useState("");
 
   useEffect(() => {
@@ -96,7 +119,7 @@ function VisitGame() {
     // Sjekk om spillet er liket av brukeren basert på spilltittelen
     const isLiked = user.likedGames?.includes(game.title);
     setLiked(isLiked);
-  }, [game.title, user.likedGames]); // Avhengigheter for å kjøre effekten
+  }, [game.title, user.likedGames]);
 
   const handleHoverRating = (value) => {
     // Set hoverRating to the value when mouse enters a star
@@ -123,7 +146,6 @@ function VisitGame() {
     console.log("Mine favoritter:", updatedUser.likedGames);
     setUser(updatedUser);
 
-    // await db.collection('users').doc(user.username).update({likedGames: updatedUser.likedGames});
     setDoc(
       doc(db, "users", user.username),
       {
@@ -135,6 +157,34 @@ function VisitGame() {
     // Toggle liked status
     setLiked(!liked);
   };
+
+  // //My Ratings
+  // const handleRating = async () => {
+  //   let updatedUser = { ...user };
+  //   if (!user.myRatings) {
+  //     updatedUser.myRatings = [];
+  //   }
+  //   if (!rating) {
+  //     updatedUser.myRatings = [...updatedUser.myRatings, game.title];
+  //   } else {
+  //     updatedUser.myRatings = updatedUser.myRatings.filter(
+  //       (title) => title.trim() !== game.title.trim()
+  //     );
+  //   }
+  //   console.log("Mine Ratings:", updatedUser.myRatings);
+  //   setUser(updatedUser);
+
+  //   setDoc(
+  //     doc(db, "users", user.username),
+  //     {
+  //       myRatings: updatedUser.myRatings,
+  //     },
+  //     { merge: true }
+  //   );
+
+  //   // Toggle liked status
+  //   setRating(!rating);
+  // };
 
   return (
     <>
