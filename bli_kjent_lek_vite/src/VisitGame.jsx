@@ -6,7 +6,6 @@ import {
   collection,
   doc,
   getDocs,
-  getDoc,
   query,
   setDoc,
   //updateDoc,
@@ -25,8 +24,11 @@ function VisitGame() {
 
   const title = location.state.key;
 
-  //My ratings
+  //Adds a game to my ratings
   const handleRatingClick = async (value) => {
+    if (!localStorage.getItem("username")) {
+      alert("Du må være logget inn for å kunne gi en rating!");
+    }
     let updatedUser = { ...user };
     if (!updatedUser.myRatings) {
       updatedUser.myRatings = {};
@@ -117,7 +119,7 @@ function VisitGame() {
     }
   }, [game.categories]);
 
-  //Sets the haert to red if the game is liked by the user
+  //Sets the heart to red if the game is liked by the user
   useEffect(() => {
     // Sjekk om spillet er liket av brukeren basert på spilltittelen
     const isLiked = user.likedGames?.includes(game.title);
@@ -140,7 +142,11 @@ function VisitGame() {
     setHoverRating(0);
   };
 
+  //Add game to my favorites
   const handleLikeClick = async () => {
+    if (!localStorage.getItem("username")) {
+      alert("Du må være logget inn for å legge til en lek i dine favoritter!");
+    }
     let updatedUser = { ...user };
     if (!user.likedGames) {
       updatedUser.likedGames = [];
@@ -191,7 +197,7 @@ function VisitGame() {
             </div>
             <div className="additionalInfo">
               <div className="ratingDiv">
-                <p>Vurdering: {rating}</p>
+                <p>Rating: {rating}</p>
                 <div>
                   {[1, 2, 3, 4, 5].map((value) => (
                     <span
