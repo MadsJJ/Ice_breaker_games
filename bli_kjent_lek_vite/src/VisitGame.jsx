@@ -10,11 +10,10 @@ import {
   getDocs,
   query,
   setDoc,
-  //updateDoc,
+  updateDoc,
   where,
+  deleteField,
 } from "firebase/firestore";
-
-
 
 function VisitGame() {
   const [rating, setRating] = useState(0); // Initial rating is 0
@@ -30,9 +29,42 @@ function VisitGame() {
   console.log("title", title);
   console.log("gameid", gameId);
 
-  const handleRatingClick = (value) => {
-    // Set the rating to the clicked value
-    setRating(value);
+  //Adds a game to my ratings
+  const handleRatingClick = async (value) => {
+    const username = localStorage.getItem("username");
+    if (!username) {
+      alert("Du må være logget inn for å kunne gi en rating!");
+      return;
+    }
+
+    let updatedUser = { ...user };
+    if (!updatedUser.myRatings) {
+      updatedUser.myRatings = {};
+    }
+
+    const gameTitle = game.title.trim();
+    const userDocRef = doc(db, "users", username);
+
+    if (value === updatedUser.myRatings[gameTitle]) {
+      // Removes the rating from the local state and in the db
+      delete updatedUser.myRatings[gameTitle];
+      setRating(0);
+      // updates the db and removes the game form the list myRatings
+      await updateDoc(userDocRef, {
+        [`myRatings.${gameTitle}`]: deleteField(),
+      });
+    } else {
+      // Updates with the new rating
+      updatedUser.myRatings[gameTitle] = value;
+      setRating(value);
+      // Updates the rating in the db
+      await updateDoc(userDocRef, {
+        [`myRatings.${gameTitle}`]: value,
+      });
+    }
+
+    console.log("Mine Ratings:", updatedUser.myRatings);
+    setUser(updatedUser);
   };
 
   const [game, setGame] = useState([]);
@@ -86,13 +118,10 @@ function VisitGame() {
           image: game.image,
         }));
       }
-
     };
 
     fetchData();
   }, [title]);
-
-  // Lag en funksjon som legger til spillet i liked array for bruker
 
   const [categoryList, setCategories] = useState("");
 
@@ -105,11 +134,18 @@ function VisitGame() {
     }
   }, [game.categories]);
 
+  //Sets the heart to red if the game is liked by the user
   useEffect(() => {
-    // Sjekk om spillet er liket av brukeren basert på spilltittelen
+    //check if the game is liked by teh user based on the game title
     const isLiked = user.likedGames?.includes(game.title);
     setLiked(isLiked);
-  }, [game.title, user.likedGames]); // Avhengigheter for å kjøre effekten
+  }, [game.title, user.likedGames]);
+
+  useEffect(() => {
+    //check if the user has rated the game based on the game title
+    const userRating = user.myRatings?.[game.title];
+    setRating(userRating || 0); //Sets the rating to the users give rating, or 0 if no rating are given
+  }, [game.title, user.myRatings]);
 
   const handleHoverRating = (value) => {
     // Set hoverRating to the value when mouse enters a star
@@ -121,7 +157,12 @@ function VisitGame() {
     setHoverRating(0);
   };
 
+  //Add game to my favorites
   const handleLikeClick = async () => {
+    if (!localStorage.getItem("username")) {
+      alert("Du må være logget inn for å legge til en lek i dine favoritter!");
+      return;
+    }
     let updatedUser = { ...user };
     if (!user.likedGames) {
       updatedUser.likedGames = [];
@@ -136,7 +177,6 @@ function VisitGame() {
     console.log("Mine favoritter:", updatedUser.likedGames);
     setUser(updatedUser);
 
-    // await db.collection('users').doc(user.username).update({likedGames: updatedUser.likedGames});
     setDoc(
       doc(db, "users", user.username),
       {
@@ -145,7 +185,6 @@ function VisitGame() {
       { merge: true }
     );
 
-    // Toggle liked status
     setLiked(!liked);
   };
 
@@ -163,11 +202,20 @@ function VisitGame() {
           <div className="container">
             <div className="descBox">
               <div className="textLeft">
-                {game.image && <img src={game.image} alt="Game" style = {{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto'}} />}
+                {game.image && (
+                  <img
+                    src={game.image}
+                    alt="Game"
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: "100%",
+                      width: "auto",
+                      height: "auto",
+                    }}
+                  />
+                )}
               </div>
               <div className="textRight">
-                
-              
                 <p>{game.description}</p>
                 <p>{game.minNumberOfPeople}</p>
                 <p>{game.maxNumberOfPeople}</p>
@@ -175,7 +223,7 @@ function VisitGame() {
             </div>
             <div className="additionalInfo">
               <div className="ratingDiv">
-                <p>Vurdering: {rating}</p>
+                <p>Rating: {rating}</p>
                 <div>
                   {[1, 2, 3, 4, 5].map((value) => (
                     <span
@@ -202,7 +250,7 @@ function VisitGame() {
                 <p>Kategorier: {categoryList}</p>
               </div>
 
-              <DropDownPlaylist gameId={gameId}/>
+              <DropDownPlaylist gameId={gameId} />
             </div>
           </div>
         </div>

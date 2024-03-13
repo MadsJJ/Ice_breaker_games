@@ -1,8 +1,45 @@
 import "./style/App.css";
 import Navbar from "./components/Navbar";
+//import Searchbar from "./components/Searchbar";
+import { Card } from "./components/Card";
+import { db } from "./firebase";
+import { useState, useEffect } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 //routing
 
 function MyRatings() {
+  const [MyRatings, setMyRatings] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userID = localStorage.getItem("username");
+        const userRef = doc(db, "users", userID);
+        const userDoc = await getDoc(userRef);
+
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          const myRatings = userData.myRatings || {};
+
+          const gamesPromises = Object.keys(myRatings).map((gameTitle) =>
+            getDocs(
+              query(collection(db, "games"), where("title", "==", gameTitle))
+            )
+          );
+          const gamesSnapshots = await Promise.all(gamesPromises);
+          const myRatingsData = gamesSnapshots.flatMap((snapshot) =>
+            snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+          );
+          setMyRatings(myRatingsData);
+        }
+      } catch (error) {
+        console.error("Error fetching user's rated games:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
       <Navbar />
@@ -19,8 +56,30 @@ function MyRatings() {
       >
         Mine Ratings
       </h1>
-      {/* <GameCarousel /> */}
       <br />
+
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          margin: "auto",
+          width: "90vw",
+        }}
+      >
+        {/* Help from ChatGPT */}
+        {MyRatings.map((game) => (
+          <Card
+            key={game.id}
+            gameId={game.id}
+            image={game.image}
+            title={game.title}
+            creatorID={game.creatorID}
+            categories={game.categories}
+            minP={game.minNumberOfPeople}
+            maxP={game.maxNumberOfPeople}
+          />
+        ))}
+      </div>
     </>
   );
 }

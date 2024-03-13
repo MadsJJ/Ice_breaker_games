@@ -74,6 +74,25 @@
 
 .ratingDiv {
   background-color: #f0f4f8;
+  font-size: 25px;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+  justify-content: space-between;
+}
+
+/* Black color on the stars when not rated */
+.off {
+  color: #000;
+}
+
+/* coler on the stars when rated */
+.on {
+  color: gold;
 }
 
 .categoryDiv {
@@ -82,7 +101,7 @@
 
 .playlistButton {
   padding: 12px 24px;
-  background-color: #007bff;
+  background-color: #064789;
   color: #fff;
   border: none;
   border-radius: 5px;
