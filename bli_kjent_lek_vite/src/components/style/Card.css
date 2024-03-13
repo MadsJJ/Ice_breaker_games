@@ -15,6 +15,7 @@
 .cardImage {
   min-width: 250px;
   max-width: 350px;
+  max-height: 140px;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
 }

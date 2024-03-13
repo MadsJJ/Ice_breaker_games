@@ -17,6 +17,7 @@ import MyFavorites from "./MyFavorites.jsx";
 import MyPlaylists from "./MyPlaylists.jsx";
 import NewPlaylist from "./NewPlaylist.jsx";
 import VisitPlaylist from "./VisitPlaylist";
+import MyRatings from "./MyRatings.jsx";
 import "./style/App.css";
 import "./style/index.css";
 import VisitGame from "./VisitGame.jsx";
@@ -100,6 +101,13 @@ const router = createBrowserRouter([
     path: "/VisitPlaylist/:playlistId",
     element: <VisitPlaylist />,
   },
+
+  //route MyRatings
+  {
+    path: "/MyRatings",
+    element: <MyRatings />,
+  },
+
 
   //-->
   //legg til flere routes her

@@ -45,12 +45,16 @@
 }
 
 .textLeft {
-  width: 30%;
-  background-color: #fff;
+  max-width: 100%; /* Begrenser bredden til containerens bredde */
+  max-height: 100%; /* Begrenser høyden til containerens høyde */
+  width: auto; /* Justerer bredden proporsjonalt */
+  height: auto; /* Justerer høyden proporsjonalt */
+  border: 1px solid #ccc; /* Legg til en ramme for visuell separasjon */
+  border-radius: 8px; /* Rund av hjørnene for et mer estetisk utseende */
 }
 
 .textRight {
-  width: 70%;
+  width: 100%;
   background-color: #f9f9f9;
 }
 
@@ -106,4 +110,19 @@
 .likeButton.liked {
   background-color: #ff4d4d;
   color: #fff;
+}
+
+
+
+.imageContainer {
+  max-width: 100%; /* Begrens bredden til containerens bredde */
+  max-height: 300px; /* Sett en maksimal høyde for å begrense bildets størrelse */
+  overflow: hidden; /* Skjul overskytende deler av bildet som overstiger rammene */
+}
+
+.imageContainer img {
+  max-width: 100%; /* Begrenser bredden til containerens bredde */
+  max-height: 100%;
+  width: auto; /* Sørg for at bildet fyller containerens bredde */
+  height: auto; /* Bevar bildets sideforhold */
 }

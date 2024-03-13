@@ -1,6 +1,6 @@
 import "./style/App.css";
 import Navbar from "./components/Navbar";
-import Searchbar from "./components/Searchbar";
+//import Searchbar from "./components/Searchbar";
 import { Card } from "./components/Card";
 import { db } from "./firebase";
 import { useState, useEffect } from "react";
