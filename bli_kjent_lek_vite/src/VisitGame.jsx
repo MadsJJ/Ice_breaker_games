@@ -6,6 +6,7 @@ import {
   collection,
   doc,
   getDocs,
+  getDoc,
   query,
   setDoc,
   //updateDoc,
@@ -24,6 +25,7 @@ function VisitGame() {
 
   const title = location.state.key;
 
+  //My ratings
   const handleRatingClick = async (value) => {
     let updatedUser = { ...user };
     if (!updatedUser.myRatings) {
@@ -115,11 +117,18 @@ function VisitGame() {
     }
   }, [game.categories]);
 
+  //Sets the haert to red if the game is liked by the user
   useEffect(() => {
     // Sjekk om spillet er liket av brukeren basert på spilltittelen
     const isLiked = user.likedGames?.includes(game.title);
     setLiked(isLiked);
   }, [game.title, user.likedGames]);
+
+  useEffect(() => {
+    // Sjekk om brukeren har gitt en rating til spillet basert på spilltittelen
+    const userRating = user.myRatings?.[game.title];
+    setRating(userRating || 0); // Setter ratingen til brukerens rating, eller 0 hvis ingen rating er gitt
+  }, [game.title, user.myRatings]);
 
   const handleHoverRating = (value) => {
     // Set hoverRating to the value when mouse enters a star
