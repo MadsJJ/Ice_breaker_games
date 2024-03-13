@@ -10,8 +10,8 @@ function DropDownCategory() {
     const handleSelectChange = (event) => {
         const selectedCategory = event.target.value;
         console.log(selectedCategory);
-        // Navigate to CategoryFilter with selected category
-        navigate("/CategoryFilter", { state: { category: selectedCategory } });
+        // Navigate to Filter with selected category
+        navigate("/Filter", { state: { category: selectedCategory } });
     };
 
     const [categories, setCategories] = useState([]);
