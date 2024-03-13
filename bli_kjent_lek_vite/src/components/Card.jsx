@@ -5,8 +5,7 @@ import "./style/Card.css";
 
 export const Card = ({
   gameId,
-  imgSrc,
-  imgAlt,
+  image,
   title,
   desc,
   categories,
@@ -31,11 +30,10 @@ export const Card = ({
   // This handleClick needs to be changed to properly route to correct page
   return (
     <div className="card" onClick={handleClick}>
-      {/* {imgSrc && imgAlt && (
-        <img className="cardImage" src={imgSrc} alt={imgAlt} />
-      )} */}
-      {/* Commented to have placeholder while not having proper images */}
-      <img className="cardImage" src="https://placekitten.com/350/140" alt="" />
+      {image && 
+         <img className="cardImage" src={image}/>
+         }
+     
       {title && <h3 className="cardTitle">{title}</h3>}
       {desc && <p className="cardDesc">{desc}</p>}
       
