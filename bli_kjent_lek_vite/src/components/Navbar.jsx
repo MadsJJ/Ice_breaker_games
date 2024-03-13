@@ -8,8 +8,6 @@ import { useState, useEffect } from "react";
 export default function Navbar() {
   const [username, setUsername] = useState("");
 
-
-
   const handleMyGames = () => {
     if (localStorage.getItem("username")) {
       navigate("/MyGames");
@@ -18,12 +16,19 @@ export default function Navbar() {
     }
   };
 
-
   const handleMyFavorites = () => {
     if (localStorage.getItem("username")) {
       navigate("/MyFavorites");
     } else {
       alert("Du må være logget inn for å se dine favoritter!");
+    }
+  };
+
+  const handleMyRatings = () => {
+    if (localStorage.getItem("username")) {
+      navigate("/MyRatings");
+    } else {
+      alert("Du må være logget inn for å se dine ratings!");
     }
   };
 
@@ -57,12 +62,17 @@ export default function Navbar() {
         </a>
         <div className="notLogo">
           <nav className="navigation">
-            
-            <a href="/">Mine ratings</a>
+            <a onClick={handleMyRatings} style={{ cursor: "pointer" }}>
+              Mine ratings
+            </a>
             <a href="/">Mine spillelister</a>
             <a href="/WheelOfFortune">Lykkehjulet</a>
-            <a onClick={handleMyFavorites} style={{cursor: 'pointer'}}>Mine favoritter</a>
-            <a onClick={handleMyGames} style={{cursor: 'pointer'}}>Mine leker</a>
+            <a onClick={handleMyFavorites} style={{ cursor: "pointer" }}>
+              Mine favoritter
+            </a>
+            <a onClick={handleMyGames} style={{ cursor: "pointer" }}>
+              Mine leker
+            </a>
           </nav>
           <div className="user">
             <p>Hei {username || "Gjest"}, godt å se deg!</p>
