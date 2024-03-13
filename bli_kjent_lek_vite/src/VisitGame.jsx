@@ -200,6 +200,17 @@ function VisitGame() {
                 <p>Rating: {rating}</p>
                 <div>
                   {[1, 2, 3, 4, 5].map((value) => (
+                    // <span
+                    //   key={value}
+                    //   className={
+                    //     value <= (hoverRating || rating) ? "on" : "off"
+                    //   }
+                    //   onClick={() => handleRatingClick(value)}
+                    //   onMouseEnter={() => handleHoverRating(value)}
+                    //   onMouseLeave={handleHoverRatingReset}
+                    // >
+                    //   ★
+                    // </span>
                     <span
                       key={value}
                       className={
