@@ -15,8 +15,6 @@ import {
   deleteField,
 } from "firebase/firestore";
 
-
-
 function VisitGame() {
   const [rating, setRating] = useState(0); // Initial rating is 0
   const [hoverRating, setHoverRating] = useState(0); // For hover effect
@@ -32,44 +30,6 @@ function VisitGame() {
   console.log("gameid", gameId);
 
   //Adds a game to my ratings
-  // const handleRatingClick = async (value) => {
-  //   if (!localStorage.getItem("username")) {
-  //     alert("Du må være logget inn for å kunne gi en rating!");
-  //     return;
-  //   }
-
-  //   let updatedUser = { ...user };
-  //   if (!updatedUser.myRatings) {
-  //     updatedUser.myRatings = {};
-  //   }
-
-  //   const currentRating = updatedUser.myRatings[game.title.trim()];
-
-  //   // Sjekk om den nye ratingen er lik den eksisterende ratingen for spillet
-  //   if (value === currentRating) {
-  //     // Fjern ratingen ved å sette den til 0 eller fjerne nøkkelen
-  //     delete updatedUser.myRatings[game.title.trim()];
-  //     setRating(0);
-  //     await updateDoc(updatedUser, {
-  //       [`myRatings.${game.title.trim()}`]: deleteField(),
-  //     });
-  //   } else {
-  //     // Oppdater med den nye ratingen
-  //     updatedUser.myRatings[game.title.trim()] = value;
-  //     setRating(value);
-  //   }
-
-  //   console.log("Mine Ratings:", updatedUser.myRatings);
-  //   setUser(updatedUser);
-
-  //   // Oppdater brukerens ratinger i databasen
-  //   await setDoc(
-  //     doc(db, "users", user.username),
-  //     { myRatings: updatedUser.myRatings },
-  //     { merge: true }
-  //   );
-  // };
-
   const handleRatingClick = async (value) => {
     const username = localStorage.getItem("username");
     if (!username) {
@@ -158,7 +118,6 @@ function VisitGame() {
           image: game.image,
         }));
       }
-
     };
 
     fetchData();
@@ -177,15 +136,15 @@ function VisitGame() {
 
   //Sets the heart to red if the game is liked by the user
   useEffect(() => {
-    // Sjekk om spillet er liket av brukeren basert på spilltittelen
+    //check if the game is liked by teh user based on the game title
     const isLiked = user.likedGames?.includes(game.title);
     setLiked(isLiked);
   }, [game.title, user.likedGames]);
 
   useEffect(() => {
-    // Sjekk om brukeren har gitt en rating til spillet basert på spilltittelen
+    //check if the user has rated the game based on the game title
     const userRating = user.myRatings?.[game.title];
-    setRating(userRating || 0); // Setter ratingen til brukerens rating, eller 0 hvis ingen rating er gitt
+    setRating(userRating || 0); //Sets the rating to the users give rating, or 0 if no rating are given
   }, [game.title, user.myRatings]);
 
   const handleHoverRating = (value) => {
@@ -226,7 +185,6 @@ function VisitGame() {
       { merge: true }
     );
 
-    // Toggle liked status
     setLiked(!liked);
   };
 
@@ -244,11 +202,20 @@ function VisitGame() {
           <div className="container">
             <div className="descBox">
               <div className="textLeft">
-                {game.image && <img src={game.image} alt="Game" style = {{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto'}} />}
+                {game.image && (
+                  <img
+                    src={game.image}
+                    alt="Game"
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: "100%",
+                      width: "auto",
+                      height: "auto",
+                    }}
+                  />
+                )}
               </div>
               <div className="textRight">
-                
-              
                 <p>{game.description}</p>
                 <p>{game.minNumberOfPeople}</p>
                 <p>{game.maxNumberOfPeople}</p>
@@ -259,17 +226,6 @@ function VisitGame() {
                 <p>Rating: {rating}</p>
                 <div>
                   {[1, 2, 3, 4, 5].map((value) => (
-                    // <span
-                    //   key={value}
-                    //   className={
-                    //     value <= (hoverRating || rating) ? "on" : "off"
-                    //   }
-                    //   onClick={() => handleRatingClick(value)}
-                    //   onMouseEnter={() => handleHoverRating(value)}
-                    //   onMouseLeave={handleHoverRatingReset}
-                    // >
-                    //   ★
-                    // </span>
                     <span
                       key={value}
                       className={
@@ -294,7 +250,7 @@ function VisitGame() {
                 <p>Kategorier: {categoryList}</p>
               </div>
 
-              <DropDownPlaylist gameId={gameId}/>
+              <DropDownPlaylist gameId={gameId} />
             </div>
           </div>
         </div>

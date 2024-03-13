@@ -56,7 +56,6 @@ function MyRatings() {
       >
         Mine Ratings
       </h1>
-      {/* <GameCarousel /> */}
       <br />
 
       <div
@@ -72,10 +71,8 @@ function MyRatings() {
           <Card
             key={game.id}
             gameId={game.id}
-            // imgSrc={game.imgSrc} // disse er ikke lagt til i db - må finne ut om vi vil ha bilder
-            // imgAlt={game.imgAlt}  / eller strings som linker til bilde r i filstrukturen
-            title={game.title} // burde endres til "title i firebase - holde det consistent med engelsk
-            // desc={game.description} // bare ha beskrivelse på lek-side
+            image={game.image}
+            title={game.title}
             creatorID={game.creatorID}
             categories={game.categories}
             minP={game.minNumberOfPeople}
