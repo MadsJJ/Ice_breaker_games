@@ -62,10 +62,11 @@ export default function Navbar() {
         </a>
         <div className="notLogo">
           <nav className="navigation">
+            
+            <a href="/MyPlaylists">Mine spillelister</a>
             <a onClick={handleMyRatings} style={{ cursor: "pointer" }}>
               Mine ratings
             </a>
-            <a href="/">Mine spillelister</a>
             <a href="/WheelOfFortune">Lykkehjulet</a>
             <a onClick={handleMyFavorites} style={{ cursor: "pointer" }}>
               Mine favoritter

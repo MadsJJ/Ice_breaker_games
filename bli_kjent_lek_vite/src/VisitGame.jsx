@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import DropDownPlaylist from "./components/DropDownPlaylist";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import "./style/VisitGame.css";
-//routing
+import { db } from "./firebase";
 import {
   collection,
   doc,
@@ -12,8 +14,7 @@ import {
   where,
 } from "firebase/firestore";
 
-import { useLocation } from "react-router-dom";
-import { db } from "./firebase";
+
 
 function VisitGame() {
   const [rating, setRating] = useState(0); // Initial rating is 0
@@ -21,8 +22,13 @@ function VisitGame() {
   const [liked, setLiked] = useState(false); // Initial like status is false
 
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const title = location.state.key;
+  const title = location.state.title;
+  const gameId = location.state.gameId;
+
+  console.log("title", title);
+  console.log("gameid", gameId);
 
   const handleRatingClick = (value) => {
     // Set the rating to the clicked value
@@ -196,7 +202,7 @@ function VisitGame() {
                 <p>Kategorier: {categoryList}</p>
               </div>
 
-              <button className="reportButton">Rapporter Lek</button>
+              <DropDownPlaylist gameId={gameId}/>
             </div>
           </div>
         </div>

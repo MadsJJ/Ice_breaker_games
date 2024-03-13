@@ -2,54 +2,53 @@ import "./style/App.css";
 import { Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
-import Searchbar from "./components/Searchbar";
+import "./style/MyPlaylists.css";
 import GameCarousel from "./components/GameCarousel";
-import { Card } from "./components/Card";
+import { CardPlaylist } from "./components/CardPlaylist";
 import { db } from "./firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 //routing
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function MyGames() {
+function MyPlaylists() {
   //routing
   let navigate = useNavigate();
 
-  const handleNewGame = () => {
+  const handleNewPlaylist = () => {
     if (localStorage.getItem("username")) {
-      navigate("/NewGame");
+      navigate("/NewPlaylist");
     } else {
-      alert("Du må være logget inn for å legge til en ny lek!");
+      alert("Du må være logget inn for å legge til en ny spilleliste!");
     }
   };
 
-  // const handleVisitGame = () => {
-  //   navigate("/VisitGame");
-  // };
+  const handleVisitPlaylist = () => {
+    navigate("/VisitPlaylist");
+  };
 
   const handleClick = () => {
     console.log("Clicked");
     location.href = "/src/";
   };
 
-  const [myGames, setMyGames] = useState([]);
+  const [myPlaylists, setMyPlaylists] = useState([]);
 
   useEffect(() => {
     // Help from ChatGPT
     const fetchData = async () => {
       try {
         const q = query(
-          collection(db, "games"),
+          collection(db, "playlists"),
           where("creatorID", "==", localStorage.getItem("username"))
         );
         const querySnapshot = await getDocs(q);
-        const myGamesData = querySnapshot.docs.map((doc) => ({
+        const myPlaylistsData = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-        setMyGames(myGamesData);
+        setMyPlaylists(myPlaylistsData);
       } catch (error) {
-        console.error("Error fetching games:", error);
+        console.error("Error fetching playlists:", error);
       }
     };
 
@@ -59,7 +58,7 @@ function MyGames() {
   return (
     <>
       <Navbar />
-      <Searchbar heading="Mine Leker" />
+      <h2 className="headerspilleliste"> Mine spillelister</h2>
       {/* <GameCarousel /> */}
       <br />
 
@@ -72,32 +71,28 @@ function MyGames() {
         }}
       >
         {/* Help from ChatGPT */}
-        {myGames.map((game) => (
-          <Card
-            key={game.id}
-            gameId={game.id}
+        {myPlaylists.map((playlist) => (
+          <CardPlaylist
+            key={playlist.id}
+            playlistId={playlist.id}
             // imgSrc={game.imgSrc} // disse er ikke lagt til i db - må finne ut om vi vil ha bilder
             // imgAlt={game.imgAlt}  / eller strings som linker til bilde r i filstrukturen
-            title={game.title} // burde endres til "title i firebase - holde det consistent med engelsk
-            // desc={game.description} // bare ha beskrivelse på lek-side
-            creatorID={game.creatorID}
-            categories={game.categories}
-            minP={game.minNumberOfPeople}
-            maxP={game.maxNumberOfPeople}
+            playlistTitle={playlist.title} // burde endres til "title i firebase - holde det consistent med engelsk
+            creatorID={playlist.creatorID}
           />
         ))}
       </div>
       <Button
-        onClick={handleNewGame}
-        id="newGameButton"
+        onClick={handleNewPlaylist}
+        id="newPlaylistButton"
         color="primary"
         variant="contained"
         size="large"
       >
-        Ny lek!
+        Ny spilleliste!
       </Button>
     </>
   );
 }
 
-export default MyGames;
+export default MyPlaylists;

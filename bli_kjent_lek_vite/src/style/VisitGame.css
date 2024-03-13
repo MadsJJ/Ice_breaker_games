@@ -80,7 +80,7 @@
   background-color: #e1ecf4;
 }
 
-.reportButton {
+.playlistButton {
   padding: 12px 24px;
   background-color: #007bff;
   color: #fff;
@@ -90,7 +90,7 @@
   transition: background-color 0.3s;
 }
 
-.reportButton:hover {
+.playlistButton:hover {
   background-color: #0056b3;
 }
 

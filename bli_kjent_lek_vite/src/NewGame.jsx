@@ -4,15 +4,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { db } from "./firebase";
 import "./style/NewGame.css";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  query,
-  where,
-  doc,
-  setDoc,
-} from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 
 function NewGame() {
   const [gameData, setGameData] = useState({
@@ -20,7 +12,7 @@ function NewGame() {
     description: "",
     minNumberOfPeople: "",
     maxNumberOfPeople: "",
-    creatorID: localStorage.getItem("userID"),
+    creatorID: localStorage.getItem("username"),
     categories: [], // Change categories to an array
     image: null,
     likes: 0,

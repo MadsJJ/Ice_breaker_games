@@ -1,3 +1,5 @@
+import "./style/App.css";
+import "./style/index.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -12,6 +14,9 @@ import MyGames from "./MyGames.jsx";
 import NewGame from "./NewGame.jsx";
 import RegisterUser from "./RegisterUser.jsx";
 import MyFavorites from "./MyFavorites.jsx";
+import MyPlaylists from "./MyPlaylists.jsx";
+import NewPlaylist from "./NewPlaylist.jsx";
+import VisitPlaylist from "./VisitPlaylist";
 import MyRatings from "./MyRatings.jsx";
 import "./style/App.css";
 import "./style/index.css";
@@ -77,10 +82,24 @@ const router = createBrowserRouter([
     element: <MyGames />,
   },
 
+  {
+    path: "/MyPlaylists",
+    element: <MyPlaylists />,
+  },
   //route MyFavorites
   {
     path: "/MyFavorites",
-    element: <MyFavorites />,
+    element: <MyFavorites />,  
+    
+  },
+    {
+    path: "/NewPlaylist",
+    element: <NewPlaylist />,
+  },
+
+  {
+    path: "/VisitPlaylist/:playlistId",
+    element: <VisitPlaylist />,
   },
 
   //route MyRatings
@@ -88,6 +107,7 @@ const router = createBrowserRouter([
     path: "/MyRatings",
     element: <MyRatings />,
   },
+
 
   //-->
   //legg til flere routes her
