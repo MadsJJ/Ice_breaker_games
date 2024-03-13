@@ -167,34 +167,6 @@ function VisitGame() {
     setLiked(!liked);
   };
 
-  // //My Ratings
-  // const handleRating = async () => {
-  //   let updatedUser = { ...user };
-  //   if (!user.myRatings) {
-  //     updatedUser.myRatings = [];
-  //   }
-  //   if (!rating) {
-  //     updatedUser.myRatings = [...updatedUser.myRatings, game.title];
-  //   } else {
-  //     updatedUser.myRatings = updatedUser.myRatings.filter(
-  //       (title) => title.trim() !== game.title.trim()
-  //     );
-  //   }
-  //   console.log("Mine Ratings:", updatedUser.myRatings);
-  //   setUser(updatedUser);
-
-  //   setDoc(
-  //     doc(db, "users", user.username),
-  //     {
-  //       myRatings: updatedUser.myRatings,
-  //     },
-  //     { merge: true }
-  //   );
-
-  //   // Toggle liked status
-  //   setRating(!rating);
-  // };
-
   return (
     <>
       <Navbar />
