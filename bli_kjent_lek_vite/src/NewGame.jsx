@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { db } from "./firebase";
 import "./style/NewGame.css";
@@ -21,10 +22,13 @@ function NewGame() {
     maxNumberOfPeople: "",
     creatorID: localStorage.getItem("userID"),
     categories: [], // Change categories to an array
+    image: null,
     likes: 0,
   });
 
   const navigate = useNavigate();
+
+  const storage = getStorage();
 
   const handleNavigate = () => {
     navigate("/");
@@ -80,6 +84,17 @@ function NewGame() {
         return;
       }
 
+      // Upload image to Firebase Storage
+      const storageRef = ref(storage, `gameImages/${gameData.image.name}`);
+      await uploadBytes(storageRef, gameData.image);
+
+      // Get the download URL of the uploaded image
+      const downloadURL = await getDownloadURL(storageRef);
+
+      // // Add the game to "games" collection with the image URL
+      // await createNewGame({ ...gameData, image: downloadURL });
+
+
       // Add the game to "games" collection
       await createNewGame(gameData);
 
@@ -90,6 +105,7 @@ function NewGame() {
         minNumberOfPeople: "",
         maxNumberOfPeople: "",
         categories: [],
+        image: null, // Reset the form after the game is added to the database
       });
 
       // Alert that the game was created
@@ -104,7 +120,26 @@ function NewGame() {
   };
 
   const createNewGame = async (gameData) => {
-    await addDoc(collection(db, "games"), gameData);
+    //await addDoc(collection(db, "games"), gameData);
+
+     // Upload image to Firebase Storage
+  const storageRef = ref(storage, `gameImages/${gameData.image.name}`);
+  await uploadBytes(storageRef, gameData.image);
+
+  // Get the download URL of the uploaded image
+  const downloadURL = await getDownloadURL(storageRef);
+
+  // Add the game to "games" collection with the image URL
+  const gameRef = await addDoc(collection(db, "games"), {
+    ...gameData,
+    image: downloadURL, // Store the image URL in Firestore
+  });
+
+  return gameRef.id; // Return the ID of the newly created game
+
+
+
+
   };
 
   return (
@@ -195,7 +230,27 @@ function NewGame() {
               </label>
             ))}
           </div>
-          <br></br>
+           <label className="gameTitle" htmlFor="fileInput">
+          Bilde:
+          </label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) =>
+            setGameData((prevGameData) => ({
+            ...prevGameData,
+            image: e.target.files[0],
+          }))
+          }
+          id="fileInput"
+          style={{ display: 'none' }}
+        />
+
+        <div className="uploadButton" onClick={() => document.getElementById('fileInput').click()}>
+        Last opp bilde
+        </div>
+        
+        <br></br>
 
           <button
             className="bnConfirm"
