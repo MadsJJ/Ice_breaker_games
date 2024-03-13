@@ -1,8 +1,9 @@
 import DropDownPlaylist from "./components/DropDownPlaylist";
 import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import "./style/VisitGame.css";
-//routing
+import { db } from "./firebase";
 import {
   collection,
   doc,
@@ -13,8 +14,7 @@ import {
   where,
 } from "firebase/firestore";
 
-import { useLocation } from "react-router-dom";
-import { db } from "./firebase";
+
 
 function VisitGame() {
   const [rating, setRating] = useState(0); // Initial rating is 0
