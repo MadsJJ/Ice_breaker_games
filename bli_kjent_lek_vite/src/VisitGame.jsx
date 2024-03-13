@@ -74,6 +74,13 @@ function VisitGame() {
       } catch (error) {
         console.error("Error fetching user:", error);
       }
+      if (game.image) {
+        setGame((prevGame) => ({
+          ...prevGame,
+          image: game.image,
+        }));
+      }
+
     };
 
     fetchData();
@@ -150,9 +157,11 @@ function VisitGame() {
           <div className="container">
             <div className="descBox">
               <div className="textLeft">
-                <p>Bilde</p>
+                {game.image && <img src={game.image} alt="Game" style = {{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto'}} />}
               </div>
               <div className="textRight">
+                
+              
                 <p>{game.description}</p>
                 <p>{game.minNumberOfPeople}</p>
                 <p>{game.maxNumberOfPeople}</p>
