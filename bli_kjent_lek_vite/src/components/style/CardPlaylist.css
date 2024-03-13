@@ -1,0 +1,42 @@
+.cardPlaylist {
+    border: 1px solid rgb(0, 0, 0, 0.1);
+    min-width: 250px;
+    max-width: 350px;
+    border-radius: 15px;
+    margin: 15px;
+    display: inline-block;
+  }
+  
+  .cardPlaylist:hover {
+    background-color: aliceblue;
+    cursor: pointer;
+  }
+  
+  .cardPlaylistImage {
+    min-width: 250px;
+    max-width: 350px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+  
+  .cardPlaylist p {
+    margin-top: -12px;
+  }
+  
+  .cardPlaylistTitle {
+    padding-left: 20px;
+    padding-right: 20px;
+    /* margin-bottom: -10px; */
+  }
+  
+  #creator {
+    color:grey !important;
+    font-size: small;
+    line-height: 15px;
+    margin-right:20px;
+    margin-top:10px;
+    float:right;
+    font-weight: 500;
+  
+    
+  }
