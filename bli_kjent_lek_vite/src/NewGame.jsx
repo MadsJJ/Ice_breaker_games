@@ -91,8 +91,8 @@ function NewGame() {
       // Get the download URL of the uploaded image
       const downloadURL = await getDownloadURL(storageRef);
 
-      // Add the game to "games" collection with the image URL
-      await createNewGame({ ...gameData, image: downloadURL });
+      // // Add the game to "games" collection with the image URL
+      // await createNewGame({ ...gameData, image: downloadURL });
 
 
       // Add the game to "games" collection
@@ -120,7 +120,26 @@ function NewGame() {
   };
 
   const createNewGame = async (gameData) => {
-    await addDoc(collection(db, "games"), gameData);
+    //await addDoc(collection(db, "games"), gameData);
+
+     // Upload image to Firebase Storage
+  const storageRef = ref(storage, `gameImages/${gameData.image.name}`);
+  await uploadBytes(storageRef, gameData.image);
+
+  // Get the download URL of the uploaded image
+  const downloadURL = await getDownloadURL(storageRef);
+
+  // Add the game to "games" collection with the image URL
+  const gameRef = await addDoc(collection(db, "games"), {
+    ...gameData,
+    image: downloadURL, // Store the image URL in Firestore
+  });
+
+  return gameRef.id; // Return the ID of the newly created game
+
+
+
+
   };
 
   return (
@@ -211,9 +230,7 @@ function NewGame() {
               </label>
             ))}
           </div>
-          <br></br>
-
-          <label className="gameTitle" htmlFor="fileInput">
+           <label className="gameTitle" htmlFor="fileInput">
           Bilde:
           </label>
         <input
@@ -228,10 +245,12 @@ function NewGame() {
           id="fileInput"
           style={{ display: 'none' }}
         />
-        <div className="uploadButton" onClick={() => document.getElementById('fileInput').click()}>
-        Upload Image
-        </div>
 
+        <div className="uploadButton" onClick={() => document.getElementById('fileInput').click()}>
+        Last opp bilde
+        </div>
+        
+        <br></br>
 
           <button
             className="bnConfirm"
