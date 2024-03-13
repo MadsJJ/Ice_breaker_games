@@ -98,18 +98,23 @@
   display: none; /* Hide the actual file input */
 }
 
-
-
 .uploadButton {
-  padding: 12px 24px;
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
+  width: 225px;
+  margin: auto;
+  margin-bottom: 10px;
+  background-color: #064789;
   border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 15px;
+  border: none;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: 0.3s;
 }
 
 .uploadButton:hover {
   background-color: #45a049;
 }
+
+
