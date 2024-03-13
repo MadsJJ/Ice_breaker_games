@@ -8,8 +8,9 @@ import {
   getDocs,
   query,
   setDoc,
-  //updateDoc,
+  updateDoc,
   where,
+  deleteField,
 } from "firebase/firestore";
 
 import { useLocation } from "react-router-dom";
@@ -25,37 +26,79 @@ function VisitGame() {
   const title = location.state.key;
 
   //Adds a game to my ratings
+  // const handleRatingClick = async (value) => {
+  //   if (!localStorage.getItem("username")) {
+  //     alert("Du må være logget inn for å kunne gi en rating!");
+  //     return;
+  //   }
+
+  //   let updatedUser = { ...user };
+  //   if (!updatedUser.myRatings) {
+  //     updatedUser.myRatings = {};
+  //   }
+
+  //   const currentRating = updatedUser.myRatings[game.title.trim()];
+
+  //   // Sjekk om den nye ratingen er lik den eksisterende ratingen for spillet
+  //   if (value === currentRating) {
+  //     // Fjern ratingen ved å sette den til 0 eller fjerne nøkkelen
+  //     delete updatedUser.myRatings[game.title.trim()];
+  //     setRating(0);
+  //     await updateDoc(updatedUser, {
+  //       [`myRatings.${game.title.trim()}`]: deleteField(),
+  //     });
+  //   } else {
+  //     // Oppdater med den nye ratingen
+  //     updatedUser.myRatings[game.title.trim()] = value;
+  //     setRating(value);
+  //   }
+
+  //   console.log("Mine Ratings:", updatedUser.myRatings);
+  //   setUser(updatedUser);
+
+  //   // Oppdater brukerens ratinger i databasen
+  //   await setDoc(
+  //     doc(db, "users", user.username),
+  //     { myRatings: updatedUser.myRatings },
+  //     { merge: true }
+  //   );
+  // };
+
   const handleRatingClick = async (value) => {
-    if (!localStorage.getItem("username")) {
+    const username = localStorage.getItem("username");
+    if (!username) {
       alert("Du må være logget inn for å kunne gi en rating!");
+      return;
     }
+
     let updatedUser = { ...user };
     if (!updatedUser.myRatings) {
       updatedUser.myRatings = {};
     }
 
-    const currentRating = updatedUser.myRatings[game.title.trim()];
+    const gameTitle = game.title.trim();
+    const userDocRef = doc(db, "users", username);
 
-    // Sjekk om den nye ratingen er lik den eksisterende ratingen for spillet
-    if (value === currentRating) {
-      // Fjern ratingen ved å sette den til 0 eller fjerne nøkkelen
-      delete updatedUser.myRatings[game.title.trim()];
+    if (value === updatedUser.myRatings[gameTitle]) {
+      // Removes the rating from the local state and in the db
+      delete updatedUser.myRatings[gameTitle];
       setRating(0);
+      // updates the db and removes the game form the list myRatings
+      await updateDoc(userDocRef, {
+        [`myRatings.${gameTitle}`]: deleteField(),
+      });
     } else {
-      // Oppdater med den nye ratingen
-      updatedUser.myRatings[game.title.trim()] = value;
+      // Updates with the new rating
+      updatedUser.myRatings[gameTitle] = value;
       setRating(value);
+      // Updates the rating in the db
+      await updateDoc(userDocRef, {
+        [`myRatings.${gameTitle}`]: value,
+      });
     }
 
     console.log("Mine Ratings:", updatedUser.myRatings);
     setUser(updatedUser);
-
-    // Oppdater brukerens ratinger i databasen
-    await setDoc(
-      doc(db, "users", user.username),
-      { myRatings: updatedUser.myRatings },
-      { merge: true }
-    );
   };
 
   const [game, setGame] = useState([]);
@@ -146,6 +189,7 @@ function VisitGame() {
   const handleLikeClick = async () => {
     if (!localStorage.getItem("username")) {
       alert("Du må være logget inn for å legge til en lek i dine favoritter!");
+      return;
     }
     let updatedUser = { ...user };
     if (!user.likedGames) {
