@@ -8,7 +8,7 @@ import {
   getDocs,
   query,
   setDoc,
-  updateDoc,
+  //updateDoc,
   where,
 } from "firebase/firestore";
 
