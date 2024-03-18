@@ -13,6 +13,7 @@ function VisitPlaylist() {
     const playlistTitle = location.state.playlistTitle;
     const playlistId = location.state.playlistId;
     const [playlistData, setPlaylistData] = useState([]);
+    const [updateTrigger, setUpdateTrigger] = useState(false);
 
     useEffect(() => {
         const fetchPlaylistData = async () => {
@@ -38,7 +39,7 @@ function VisitPlaylist() {
         if (playlistTitle && playlistId) {
             fetchPlaylistData();
         }
-    }, [playlistId, playlistTitle]);
+    }, [playlistId, playlistTitle, updateTrigger]);
 
     return (
         <>
@@ -47,7 +48,7 @@ function VisitPlaylist() {
             <div className="playlistBody">
                 <div className="games">
                     <h2 className="playlistTitle">{playlistTitle}</h2>
-                    {playlistData ? (
+                    {playlistData.length >= 1 ? (
                         <>
                             {playlistData.map((game) => (
                                 <Card

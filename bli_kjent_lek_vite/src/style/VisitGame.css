@@ -1,128 +1,145 @@
 .content {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .newGameContainer {
-  border: solid 2px rgb(131, 147, 216);
-  border-radius: 10px;
-  margin-top: 50px;
-  padding: 20px;
-  width: 80%;
-  height: 70%;
-  display: flex;
-  flex-direction: column;
-  background-color: #f0f4f8;
+    border: solid 2px rgb(131, 147, 216);
+    border-radius: 10px;
+    margin-top: 50px;
+    padding: 20px;
+    width: 80%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f4f8;
 }
 
 .gameHeader {
-  width: 100%;
-  height: 10%;
-  border-bottom: solid 1px #ccc;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
+    width: 100%;
+    height: 10%;
+    border-bottom: solid 1px #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .container {
-  display: flex;
-  flex-direction: row;
-  gap: 3%;
+    display: flex;
+    flex-direction: row;
+    gap: 3%;
 }
 
 .descBox {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 1%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1%;
 }
 
 .textLeft,
 .textRight {
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .textLeft {
-  max-width: 100%; /* Begrenser bredden til containerens bredde */
-  max-height: 100%; /* Begrenser høyden til containerens høyde */
-  width: auto; /* Justerer bredden proporsjonalt */
-  height: auto; /* Justerer høyden proporsjonalt */
-  border: 1px solid #ccc; /* Legg til en ramme for visuell separasjon */
-  border-radius: 8px; /* Rund av hjørnene for et mer estetisk utseende */
+    max-width: 100%; /* Begrenser bredden til containerens bredde */
+    max-height: 100%; /* Begrenser høyden til containerens høyde */
+    width: auto; /* Justerer bredden proporsjonalt */
+    height: auto; /* Justerer høyden proporsjonalt */
+    border: 1px solid #ccc; /* Legg til en ramme for visuell separasjon */
+    border-radius: 8px; /* Rund av hjørnene for et mer estetisk utseende */
 }
 
 .textRight {
-  width: 100%;
-  background-color: #f9f9f9;
+    width: 100%;
+    background-color: #f9f9f9;
 }
 
 .additionalInfo {
-  width: 48%; /* Adjust if necessary */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    width: 48%; /* Adjust if necessary */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .ratingDiv,
 .categoryDiv {
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 
 .ratingDiv {
-  background-color: #f0f4f8;
+    background-color: #f0f4f8;
+    font-size: 25px;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease;
+    justify-content: space-between;
+}
+
+/* Black color on the stars when not rated */
+.off {
+    color: #000;
+}
+
+/* coler on the stars when rated */
+.on {
+    color: gold;
 }
 
 .categoryDiv {
-  background-color: #e1ecf4;
+    background-color: #e1ecf4;
 }
 
 .playlistButton {
-  padding: 12px 24px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+    padding: 12px 24px;
+    background-color: #064789;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .playlistButton:hover {
-  background-color: #0056b3;
+    background-color: #0056b3;
 }
 
 /* likeButton */
 .likeButton {
-  font-size: 25px;
-  background-color: #f2f2f2;
-  color: #000;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  cursor: pointer;
-  outline: none;
-  transition: background-color 0.3s ease;
+    font-size: 25px;
+    background-color: #f2f2f2;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease;
 }
 
 .likeButton.liked {
-  background-color: #ff4d4d;
-  color: #fff;
+    background-color: #ff4d4d;
+    color: #fff;
 }
 
-
-
 .imageContainer {
-  max-width: 100%; /* Begrens bredden til containerens bredde */
-  max-height: 300px; /* Sett en maksimal høyde for å begrense bildets størrelse */
-  overflow: hidden; /* Skjul overskytende deler av bildet som overstiger rammene */
+    max-width: 100%; /* Begrens bredden til containerens bredde */
+    max-height: 300px; /* Sett en maksimal høyde for å begrense bildets størrelse */
+    overflow: hidden; /* Skjul overskytende deler av bildet som overstiger rammene */
 }
 
 .imageContainer img {
-  max-width: 100%; /* Begrenser bredden til containerens bredde */
-  max-height: 100%;
-  width: auto; /* Sørg for at bildet fyller containerens bredde */
-  height: auto; /* Bevar bildets sideforhold */
+    max-width: 100%; /* Begrenser bredden til containerens bredde */
+    max-height: 100%;
+    width: auto; /* Sørg for at bildet fyller containerens bredde */
+    height: auto; /* Bevar bildets sideforhold */
 }

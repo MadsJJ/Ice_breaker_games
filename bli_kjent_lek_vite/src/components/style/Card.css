@@ -41,3 +41,26 @@
 /* .cardDesc {
   padding: 20px;
 } */
+
+.card button {
+    color: white;
+    background-color: #d84646;
+    /* margin-left: 15px; */
+    border: none;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    opacity: 0.95;
+    min-width: 1px;
+    margin-left: 2px;
+    margin-right: 4px;
+}
+
+.card button:hover {
+    background-color: red;
+    opacity: 1;
+}
