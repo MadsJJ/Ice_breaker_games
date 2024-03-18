@@ -2,7 +2,7 @@ import DropDownPlaylist from "./components/DropDownPlaylist";
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import "./style/VisitGame.css";
+import Timer from "./components/Timer";
 import { db } from "./firebase";
 import {
     collection,
@@ -14,6 +14,7 @@ import {
     where,
     deleteField,
 } from "firebase/firestore";
+import "./style/VisitGame.css";
 
 function VisitGame() {
     const [rating, setRating] = useState(0); // Initial rating is 0
@@ -25,9 +26,6 @@ function VisitGame() {
 
     const title = location.state.title;
     const gameId = location.state.gameId;
-
-    console.log("title", title);
-    console.log("gameid", gameId);
 
     //Adds a game to my ratings
     const handleRatingClick = async (value) => {
@@ -63,7 +61,6 @@ function VisitGame() {
             });
         }
 
-        console.log("Mine Ratings:", updatedUser.myRatings);
         setUser(updatedUser);
     };
 
@@ -123,7 +120,6 @@ function VisitGame() {
     const [categoryList, setCategories] = useState("");
 
     useEffect(() => {
-        console.log(game.categories);
         if (typeof game.categories === "object") {
             setCategories(game.categories.join(", "));
         } else {
@@ -171,7 +167,6 @@ function VisitGame() {
                 (title) => title.trim() !== game.title.trim()
             );
         }
-        console.log("Mine favoritter:", updatedUser.likedGames);
         setUser(updatedUser);
 
         setDoc(
@@ -189,16 +184,15 @@ function VisitGame() {
         <>
             <Navbar />
             <div className="content">
-                <div className="newGameContainer">
+                <div className="gameContainer">
                     <div className="gameHeader">
                         <h2>{game.title}</h2>
                     </div>
-                    <p>Laget av: {game.creatorID ? game.creatorID : "Ukjent"}</p>
-                    <br></br>
+                    <p id="createdBy">Laget av: {game.creatorID ? game.creatorID : "Ukjent"}</p>
 
                     <div className="container">
-                        <div className="descBox">
-                            <div className="textLeft">
+                        <div className="infoBox">
+                            <div className="miscInfo">
                                 {game.image && (
                                     <img
                                         src={game.image}
@@ -211,11 +205,17 @@ function VisitGame() {
                                         }}
                                     />
                                 )}
+                                <div className="categoryDiv">
+                                    <p>Kategorier: {categoryList}</p>
+                                </div>
+                                <p>
+                                    Spillertall: {game.minNumberOfPeople}-{game.maxNumberOfPeople}
+                                </p>
                             </div>
-                            <div className="textRight">
+                            <div className="gameDesc">
                                 <p>{game.description}</p>
-                                <p>{game.minNumberOfPeople}</p>
-                                <p>{game.maxNumberOfPeople}</p>
+                                <br />
+                                <Timer />
                             </div>
                         </div>
                         <div className="additionalInfo">
@@ -243,10 +243,6 @@ function VisitGame() {
                                         : "🤍 Legg til i favoritter"}
                                 </button>
                             </div>
-                            <div className="categoryDiv">
-                                <p>Kategorier: {categoryList}</p>
-                            </div>
-
                             <DropDownPlaylist gameId={gameId} />
                         </div>
                     </div>
