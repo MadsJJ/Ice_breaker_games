@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Timer from "./components/Timer";
+import CountdownTimer from "./components/CountdownTimer";
 import { db } from "./firebase";
 import {
     collection,
@@ -219,6 +220,7 @@ function VisitGame() {
                             </div>
                         </div>
                         <div className="additionalInfo">
+                            <CountdownTimer />
                             <div className="ratingDiv">
                                 <p>Rating: {rating}</p>
                                 <div>
