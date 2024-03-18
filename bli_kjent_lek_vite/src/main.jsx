@@ -21,7 +21,6 @@ import MyRatings from "./MyRatings.jsx";
 import "./style/App.css";
 import "./style/index.css";
 import VisitGame from "./VisitGame.jsx";
-import WheelOfFortune from "./WheelOfFortune.jsx";
 //error page
 import ErrorPage from "./components/error-page.jsx";
 //routing
