@@ -63,12 +63,6 @@ const router = createBrowserRouter([
         element: <Filter />,
     },
 
-    //route WheelOfFortune
-    {
-        path: "/WheelOfFortune",
-        element: <WheelOfFortune />,
-    },
-
     //route Mygames
     {
         path: "/MyGames",
