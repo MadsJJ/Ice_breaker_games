@@ -220,7 +220,7 @@ function VisitGame() {
                             </div>
                         </div>
                         <div className="additionalInfo">
-                            <CountdownTimer />
+                            {/* <CountdownTimer /> */}
                             <div className="ratingDiv">
                                 <p>Rating: {rating}</p>
                                 <div>

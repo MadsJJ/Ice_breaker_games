@@ -21,6 +21,7 @@ const Timer = () => {
                         clearInterval(timer);
                         setIsRunning(false);
                         setTimeUp(true);
+                        notify();
                         setTimeout(() => {
                             setTimeUp(false);
                         }, 3000);
@@ -57,7 +58,14 @@ const Timer = () => {
         }
     };
 
-    const notify = () => toast("Tiden er ute!");
+    useEffect(() => {
+        if (timeUp) {
+            toast.error("Tiden er ute!", {
+                autoClose: 5000,
+                onClose: () => setTimeUp(false),
+            });
+        }
+    }, [timeUp]);
 
     return (
         <>
@@ -141,8 +149,6 @@ const Timer = () => {
                         Sett tid
                     </button>
                 </div>
-
-                {timeUp && notify()}
             </div>
         </>
     );
