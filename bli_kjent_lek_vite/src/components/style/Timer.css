@@ -1,63 +1,117 @@
 .timer-container {
-  width: 300px;
-  margin: 0 auto;
-  margin-top: 50px;
-  text-align: center;
-  border: 2px solid #2980b9;
-  border-radius: 10px;
-  padding: 20px;
-  padding-top: 40px;
-  background-color: #ecf0f1;
-  font-family: "Courier New", Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: auto;
+    text-align: center;
+    border-top: 2px solid #2980b9;
 }
 
-.timer {
-  font-size: 24px;
-  margin-bottom: 20px;
+.timeStartReset {
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
 .input-container {
-  margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2%;
+    margin-bottom: 10px;
 }
 
 .input-group {
-  margin-bottom: 10px;
+    margin-top: -30px;
+}
+
+.input-group button {
+    padding: 5px 7px;
+}
+
+.input-group h4 {
+    color: #2980b9;
+    margin-bottom: 1px;
 }
 
 .timeInput {
-  width: 50px;
-  padding: 5px;
-  border: 1px solid #2980b9;
-  border-radius: 5px;
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    width: 30px;
+    padding: 5px;
+    border: 1px solid #2980b9;
+    border-radius: 5px;
 }
 
 .timerButton {
-  background-color: #3498db;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  margin: 0 5px;
-  border-radius: 5px;
-  cursor: pointer;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.buttons button:hover {
-  background-color: #2980b9;
+.timer button:hover {
+    background-color: cornflowerblue;
+}
+
+.input-group button:hover {
+    background-color: cornflowerblue;
 }
 
 .time-up-message {
-  font-size: 20px;
-  color: #2980b9;
-  margin-top: 20px;
+    font-size: 20px;
+    color: #2980b9;
+    margin-top: 20px;
+}
+
+#bnSetTime {
+    font-size: 14px;
 }
 
 #startknapp {
-  font-size: large;
-  font-weight: normal;
+    font-size: 14px;
+}
+
+.ttttt {
+    margin-bottom: -10px;
+}
+
+.tttt {
+    border-bottom: 2px solid #2980b9;
+}
+
+.ttt {
+    display: flex;
+    justify-content: space-evenly;
+    width: 180px;
+    margin-left: 43px;
+    margin-bottom: -20px;
+    color: #064789;
+}
+
+.tt {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 5px;
+}
+
+.tp {
+    margin: 5px;
+}
+
+.ti {
+    width: 50px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 2px solid #2980b9;
+}
+
+.mi {
+}
+
+.mi h4 {
+    margin-bottom: 10px;
+    color: #064789;
 }

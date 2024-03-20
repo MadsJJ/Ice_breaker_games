@@ -1,43 +1,41 @@
 .card {
-  border: 1px solid rgb(0, 0, 0, 0.1);
-  min-width: 250px;
-  max-width: 350px;
-  border-radius: 15px;
-  margin: 15px;
-  display: inline-block;
+    border: 1px solid rgb(0, 0, 0, 0.1);
+    width: 300px;
+    border-radius: 15px;
+    margin: 15px;
+    display: inline-block;
 }
 
 .card:hover {
-  background-color: aliceblue;
-  cursor: pointer;
+    background-color: aliceblue;
+    cursor: pointer;
 }
 
 .cardImage {
-  min-width: 250px;
-  max-width: 350px;
-  max-height: 140px;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+    width: 300px;
+    max-height: 140px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
 .card p {
-  margin-top: -12px;
+    margin-top: -12px;
 }
 
 .cardTitle {
-  padding-left: 20px;
-  padding-right: 20px;
-  /* margin-bottom: -10px; */
+    padding-left: 20px;
+    padding-right: 20px;
+    /* margin-bottom: -10px; */
 }
 
 #creator {
-  color: grey !important;
-  font-size: small;
-  line-height: 15px;
-  margin-right: 20px;
-  margin-top: 10px;
-  float: right;
-  font-weight: 500;
+    color: grey !important;
+    font-size: small;
+    line-height: 15px;
+    margin-right: 20px;
+    margin-top: 10px;
+    float: right;
+    font-weight: 500;
 }
 
 /* .cardDesc {
@@ -45,24 +43,24 @@
 } */
 
 .card button {
-  color: white;
-  background-color: #d84646;
-  /* margin-left: 15px; */
-  border: none;
-  border-radius: 20px;
-  padding: 5px 12px;
-  font-size: 12px;
-  font-weight: bold;
-  text-align: center;
-  transition: background-color 0.3s, box-shadow 0.3s;
-  cursor: pointer;
-  opacity: 0.95;
-  min-width: 1px;
-  margin-left: 2px;
-  margin-right: 4px;
+    color: white;
+    background-color: #d84646;
+    /* margin-left: 15px; */
+    border: none;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    opacity: 0.95;
+    min-width: 1px;
+    margin-left: 2px;
+    margin-right: 4px;
 }
 
 .card button:hover {
-  background-color: red;
-  opacity: 1;
+    background-color: red;
+    opacity: 1;
 }
