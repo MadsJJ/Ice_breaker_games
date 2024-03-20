@@ -102,16 +102,16 @@ const router = createBrowserRouter([
 export const theme = createTheme({
     palette: {
         background: {
-            paper: "#ebf2fa", // Your tertiary color
+            paper: "#ebf2fa",
         },
         primary: {
-            main: "#064789", // Your primary color
+            main: "#064789",
         },
         secondary: {
-            main: "#427aa1", // Your secondary color
+            main: "#427aa1",
         },
         tertiary: {
-            main: "#ebf2fa", // Your tertiary color
+            main: "#ebf2fa",
         },
     },
 });

@@ -11,88 +11,77 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 function MyPlaylists() {
-  //routing
-  let navigate = useNavigate();
+    //routing
+    let navigate = useNavigate();
 
-  const handleNewPlaylist = () => {
-    if (localStorage.getItem("username")) {
-      navigate("/NewPlaylist");
-    } else {
-      alert("Du må være logget inn for å legge til en ny spilleliste!");
-    }
-  };
-
-  const handleVisitPlaylist = () => {
-    navigate("/VisitPlaylist");
-  };
-
-  const handleClick = () => {
-    console.log("Clicked");
-    location.href = "/src/";
-  };
-
-  const [myPlaylists, setMyPlaylists] = useState([]);
-
-  useEffect(() => {
-    // Help from ChatGPT
-    const fetchData = async () => {
-      try {
-        const q = query(
-          collection(db, "playlists"),
-          where("creatorID", "==", localStorage.getItem("username"))
-        );
-        const querySnapshot = await getDocs(q);
-        const myPlaylistsData = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setMyPlaylists(myPlaylistsData);
-      } catch (error) {
-        console.error("Error fetching playlists:", error);
-      }
+    const handleNewPlaylist = () => {
+        if (localStorage.getItem("username")) {
+            navigate("/NewPlaylist");
+        } else {
+            alert("Du må være logget inn for å legge til en ny spilleliste!");
+        }
     };
 
-    fetchData();
-  }, []);
+    const [myPlaylists, setMyPlaylists] = useState([]);
 
-  return (
-    <>
-      <Navbar />
-      <h2 className="headerspilleliste"> Mine spillelister</h2>
-      {/* <GameCarousel /> */}
-      <br />
+    useEffect(() => {
+        // Help from ChatGPT
+        const fetchData = async () => {
+            try {
+                const q = query(
+                    collection(db, "playlists"),
+                    where("creatorID", "==", localStorage.getItem("username"))
+                );
+                const querySnapshot = await getDocs(q);
+                const myPlaylistsData = querySnapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }));
+                setMyPlaylists(myPlaylistsData);
+            } catch (error) {
+                console.error("Error fetching playlists:", error);
+            }
+        };
 
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          margin: "auto",
-          width: "90vw",
-        }}
-      >
-        {/* Help from ChatGPT */}
-        {myPlaylists.map((playlist) => (
-          <CardPlaylist
-            key={playlist.id}
-            playlistId={playlist.id}
-            // imgSrc={game.imgSrc} // disse er ikke lagt til i db - må finne ut om vi vil ha bilder
-            // imgAlt={game.imgAlt}  / eller strings som linker til bilde r i filstrukturen
-            playlistTitle={playlist.title} // burde endres til "title i firebase - holde det consistent med engelsk
-            creatorID={playlist.creatorID}
-          />
-        ))}
-      </div>
-      <Button
-        onClick={handleNewPlaylist}
-        id="newPlaylistButton"
-        color="primary"
-        variant="contained"
-        size="large"
-      >
-        Ny spilleliste!
-      </Button>
-    </>
-  );
+        fetchData();
+    }, []);
+
+    return (
+        <>
+            <Navbar />
+            <h2 className="headerspilleliste"> Mine spillelister</h2>
+            {/* <GameCarousel /> */}
+            <br />
+
+            <div
+                style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    margin: "auto",
+                    width: "90vw",
+                }}
+            >
+                {/* Help from ChatGPT */}
+                {myPlaylists.map((playlist) => (
+                    <CardPlaylist
+                        key={playlist.id}
+                        playlistId={playlist.id}
+                        playlistTitle={playlist.title}
+                        creatorID={playlist.creatorID}
+                    />
+                ))}
+            </div>
+            <Button
+                onClick={handleNewPlaylist}
+                id="newPlaylistButton"
+                color="primary"
+                variant="contained"
+                size="large"
+            >
+                Ny spilleliste!
+            </Button>
+        </>
+    );
 }
 
 export default MyPlaylists;

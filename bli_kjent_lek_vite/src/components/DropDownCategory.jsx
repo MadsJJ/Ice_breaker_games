@@ -9,7 +9,6 @@ function DropDownCategory() {
 
     const handleSelectChange = (event) => {
         const selectedCategory = event.target.value;
-        console.log(selectedCategory);
         // Navigate to Filter with selected category
         navigate("/Filter", { state: { category: selectedCategory } });
     };

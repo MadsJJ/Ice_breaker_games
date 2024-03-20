@@ -55,7 +55,7 @@ function VisitPlaylist() {
                                     key={game.id}
                                     gameId={game.id}
                                     image={game.image}
-                                    title={game.title} // burde endres til "title i firebase - holde det consistent med engelsk
+                                    title={game.title}
                                     // desc={game.description} // bare ha beskrivelse på lek-side
                                     creatorID={game.creatorID}
                                     categories={game.categories}

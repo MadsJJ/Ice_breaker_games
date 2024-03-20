@@ -56,7 +56,6 @@ export default function Navbar() {
         <>
             <header className="navbar">
                 <a href="/">
-                    {/* Empty link for now - will return you to homepage once routing logic is completed */}
                     <img src={kaldprat_logo} alt="KaldPrat logo" width="80px" />
                     {/* Image tag for logo */}
                 </a>
