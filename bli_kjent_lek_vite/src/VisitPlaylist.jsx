@@ -61,6 +61,8 @@ function VisitPlaylist() {
                                     categories={game.categories}
                                     minP={game.minNumberOfPeople}
                                     maxP={game.maxNumberOfPeople}
+                                    playlistView={true}
+                                    onRemove={() => setUpdateTrigger((prev) => !prev)}
                                 />
                             ))}
                         </>

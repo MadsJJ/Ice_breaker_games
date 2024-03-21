@@ -72,7 +72,7 @@ export const Card = ({
                         e.stopPropagation();
                         handleRemoveFromPlaylist();
                     }}
-                    className="card"
+                    className="bnRemove"
                 >
                     Fjern fra liste
                 </button>
